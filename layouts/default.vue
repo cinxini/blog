@@ -1,7 +1,7 @@
 <template>
-  <v-app>
+  <v-app class="main-background">
 
-    <v-app-bar :elevation="0">
+    <v-app-bar :elevation="0" color="white">
       <!-- <template v-slot:prepend>
         <v-img
     :width="151"
@@ -13,7 +13,7 @@
       <v-app-bar-title class=" d-flex justify-center">Application Bar</v-app-bar-title> -->
       <v-row no-gutters>
       <v-col cols="2" class="d-flex flex-row">
-        <div class="vertical-center"><v-img
+        <div class="vertical-center" ><v-img
           :width="151"
           aspect-ratio="16/9"
           cover
@@ -30,8 +30,8 @@
       </v-col>
       <v-col cols="2"  class="d-flex flex-row-reverse">
         <div class="vertical-center">
-          <v-btn color="primary">b1</v-btn>
-          <v-btn color="primary">b2</v-btn>
+          <v-btn color="primaryContainer">b1</v-btn>
+          <v-btn color="primaryContainer">b2</v-btn>
         </div>
       </v-col>
     </v-row>
@@ -50,9 +50,12 @@ import { VApp } from 'vuetify/components';
 
 </script>
 
-<style>
+<style >
 .vertical-center {
   display: flex;
   align-items: center;
+}
+.main-background{
+  background: white;
 }
 </style>
