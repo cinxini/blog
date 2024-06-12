@@ -2,15 +2,6 @@
   <v-app class="main-background">
 
     <v-app-bar :elevation="0" color="white">
-      <!-- <template v-slot:prepend>
-        <v-img
-    :width="151"
-    aspect-ratio="16/9"
-    cover
-    src="@/assets/images/logo.png"
-  ></v-img>
-      </template>
-      <v-app-bar-title class=" d-flex justify-center">Application Bar</v-app-bar-title> -->
       <v-row no-gutters>
       <v-col cols="2" class="d-flex flex-row">
         <div class="vertical-center mx-4" >
@@ -33,8 +24,13 @@
       </v-col>
       <v-col cols="2"  class="d-flex flex-row-reverse">
         <div class="vertical-center">
-          <v-btn >b1</v-btn>
-          <v-btn >b2</v-btn>
+          <v-btn icon="fa-brands fa-medium"></v-btn>
+          <!-- <v-btn><v-icon icon="fa-brands fa-linkedin" /></v-btn> -->
+          <v-btn icon="fa-brands fa-linkedin-in"></v-btn>
+          <!-- <v-btn><v-icon icon="fa-brands fa-square-x-twitter" /></v-btn>  -->
+          <v-btn icon="fa-brands fa-x-twitter"></v-btn>     
+          <!-- <v-btn><v-icon icon="fa-brands fa-square-github" /></v-btn> -->
+          <v-btn icon="fa-brands fa-github-alt"></v-btn>
         </div>
       </v-col>
     </v-row>

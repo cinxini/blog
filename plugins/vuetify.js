@@ -1,7 +1,9 @@
+import orangeTheme from "@/assets/themes/orange-03.json";
+import "@fortawesome/fontawesome-free/css/all.css";
 import "@mdi/font/css/materialdesignicons.css";
 import { createVuetify } from "vuetify";
+import { aliases, fa } from "vuetify/iconsets/fa";
 import "vuetify/styles";
-import orangeTheme from "@/assets/themes/orange-03.json";
 
 const lightTheme = {
     dark: false,
@@ -24,6 +26,13 @@ export default defineNuxtPlugin((app) => {
                 darken: 8,
             },
             themes: { lightTheme, darkTheme },
+        },
+        icons: {
+            defaultSet: "fa",
+            aliases,
+            sets: {
+                fa,
+            },
         },
     });
     app.vueApp.use(vuetify);
