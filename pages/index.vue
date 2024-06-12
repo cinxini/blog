@@ -1,7 +1,7 @@
 <template>
   <v-container style="max-width: 60%;">
     <div >
-    <h1>hello world</h1>
+    <h1 class="josefin-slab-bolder">hello world</h1>
   </div>
   </v-container>
   
