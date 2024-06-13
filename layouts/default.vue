@@ -1,36 +1,37 @@
 <template>
   <v-app class="main-background">
 
-    <v-app-bar :elevation="0" color="white">
+    <v-app-bar :elevation="0" color="white" height="50" >
       <v-row no-gutters>
       <v-col cols="2" class="d-flex flex-row">
-        <div class="vertical-center mx-4" >
+        <div class="vertical-center ma-4" >
           <!-- <v-img
             :width="151"
             aspect-ratio="16/9"
             cover
             src="@/assets/images/logo.png"
           ></v-img> -->
-          <h1><span class="pacifico-regular">nutnaree.kleaw</span></h1>
+          <h1 ><span class="neonderthaw-regular font-weight-medium" style="font-size:larger;">nutnaree.kleaw</span></h1>
         </div>
         
       </v-col>
       <v-col  class="d-flex justify-center ">
           <div class="vertical-center">
-            <v-btn >about</v-btn>
-            <v-btn >blog</v-btn>
-            <v-btn >portfolio</v-btn>
+            <v-btn class="ma-2 nanum-gothic-coding-bold text-subtitle-1" color="primary" >About</v-btn>
+            <v-btn class="ma-2 nanum-gothic-coding-bold text-subtitle-1" color="primary">Projects</v-btn>
+            <v-btn class="ma-2 nanum-gothic-coding-bold text-subtitle-1" color="primary">Blog</v-btn>
         </div>
       </v-col>
       <v-col cols="2"  class="d-flex flex-row-reverse">
-        <div class="vertical-center">
-          <v-btn icon="fa-brands fa-medium"></v-btn>
+        <div class="vertical-center ">
+          <v-btn class="ma-2 pa-0" icon="fa-solid fa-magnifying-glass" size="small"></v-btn>
+          <!-- <v-btn class="ma-2 pa-0" icon="fa-brands fa-medium" size="small"></v-btn> -->
           <!-- <v-btn><v-icon icon="fa-brands fa-linkedin" /></v-btn> -->
-          <v-btn icon="fa-brands fa-linkedin-in"></v-btn>
+          <!-- <v-btn class="ma-2 pa-0" icon="fa-brands fa-linkedin-in" size="small"></v-btn> -->
           <!-- <v-btn><v-icon icon="fa-brands fa-square-x-twitter" /></v-btn>  -->
-          <v-btn icon="fa-brands fa-x-twitter"></v-btn>     
+          <!-- <v-btn class="ma-2"  icon="fa-brands fa-x-twitter" size="small"></v-btn>      -->
           <!-- <v-btn><v-icon icon="fa-brands fa-square-github" /></v-btn> -->
-          <v-btn icon="fa-brands fa-github-alt"></v-btn>
+          <!-- <v-btn class="mr-4 ml-2 my-2"  icon="fa-brands fa-github-alt" size="small"></v-btn> -->
         </div>
       </v-col>
     </v-row>
@@ -58,6 +59,7 @@ import { VApp } from 'vuetify/components';
   background: white;
 }
 
+/* font */
 .josefin-slab-bold {
   font-family: "Josefin Slab", serif;
   font-optical-sizing: auto;
@@ -77,4 +79,140 @@ import { VApp } from 'vuetify/components';
   font-style: normal;
 }
 
+.poppins-thin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.sofia-regular {
+  font-family: "Sofia", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nanum-gothic-coding-bold {
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.nanum-gothic-coding-regular {
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.borel-regular {
+  font-family: "Borel", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.neonderthaw-regular {
+  font-family: "Neonderthaw", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
 </style>
