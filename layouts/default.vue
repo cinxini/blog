@@ -5,13 +5,13 @@
       <v-row no-gutters>
       <v-col cols="2" class="d-flex flex-row">
         <div class="vertical-center ma-4" >
-          <!-- <v-img
-            :width="151"
+          <v-img
+            :width="150"
             aspect-ratio="16/9"
             cover
-            src="@/assets/images/logo.png"
-          ></v-img> -->
-          <h1 ><span class="neonderthaw-regular font-weight-medium" style="font-size:larger;">nutnaree.kleaw</span></h1>
+            src="@/assets/images/logo2.png"
+          ></v-img>
+          <!-- <h1 ><span class="neonderthaw-regular font-weight-medium" style="font-size:larger;">nutnaree.kleaw</span></h1> -->
         </div>
         
       </v-col>
