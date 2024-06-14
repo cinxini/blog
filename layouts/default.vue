@@ -17,9 +17,10 @@
       </v-col>
       <v-col  class="d-flex justify-center ">
           <div class="vertical-center">
-            <v-btn class="ma-2 noto-serif-display-bold text-subtitle-1" color="primary" >about</v-btn>
-            <v-btn class="ma-2 noto-serif-display-bold text-subtitle-1" color="primary">projects</v-btn>
-            <v-btn class="ma-2 noto-serif-display-bold text-subtitle-1" color="primary">blog</v-btn>
+            <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/">home</v-btn>
+            <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/about">about</v-btn>
+            <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/projects">projects</v-btn>
+            <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/blog">blog</v-btn>
         </div>
       </v-col>
       <v-col cols="2"  class="d-flex flex-row-reverse">

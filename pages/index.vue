@@ -1,13 +1,11 @@
 <template>
-  <v-container style="max-width: 60%;">
-    <div >
-    <h1 class="nanum-gothic-coding-bold">helLo world about ABOUT</h1>
-  </div>
+  <v-container style="max-width: 900px; min-width: 400px;">
+    home page
   </v-container>
   
 </template>
 
-<script lang="ts" setup>
+<script  setup>
 
 </script>
 
