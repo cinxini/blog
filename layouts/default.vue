@@ -1,7 +1,7 @@
 <template>
   <v-app class="main-background">
 
-    <v-app-bar :elevation="0" color="white" height="50" >
+    <v-app-bar :elevation="0" color="white" height="50"  class="appbar-border-bottom">
       <v-row no-gutters>
       <v-col cols="2" class="d-flex flex-row">
         <div class="vertical-center ma-4" >
@@ -9,7 +9,7 @@
             :width="150"
             aspect-ratio="16/9"
             cover
-            src="@/assets/images/logo2.png"
+            src="@/assets/images/logo4.png"
           ></v-img>
           <!-- <h1 ><span class="neonderthaw-regular font-weight-medium" style="font-size:larger;">nutnaree.kleaw</span></h1> -->
         </div>
@@ -17,9 +17,9 @@
       </v-col>
       <v-col  class="d-flex justify-center ">
           <div class="vertical-center">
-            <v-btn class="ma-2 nanum-gothic-coding-bold text-subtitle-1" color="primary" >About</v-btn>
-            <v-btn class="ma-2 nanum-gothic-coding-bold text-subtitle-1" color="primary">Projects</v-btn>
-            <v-btn class="ma-2 nanum-gothic-coding-bold text-subtitle-1" color="primary">Blog</v-btn>
+            <v-btn class="ma-2 noto-serif-display-bold text-subtitle-1" color="primary" >about</v-btn>
+            <v-btn class="ma-2 noto-serif-display-bold text-subtitle-1" color="primary">projects</v-btn>
+            <v-btn class="ma-2 noto-serif-display-bold text-subtitle-1" color="primary">blog</v-btn>
         </div>
       </v-col>
       <v-col cols="2"  class="d-flex flex-row-reverse">
@@ -50,7 +50,11 @@ import { VApp } from 'vuetify/components';
 
 </script>
 
-<style >
+<style>
+.appbar-border-bottom{
+  border-bottom: 1px solid rgb(var(--v-theme-surface));
+}
+
 .vertical-center {
   display: flex;
   align-items: center;
@@ -214,5 +218,41 @@ import { VApp } from 'vuetify/components';
   font-family: "Neonderthaw", cursive;
   font-weight: 400;
   font-style: normal;
+}
+
+.noto-serif-display-regular {
+  font-family: "Noto Serif Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.noto-serif-display-medium {
+  font-family: "Noto Serif Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.noto-serif-display-semibold {
+  font-family: "Noto Serif Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.noto-serif-display-bold {
+  font-family: "Noto Serif Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
 }
 </style>
