@@ -6,6 +6,10 @@ export default defineNuxtConfig({
     head: {
       link: [
         {
+          rel: 'stylesheet',
+          href: "https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css"
+        },
+        {
           rel: 'preconnect',
           href: "https://fonts.googleapis.com"
         }, {
@@ -64,6 +68,11 @@ export default defineNuxtConfig({
     '@nuxt/content'
     //...
   ],
+  content: {
+    highlight: {
+      theme: 'github-light'
+    }
+  },
   vite: {
     vue: {
       template: {
