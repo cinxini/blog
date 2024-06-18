@@ -1,6 +1,11 @@
 <script  setup>
+import { useRouter } from 'vue-router';
+import { useDate } from 'vuetify';
+const date = useDate()
+const router = useRouter();
+
 const { data: blogPostList } = useAsyncData('blogPostList', () => {
-  return queryContent('/post').find();
+  return queryContent('/post').sort({ 'dates.published' : -1 }).find();
 })  
 console.log(blogPostList)
 
@@ -12,13 +17,18 @@ console.log('count', count)
 <template>
   <v-container style=" max-width: 800px; min-width: 400px;">
     <div >
-    <h1 class="poppins-regular">Recent Posts</h1>
-    <v-card v-for="blogPost in blogPostList" :key="blogPost._path" class="my-4" color="white">
+    <p class="text-center text-h5 poppins-regular">Recent Posts</p>
+    <v-card v-for="blogPost in blogPostList" :key="blogPost._path" class="my-4"  @click="router.push(blogPost._path)" variant="flat">
       <div class="ma-0 pa-4">
         <v-row no-gutters class="text-caption poppins-regular pb-0" >
-          <v-col>{{ blogPost.dates.published }}</v-col>
+          <v-col class="d-flex flex-row  align-center">
+            <div class="">{{ date.format(blogPost.dates.published, 'fullDate')}}</div>
+            <v-chip class="mx-2" label variant="outlined" density="comfortable" size="small">
+              {{ blogPost.category }}
+            </v-chip>
+          </v-col>
         </v-row>
-        <v-row  no-gutters class="text-wrap noto-serif-display-semibold text-h4">
+        <v-row  no-gutters class="text-wrap noto-serif-display-bold text-h4">
           <v-col>{{ blogPost.title }}</v-col>
         </v-row>
       </div>
@@ -26,8 +36,6 @@ console.log('count', count)
       <v-row  no-gutters class="ma-0 pa-4 text-wrap text-caption poppins-regular">
           <v-col>
             <div class="d-flex flex-row">
-              <div class="mr-1">{{ blogPost.category }}</div>
-              <div class="mr-1">|</div>
               <div v-for="tag in blogPost.tags" class="mr-1">
                 #{{ tag }}
               </div>

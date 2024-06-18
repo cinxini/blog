@@ -1,7 +1,6 @@
 <template>
-  <v-app class="main-background">
-
-    <v-app-bar :elevation="0" color="white" height="50"  class="appbar-border-bottom">
+  <v-app >
+    <v-app-bar :elevation="0"  height="50"  class="appbar-border-bottom">
       <v-row no-gutters>
       <v-col cols="2" class="d-flex flex-row">
         <div class="vertical-center ma-4" >
@@ -60,9 +59,7 @@ import { VApp } from 'vuetify/components';
   display: flex;
   align-items: center;
 }
-.main-background{
-  background: white;
-}
+
 
 /* font */
 .josefin-slab-bold {
