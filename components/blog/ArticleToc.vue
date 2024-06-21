@@ -1,5 +1,5 @@
 <script setup>
-
+import { computed, ref } from 'vue';
 const props = defineProps({
   links: {
     type: Array,
@@ -8,61 +8,61 @@ const props = defineProps({
   }
 })
 
+const openToc = ref(true);
+const toggleToc = computed(() => {
+    if (openToc.value) {
+        return 'block';
+    } else {
+        return 'none'
+    }
+})
+
 </script>
 
 <template>
   <v-navigation-drawer
       location="right"
-      class="text-primary"
+      class=""
       permanent
       app
-      width="200" style="position:fixed; top:0; right:0; overflow-y:scroll; "
+      floating
+      width="250" style="position:fixed; top:0; right:0; overflow-y: auto; "
+      variant="plain"
   >
       <div style="padding-top: 50px; text-align: right;">
-        <v-list>
-            <div v-for="h2 in links"  :key="h2.text">
-                <v-list-item>
-                    <v-list-item-title class="toc-h2"><span>#</span> {{ h2.text }}</v-list-item-title>
-                </v-list-item>
-
-                <div v-if="h2.children" v-for="h3 in h2.children" :key="h3.text">
-                    <v-list-item>
-                        <v-list-item-title class="toc-h3">{{ h3.text }}</v-list-item-title>
+        <v-list-item>
+            <template v-slot:append>
+                <v-btn class="pa-0" icon="fa-solid fa-list" size="small" variant="plain" @click="openToc = !openToc"></v-btn>
+            </template>
+        </v-list-item>
+        <div :style="{ display: toggleToc }">
+            <v-list class="mr-3">
+                <div v-for="h2 in links"  :key="h2.text">
+                    <v-list-item density="compact" min-height="20" class="py-0">
+                        <v-list-item-title class="toc-h2 poppins-medium"><span class="h2-sharp text-primaryContainer">#</span> {{ h2.text }}</v-list-item-title>
                     </v-list-item>
+                    
+                    <div v-if="h2.children" class="">
+                        <div  v-for="h3 in h2.children" :key="h3.text">
+                            <v-list-item density="compact" min-height="20" class="py-0">
+                                <v-list-item-title class="toc-h3 poppins-regular">{{ h3.text }}</v-list-item-title>
+                            </v-list-item>
 
-                    <div v-if="h3.children" v-for="h4 in h3.children" :key="h4.text">
-                        <v-list-item>
-                            <v-list-item-title class="toc-h4">{{ h4.text }}</v-list-item-title>
-                        </v-list-item>
+                            <div v-if="h3.children">
+                                <div  v-for="h4 in h3.children" :key="h4.text">
+                                    <v-list-item density="compact" min-height="20" class="py-0" >
+                                        <v-list-item-title class="toc-h4 poppins-light">{{ h4.text }}</v-list-item-title>
+                                    </v-list-item>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- <v-list-group v-else >
-                    <template v-slot:activator="{ props }">
-                        <v-list-item  vbind="props" :title="h2.text" >
-                            <template v-slot:prepend> # </template>
-                        </v-list-item>
-                    </template>
-                    <div v-for="h3 in h2.children"  :key="h3.text">
-                        <v-list-item  :title="h3.text"></v-list-item>
-                    </div>
+            
+            </v-list>
 
-                </v-list-group> -->
-            </div>
-            <!-- <div v-if="!h2.children">
-                <v-list-item v-for="h2 in links" :title="h2.text">
-                    <template v-slot:prepend> # </template>
-                </v-list-item>
-            </div>  -->
-            <!-- <div v-else>
-            k -->
-                  <!-- <v-list-item v-for="h3 in h2.children" :key="h3.text" :title="h3.text">
-                    <div v-if="h3.children">
-                        <v-list-item v-for="h4 in h3.children" :key="h4.text" :title="h4.text"></v-list-item>
-                    </div>
-                  </v-list-item> -->
-            <!-- </div> -->
-          
-        </v-list>
+        </div>
+        
           
       </div>
   </v-navigation-drawer>
@@ -70,15 +70,18 @@ const props = defineProps({
 
 <style scoped>
 .toc-h2 {
-    font-family: "Menlo", "Meslo LG", monospace;
+    /* font-family: "Menlo", "Meslo LG", monospace; */
     font-size: 14px;
-    color: blue;
 }
 
+/* .h2-sharp {
+    color: red;
+} */
+
 .toc-h3 {
-    font-size: 13px;
+    font-size: 12px;
 }
 .toc-h4{
-    font-size: 11px;
+    font-size: 10px;
 }
 </style>
