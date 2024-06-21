@@ -33,7 +33,8 @@ const meta = computed(() => {
 <template>
     <v-container v-if="blogPost" style=" max-width: 800px; min-width: 400px;" class="main-background">
         <ArticleHeader :meta="meta"></ArticleHeader>
-        <ArticleBody class="poppins my-6 main-background">
+        <v-divider class="mt-4 mb-6" color="secondary"></v-divider>
+        <ArticleBody class="poppins my-4 main-background">
             <ContentDoc />
         </ArticleBody>
     </v-container>

@@ -20,7 +20,7 @@ console.log('count', count)
     <div >
     <p class="text-center text-h5 poppins-regular">Recent Posts</p>
     <div  v-for="blogPost in blogPostList" :key="blogPost._path">
-      <ArticleCard :article="blogPost"></ArticleCard>
+      <ArticleCard :article="blogPost" class="my-4"></ArticleCard>
     </div>
   </div>
   </v-container>
