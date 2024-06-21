@@ -1,6 +1,6 @@
 <template>
   <v-app >
-    <v-app-bar :elevation="0"  height="50"  class="appbar-border-bottom">
+    <v-app-bar :elevation="0"  height="50"  class="appbar-border-bottom" color="background">
       <v-row no-gutters>
       <v-col cols="2" class="d-flex flex-row">
         <div class="vertical-center ma-4" >
@@ -50,6 +50,14 @@ import { VApp } from 'vuetify/components';
 </script>
 
 <style>
+/* .v-app-bar.v-toolbar {
+  background-color: var(--v-theme-background);
+  opacity: 1;
+} */
+.main-background{
+  background-color: var(--v-theme-background);
+}
+
 .appbar-border-bottom{
   border-bottom: 1px solid rgb(var(--v-theme-surface));
 }

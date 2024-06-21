@@ -31,17 +31,13 @@ const meta = computed(() => {
 </script>
 
 <template>
-
-        
-        <v-container v-if="blogPost" style=" max-width: 800px; min-width: 400px;">
-            <ArticleHeader :meta="meta"></ArticleHeader>
-            <ArticleBody class="poppins my-6">
-                <ContentDoc />
-            </ArticleBody>
-        </v-container>
-        <ArticleToc :links="blogPost.body.toc.links" />
-    
-
+    <v-container v-if="blogPost" style=" max-width: 800px; min-width: 400px;" class="main-background">
+        <ArticleHeader :meta="meta"></ArticleHeader>
+        <ArticleBody class="poppins my-6 main-background">
+            <ContentDoc />
+        </ArticleBody>
+    </v-container>
+    <ArticleToc :links="blogPost.body.toc.links" />
 </template>
 
 <style >

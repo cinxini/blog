@@ -1,12 +1,12 @@
 <template>
   <NuxtLayout>
-    <v-app class="main-background">
-      <NuxtPage />
+    <v-app>
+      <NuxtPage  />
     </v-app>
   </NuxtLayout>
 </template>
 <style >
 .main-background{
-  background: white;
+  background-color: var(--v-theme-background);
 }
 </style>

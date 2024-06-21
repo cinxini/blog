@@ -11,7 +11,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <v-sheet>
+    <v-sheet class="main-background">
         <div>
             <v-chip label variant="outlined" density="comfortable" size="small" color="secondary">{{ meta.category }}</v-chip>
         </div>

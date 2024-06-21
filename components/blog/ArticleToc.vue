@@ -22,12 +22,13 @@ const toggleToc = computed(() => {
 <template>
   <v-navigation-drawer
       location="right"
-      class=""
+
       permanent
       app
       floating
       width="250" style="position:fixed; top:0; right:0; overflow-y: auto; "
       variant="plain"
+      class="main-background"
   >
       <div style="padding-top: 50px; text-align: right;">
         <v-list-item>
