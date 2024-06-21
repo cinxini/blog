@@ -1,36 +1,49 @@
 <script  setup>
 import ArticleCard from '@/components/blog/ArticleCard.vue';
 import c from '@/constants/blog';
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useDate } from 'vuetify';
+
 const date = useDate()
 const router = useRouter();
 
-const { data: blogPostList } = useAsyncData('blogPostList', () => {
-  return queryContent('/post').sort({ 'dates.published' : -1 }).find();
-})  
-console.log(blogPostList)
-console.log('# posts', c.POSTS_PER_PAGE)
+const page = ref(1);
+const { data: blogPosts } = useAsyncData('blogPostList', () => {
+    return queryContent('/post').sort({ 'dates.published' : -1 }).skip((page.value - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find();
+  })  
+
+
 const count = await queryContent('/post').count();
-console.log(count)
+
 const numPages = computed(() => {
   return Math.ceil(count / c.POSTS_PER_PAGE);
 })
 
+
+watch(page, async (newPage, prevPage) => {
+  // const data = await queryContent('/post').sort({ 'dates.published' : -1 }).skip((page.value - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find();
+  const data = await queryContent('/post').sort({ 'dates.published' : -1 }).skip((newPage - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find()
+  blogPosts.value = data;
+  console.log('page', newPage, data)
+})
+
+console.log('init blog posts', blogPosts)
 </script>
 
 <template>
   <v-container style=" max-width: 800px; min-width: 400px;">
-    <div >
-    <p class="text-center text-h5 poppins-regular">Recent Posts</p>
-    <div  v-for="blogPost in blogPostList" :key="blogPost._path">
-      <ArticleCard :article="blogPost" class="my-4"></ArticleCard>
-    </div>
-    <v-pagination :length="numPages"
-      next-icon="fa-solid fa-caret-right"
-      prev-icon="fa-solid fa-caret-left"
-    ></v-pagination>
+    <div v-if="blogPosts">
+      <p class="text-center text-h5 poppins-regular">Recent Posts</p>
+      <div  v-for="blogPost in blogPosts" :key="blogPost._path">
+        <ArticleCard :article="blogPost" class="my-4"></ArticleCard>
+      </div>
+      <v-pagination :length="numPages"
+        v-model="page"
+        next-icon="fa-solid fa-caret-right"
+        prev-icon="fa-solid fa-caret-left"
+        rounded="lg"
+      ></v-pagination>
   </div>
   </v-container>
   
