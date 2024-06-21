@@ -1,4 +1,5 @@
 <script setup>
+import FlexBox from '@/components/containers/FlexBox.vue';
 import { computed, ref } from 'vue';
 const props = defineProps({
   links: {
@@ -37,6 +38,15 @@ const toggleToc = computed(() => {
             </template>
         </v-list-item>
         <div :style="{ display: toggleToc }">
+            <v-list-item class="ma-3">
+                <template v-slot:append>
+                    <FlexBox class="align-center ga-3">
+                        <v-icon icon="fa-solid fa-caret-up"></v-icon>
+                        <!-- <v-icon icon="fa-solid fa-caret-down"></v-icon> -->
+                        <v-icon icon="fa-solid fa-comment-dots"></v-icon>
+                    </FlexBox>
+                </template>
+            </v-list-item>
             <v-list class="mr-3">
                 <div v-for="h2 in links"  :key="h2.text">
                     <v-list-item density="compact" min-height="20" class="py-0">
