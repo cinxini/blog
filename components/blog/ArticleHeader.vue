@@ -11,15 +11,16 @@ const props = defineProps({
 </script>
 
 <template>
-    <v-sheet >
+    <v-sheet>
         <div>
-            <div>{{ meta.date }}</div>
-            <v-chip>{{ meta.category }}</v-chip>
+            <v-chip label variant="outlined" density="comfortable" size="small" color="secondary">{{ meta.category }}</v-chip>
         </div>
-        <div class="text-h4">{{ meta.title }}</div>
-        <div class="">{{ meta.description }}</div>
-        <FlexBox>
-            <div v-for="tag in meta.tags" :key="tag">#{{ tag }}</div>
+        <div class="my-3 text-h4 noto-serif-display-bold text-primary-lighten-3">{{ meta.title }}</div>
+        <div class="poppins-regular-italic">{{ meta.description }}</div>
+        <FlexBox class="my-1">
+            <div class="poppins-regular text-caption">{{ meta.date }}</div> | 
+            <v-icon icon="fa-solid fa-tag" size="x-small"></v-icon>
+            <div v-for="tag in meta.tags" :key="tag" class="poppins-regular text-caption">#{{ tag }}</div>
         </FlexBox>
     </v-sheet>
 </template>

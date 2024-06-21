@@ -35,7 +35,7 @@ const meta = computed(() => {
         
         <v-container v-if="blogPost" style=" max-width: 800px; min-width: 400px;">
             <ArticleHeader :meta="meta"></ArticleHeader>
-            <ArticleBody>
+            <ArticleBody class="poppins my-6">
                 <ContentDoc />
             </ArticleBody>
         </v-container>
@@ -51,4 +51,8 @@ const meta = computed(() => {
         display: none !important;
     }
 } */
+
+ .poppins {
+    font-family: "Poppins", sans-serif;
+ }
 </style>

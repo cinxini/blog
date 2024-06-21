@@ -10,7 +10,6 @@
             cover
             src="@/assets/images/logo4.png"
           ></v-img>
-          <!-- <h1 ><span class="neonderthaw-regular font-weight-medium" style="font-size:larger;">nutnaree.kleaw</span></h1> -->
         </div>
         
       </v-col>

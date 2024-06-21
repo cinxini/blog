@@ -1,4 +1,4 @@
-import orangeTheme from "@/assets/themes/static-02.json";
+import orangeTheme from "@/assets/themes/static-01.json";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@mdi/font/css/materialdesignicons.css";
 import { createVuetify } from "vuetify";
@@ -22,7 +22,7 @@ export default defineNuxtPlugin((app) => {
         theme: {
             defaultTheme: "lightTheme",
             variations: {
-                colors: ["primary", "secondary"],
+                colors: ["primary", "secondary", "primaryContainer"],
                 lighten: 8,
                 darken: 8,
             },

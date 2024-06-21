@@ -39,7 +39,7 @@ const toggleToc = computed(() => {
             <v-list class="mr-3">
                 <div v-for="h2 in links"  :key="h2.text">
                     <v-list-item density="compact" min-height="20" class="py-0">
-                        <v-list-item-title class="toc-h2 poppins-medium"><span class="h2-sharp text-primaryContainer">#</span> {{ h2.text }}</v-list-item-title>
+                        <v-list-item-title class="toc-h2 poppins-medium"><span class="h2-sharp text-primary-lighten-3">#</span> {{ h2.text }}</v-list-item-title>
                     </v-list-item>
                     
                     <div v-if="h2.children" class="">
@@ -71,7 +71,7 @@ const toggleToc = computed(() => {
 <style scoped>
 .toc-h2 {
     /* font-family: "Menlo", "Meslo LG", monospace; */
-    font-size: 14px;
+    font-size: 13px;
 }
 
 /* .h2-sharp {
@@ -79,9 +79,9 @@ const toggleToc = computed(() => {
 } */
 
 .toc-h3 {
-    font-size: 12px;
+    font-size: 11px;
 }
 .toc-h4{
-    font-size: 10px;
+    font-size: 9px;
 }
 </style>
