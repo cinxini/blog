@@ -2,7 +2,7 @@
 import ArticleBody from '@/components/blog/ArticleBody.vue';
 import ArticleHeader from '@/components/blog/ArticleHeader.vue';
 import ArticleToc from '@/components/blog/ArticleToc.vue';
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useDate } from 'vuetify';
 
 const date = useDate()
@@ -28,6 +28,15 @@ const meta = computed(() => {
         return null;
     }
 })
+
+const observer = ref(null);
+const md = ref(null)
+onMounted(() => {
+    observer.value = new IntersectionObserver(entries => {
+        console.log('entries', entries)
+    })
+})
+console.log('md', blogPost)
 </script>
 
 <template>
@@ -35,7 +44,7 @@ const meta = computed(() => {
         <ArticleHeader :meta="meta"></ArticleHeader>
         <v-divider class="mt-4 mb-6" color="secondary"></v-divider>
         <ArticleBody class="poppins my-4 main-background">
-            <ContentDoc />
+            <ContentDoc ref="md" />
         </ArticleBody>
     </v-container>
     <ArticleToc :links="blogPost.body.toc.links" />
