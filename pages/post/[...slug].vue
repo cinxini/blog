@@ -2,7 +2,7 @@
 import ArticleBody from '@/components/blog/ArticleBody.vue';
 import ArticleHeader from '@/components/blog/ArticleHeader.vue';
 import ArticleToc from '@/components/blog/ArticleToc.vue';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useDate } from 'vuetify';
 
 const date = useDate()
@@ -29,14 +29,34 @@ const meta = computed(() => {
     }
 })
 
-const observer = ref(null);
-const md = ref(null)
+const intersectedTocId = ref(null);
+const observer = ref(null)
+const nuxtContent = ref(null)
+const observerOptions = ref({
+  root: 0,
+  threshold: "0",
+})
 onMounted(() => {
-    observer.value = new IntersectionObserver(entries => {
-        console.log('entries', entries)
+    console.log('md', observerOptions)
+    observer.value = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            const id = entry.target.getAttribute('id')
+            if (entry.isIntersecting) {
+                intersectedTocId.value = id
+                console.log('intersecting::' , id)
+            }
+            
+        })
+    }, { threshold:1.0
+    })
+    console.log(observer)
+    document.querySelectorAll('.content h2[id], .content h3[id]').forEach((section) => {
+        observer.value?.observe(section)
     })
 })
-console.log('md', blogPost)
+onUnmounted(() => {
+  observer.value?.disconnect()
+})
 </script>
 
 <template>
@@ -44,7 +64,9 @@ console.log('md', blogPost)
         <ArticleHeader :meta="meta"></ArticleHeader>
         <v-divider class="mt-4 mb-6" color="secondary"></v-divider>
         <ArticleBody class="poppins my-4 main-background">
-            <ContentDoc ref="md" />
+            <!-- <ContentDoc ref="md" /> -->
+            <ContentDoc />
+               
         </ArticleBody>
     </v-container>
     <ArticleToc :links="blogPost.body.toc.links" />
