@@ -69,7 +69,7 @@ onUnmounted(() => {
                
         </ArticleBody>
     </v-container>
-    <ArticleToc :links="blogPost.body.toc.links" />
+    <ArticleToc :links="blogPost.body.toc.links" :current-id="intersectedTocId" />
 </template>
 
 <style >

@@ -22,7 +22,12 @@ export default defineNuxtPlugin((app) => {
         theme: {
             defaultTheme: "lightTheme",
             variations: {
-                colors: ["primary", "secondary", "primaryContainer"],
+                colors: [
+                    "primary",
+                    "secondary",
+                    "primaryContainer",
+                    "tertiary",
+                ],
                 lighten: 8,
                 darken: 8,
             },

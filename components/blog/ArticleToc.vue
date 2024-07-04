@@ -15,12 +15,15 @@ const props = defineProps({
 
 const openToc = ref(true);
 const toggleToc = computed(() => {
+    console.log(props.links)
     if (openToc.value) {
         return 'block';
     } else {
         return 'none'
     }
 })
+
+
 
 </script>
 
@@ -54,13 +57,16 @@ const toggleToc = computed(() => {
             <v-list class="mr-3">
                 <div v-for="h2 in links"  :key="h2.text">
                     <v-list-item density="compact" min-height="20" class="py-0">
-                        <v-list-item-title class="toc-h2 poppins-medium"><span class="h2-sharp text-primary-lighten-3">#</span> {{ h2.text }}</v-list-item-title>
+                        <v-list-item-title class="toc-h2 poppins-medium">
+                            <span class="h2-sharp text-primary-lighten-3"># </span> 
+                            <span :class="{ 'text-tertiary-lighten-2': h2.id == currentId? true: false, 'font-weight-bold': h2.id == currentId? true: false }">{{ h2.text }}</span>
+                        </v-list-item-title>
                     </v-list-item>
                     
                     <div v-if="h2.children" class="">
                         <div  v-for="h3 in h2.children" :key="h3.text">
                             <v-list-item density="compact" min-height="20" class="py-0">
-                                <v-list-item-title class="toc-h3 poppins-regular">{{ h3.text }}</v-list-item-title>
+                                <v-list-item-title class="toc-h3 poppins-regular"><span :class="{ 'text-tertiary-lighten-2': h3.id == currentId? true: false, 'font-weight-bold': h3.id == currentId? true: false }">{{ h3.text }}</span></v-list-item-title>
                             </v-list-item>
 
                             <div v-if="h3.children">
