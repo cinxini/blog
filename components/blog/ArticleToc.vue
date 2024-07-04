@@ -6,6 +6,10 @@ const props = defineProps({
     type: Array,
     nullable: true,
     default: null
+  },
+  currentId:{
+    type: String,
+    default: null
   }
 })
 
