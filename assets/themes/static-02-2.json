@@ -31,7 +31,7 @@
             "onError": "#FFFFFF",
             "errorContainer": "#FFDAD6",
             "onErrorContainer": "#410002",
-            "background": "#FFFFFF",
+            "background": "#F9F9F9",
             "onBackground": "#1A1C1C",
             "surface": "#F9F9F9",
             "onSurface": "#1A1C1C",
