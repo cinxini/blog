@@ -18,7 +18,7 @@ const router = useRouter();
     <div class="ma-0 px-4 py-2">
       <v-row no-gutters class="text-caption poppins-regular pb-2">
         <v-col class="d-flex flex-row  align-center">
-          <v-chip class="" label variant="outlined" density="comfortable" size="small" color="secondary">
+          <v-chip class="category" label variant="outlined" density="comfortable" size="small" color="">
             {{ article.category }}
           </v-chip>
         </v-col>

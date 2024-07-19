@@ -49,7 +49,7 @@ import { VApp } from 'vuetify/components';
 
 </script>
 
-<style>
+<style >
 /* .v-app-bar.v-toolbar {
   background-color: var(--v-theme-background);
   opacity: 1;
@@ -283,5 +283,11 @@ import { VApp } from 'vuetify/components';
   font-family: "Anonymous Pro", monospace;
   font-weight: 700;
   font-style: italic;
+}
+
+/* blog colors */
+.v-chip.category {
+  /* border-color: rgb(var(--v-theme-secondary-darken-1)); */
+  color: rgb(var(--v-theme-secondary-darken-1));
 }
 </style>

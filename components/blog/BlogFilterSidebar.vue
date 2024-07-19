@@ -1,4 +1,5 @@
 <script setup>
+import FlexBox from '@/components/containers/FlexBox.vue';
 import c from '@/constants/blog';
 
 const { data: tags } = useAsyncData(
@@ -36,10 +37,10 @@ const { data: tags } = useAsyncData(
         <v-list-item-title>Category</v-list-item-title>
         <v-list-item-subtitle>
           <FlexBox style="flex-wrap: wrap;">
-            <v-chip label variant="outlined" density="comfortable" size="small" color="secondary-lighten-3">all</v-chip>
-            <v-chip label variant="outlined" density="comfortable" size="small" color="secondary-lighten-3">datasci</v-chip>
-            <v-chip label variant="outlined" density="comfortable" size="small" color="secondary-lighten-3">webdev</v-chip>
-            <v-chip label variant="outlined" density="comfortable" size="small" color="secondary-lighten-3">others</v-chip>
+            <v-chip label variant="outlined" density="comfortable" size="small" class="category">all</v-chip>
+            <v-chip label variant="outlined" density="comfortable" size="small" class="category">datasci</v-chip>
+            <v-chip label variant="outlined" density="comfortable" size="small" class="category">webdev</v-chip>
+            <v-chip label variant="outlined" density="comfortable" size="small" class="category">others</v-chip>
           </FlexBox>
         </v-list-item-subtitle>
       </v-list-item>
@@ -48,7 +49,7 @@ const { data: tags } = useAsyncData(
         <v-list-item-title>Tags</v-list-item-title>
         <v-list-item-subtitle>
           <FlexBox style="flex-wrap: wrap;">
-            <div v-for="tag in tags">#{{ tag[0] }}</div>
+            <div v-for="tag in tags" :key="tag">#{{ tag[0] }}</div>
           </FlexBox>
         </v-list-item-subtitle>
       </v-list-item>
