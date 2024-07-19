@@ -287,19 +287,36 @@ import { VApp } from 'vuetify/components';
 
 /* blog colors */
 .v-chip.category {
-  /* border-color: rgb(var(--v-theme-secondary-darken-1)); */
+  border-color: rgb(var(--v-theme-secondary));
   color: rgb(var(--v-theme-secondary));
+  border-radius: 5;
+  transition: 0.05s ease-in-out;
 }
 
 .v-chip.category:hover {
   /* border-color: rgb(var(--v-theme-secondary-darken-1)); */
   background-color: rgb(var(--v-theme-secondary));
   color: white;
+    display: block;
+    line-height: 0.95;
+    border-bottom: 2px solid rgba(var(--v-theme-secondary-darken-1), 1);
 }
 
 body {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+
+.tag {
+    background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.3);
+    border-radius: 5;
+    transition: 0.05s ease-in-out;
+}
+.tag:hover {
+    background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.6);
+    border-bottom: 2px solid rgba(var(--v-theme-secondaryContainer), 1);
+    display: inline-block;
+    line-height: 0.95;
 }
 </style>

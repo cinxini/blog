@@ -18,7 +18,7 @@ const router = useRouter();
     <div class="ma-0 px-4 py-2">
       <v-row no-gutters class="text-caption poppins-regular pb-2">
         <v-col class="d-flex flex-row  align-center">
-          <v-chip class="category" label variant="outlined" density="comfortable" size="small" rounded="0">
+          <v-chip class="category" label variant="outlined" density="comfortable" size="small" >
             {{ article.category }}
           </v-chip>
         </v-col>
@@ -35,7 +35,7 @@ const router = useRouter();
           <span>|</span>
           <v-icon icon="fa-solid fa-tag" size="small" color="secondary"></v-icon>
           <FlexBox class="ga-1">
-            <div v-for="tag in article.tags" :key="tag">
+            <div v-for="tag in article.tags" :key="tag" class="tag">
               #{{ tag }}
             </div>
           </FlexBox>

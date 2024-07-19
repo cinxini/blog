@@ -26,6 +26,7 @@ export default defineNuxtPlugin((app) => {
                     "primary",
                     "secondary",
                     "primaryContainer",
+                    "secondaryContainer",
                     "tertiary",
                 ],
                 lighten: 8,

@@ -15,7 +15,6 @@ const props = defineProps({
         <div>
             
             <v-chip label 
-            rounded="0"
                 variant="outlined" 
                 density="comfortable" 
                 size="small"
@@ -30,7 +29,7 @@ const props = defineProps({
             <div class="poppins-regular text-caption">{{ meta.date }}</div> |
             <v-icon icon="fa-solid fa-tag" size="x-small" color="secondary-darken-1"></v-icon>
             <FlexBox class="ga-1">
-                <div v-for="tag in meta.tags" :key="tag" class="poppins-regular text-caption">#{{ tag }}</div>
+                <div v-for="tag in meta.tags" :key="tag" class="poppins-regular text-caption tag">#{{ tag }}</div>
             </FlexBox>
         </FlexBox>
     </v-sheet>
@@ -38,4 +37,6 @@ const props = defineProps({
 
 
 
-<style></style>
+<style>
+
+</style>
