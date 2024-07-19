@@ -18,12 +18,12 @@ const router = useRouter();
     <div class="ma-0 px-4 py-2">
       <v-row no-gutters class="text-caption poppins-regular pb-2">
         <v-col class="d-flex flex-row  align-center">
-          <v-chip class="category" label variant="outlined" density="comfortable" size="small" color="">
+          <v-chip class="category" label variant="outlined" density="comfortable" size="small" rounded="0">
             {{ article.category }}
           </v-chip>
         </v-col>
       </v-row>
-      <v-row no-gutters class="text-wrap noto-serif-display-bold text-h4 text-primary">
+      <v-row no-gutters class="text-wrap  text-h4 text-primary">
         <v-col>{{ article.title }}</v-col>
       </v-row>
     </div>

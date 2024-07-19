@@ -53,22 +53,49 @@ const toggleToc = computed(() => {
                             <v-list-item-title class="toc-h2 poppins-medium">
                                 <span class="h2-sharp text-primary"># </span>
                                 <span
-                                    :class="{ 'text-tertiary': h2.id == currentId ? true : false, 'font-weight-bold': h2.id == currentId ? true : false }">{{ h2.text }}</span>
+                                    :class="{ current: h2.id == currentId ? true : false }" class="toc-label">
+                                        <a 
+                                            class=""
+                                            :href="`#${h2.id}`">
+                                            {{ h2.text }}
+                                        </a>
+                                    </span>
                             </v-list-item-title>
                         </v-list-item>
 
                         <div v-if="h2.children" class="">
                             <div v-for="h3 in h2.children" :key="h3.text">
                                 <v-list-item density="compact" min-height="20" class="py-0">
-                                    <v-list-item-title class="toc-h3 poppins-regular"><span
-                                            :class="{ 'text-tertiary': h3.id == currentId ? true : false, 'font-weight-bold': h3.id == currentId ? true : false }">{{ h3.text }}</span></v-list-item-title>
+                                    <v-list-item-title class="toc-h3 poppins-regular">
+                                        <span
+                                            :class="{ current: h3.id == currentId ? true : false }" class="toc-label"
+                                        >
+                                            <a 
+                                                class=""
+                                                :href="`#${h3.id}`">
+                                                {{ h3.text }}
+                                            </a>
+                                        </span>
+                                    </v-list-item-title>
                                 </v-list-item>
 
                                 <div v-if="h3.children">
                                     <div v-for="h4 in h3.children" :key="h4.text">
                                         <v-list-item density="compact" min-height="20" class="py-0">
                                             <v-list-item-title
-                                                class="toc-h4 poppins-light">{{ h4.text }}</v-list-item-title>
+                                                class="toc-h4 poppins-light"
+                                                >
+                                                <span
+                                                    :class="{ current: h4.id == currentId ? true : false }" class="toc-label"
+                                                >
+                                                    <a 
+                                                        class=""
+                                                        :href="`#${h4.id}`">
+                                                        {{ h4.text }}
+                                                    </a>
+                                                </span>
+                                            
+                                            </v-list-item-title>
                                         </v-list-item>
                                     </div>
                                 </div>
@@ -89,6 +116,7 @@ const toggleToc = computed(() => {
 .toc-h2 {
     /* font-family: "Menlo", "Meslo LG", monospace; */
     font-size: 13px;
+    font-weight: bold;
 }
 
 /* .h2-sharp {
@@ -97,9 +125,20 @@ const toggleToc = computed(() => {
 
 .toc-h3 {
     font-size: 11px;
+    font-weight: 600;
 }
 
 .toc-h4 {
     font-size: 9px;
+    font-weight: 400;
+}
+
+.toc-h2 .toc-label a, .toc-h3 .toc-label a, .toc-h4 .toc-label a {
+    color: rgb(var(--v-theme-surface-variant));
+}
+
+.toc-h2 .toc-label.current a, .toc-h3 .toc-label.current a, .toc-h4 .toc-label.current a {
+    color: rgb(var(--v-theme-tertiary));
+    font-weight: bold;
 }
 </style>

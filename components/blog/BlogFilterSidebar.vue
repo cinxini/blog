@@ -34,15 +34,13 @@ const { data: tags } = useAsyncData(
   >
     <div style="padding-top: 50px; text-align: left;">  
       <v-list-item>
-        <v-list-item-title>Category</v-list-item-title>
-        <v-list-item-subtitle>
+          <p>Category</p>
           <FlexBox style="flex-wrap: wrap;">
-            <v-chip label variant="outlined" density="comfortable" size="small" class="category">all</v-chip>
-            <v-chip label variant="outlined" density="comfortable" size="small" class="category">datasci</v-chip>
-            <v-chip label variant="outlined" density="comfortable" size="small" class="category">webdev</v-chip>
-            <v-chip label variant="outlined" density="comfortable" size="small" class="category">others</v-chip>
+            <v-chip label variant="outlined" density="comfortable" size="small" class="category" rounded="0">all</v-chip>
+            <v-chip label variant="outlined" density="comfortable" size="small" class="category" rounded="0">datasci</v-chip>
+            <v-chip label variant="outlined" density="comfortable" size="small" class="category" rounded="0">webdev</v-chip>
+            <v-chip label variant="outlined" density="comfortable" size="small" class="category" rounded="0">others</v-chip>
           </FlexBox>
-        </v-list-item-subtitle>
       </v-list-item>
 
       <v-list-item>
@@ -54,7 +52,6 @@ const { data: tags } = useAsyncData(
         </v-list-item-subtitle>
       </v-list-item>
     </div>
-  
   </v-navigation-drawer>
 </template>
 

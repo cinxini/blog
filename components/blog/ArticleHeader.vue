@@ -13,8 +13,16 @@ const props = defineProps({
 <template>
     <v-sheet class="main-background">
         <div>
-            <v-chip label variant="outlined" density="comfortable" size="small"
-                color="" class="category">{{ meta.category }}</v-chip>
+            
+            <v-chip label 
+            rounded="0"
+                variant="outlined" 
+                density="comfortable" 
+                size="small"
+                color="" 
+                class="category">
+                    {{ meta.category }}
+            </v-chip>
         </div>
         <div class="my-3 text-h4 poppins-bold text-primary">{{ meta.title }}</div>
         <div class="poppins-light text-subtitle-2">{{ meta.description }}</div>

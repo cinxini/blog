@@ -288,6 +288,18 @@ import { VApp } from 'vuetify/components';
 /* blog colors */
 .v-chip.category {
   /* border-color: rgb(var(--v-theme-secondary-darken-1)); */
-  color: rgb(var(--v-theme-secondary-darken-1));
+  color: rgb(var(--v-theme-secondary));
+}
+
+.v-chip.category:hover {
+  /* border-color: rgb(var(--v-theme-secondary-darken-1)); */
+  background-color: rgb(var(--v-theme-secondary));
+  color: white;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 </style>
