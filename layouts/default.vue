@@ -1,47 +1,42 @@
 <template>
-  <v-app >
-    <v-app-bar :elevation="0"  height="50"  class="appbar-border-bottom" color="background">
+  <v-app>
+    <v-app-bar :elevation="0" height="50" class="appbar-border-bottom" color="background">
       <v-row no-gutters>
-      <v-col cols="2" class="d-flex flex-row">
-        <div class="vertical-center ma-4" >
-          <v-img
-            :width="150"
-            aspect-ratio="16/9"
-            cover
-            src="@/assets/images/logo4.png"
-          ></v-img>
-        </div>
-        
-      </v-col>
-      <v-col  class="d-flex justify-center ">
+        <v-col cols="2" class="d-flex flex-row">
+          <div class="vertical-center ma-4">
+            <v-img :width="150" aspect-ratio="16/9" cover src="@/assets/images/logo4.png"></v-img>
+          </div>
+
+        </v-col>
+        <v-col class="d-flex justify-center ">
           <div class="vertical-center">
             <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/">home</v-btn>
             <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/about">about</v-btn>
             <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/projects">projects</v-btn>
             <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/blog">blog</v-btn>
-        </div>
-      </v-col>
-      <v-col cols="2"  class="d-flex flex-row-reverse">
-        <div class="vertical-center ">
-          <v-btn class="ma-2 pa-0" icon="fa-solid fa-magnifying-glass" size="small"></v-btn>
-          <!-- <v-btn class="ma-2 pa-0" icon="fa-brands fa-medium" size="small"></v-btn> -->
-          <!-- <v-btn><v-icon icon="fa-brands fa-linkedin" /></v-btn> -->
-          <!-- <v-btn class="ma-2 pa-0" icon="fa-brands fa-linkedin-in" size="small"></v-btn> -->
-          <!-- <v-btn><v-icon icon="fa-brands fa-square-x-twitter" /></v-btn>  -->
-          <!-- <v-btn class="ma-2"  icon="fa-brands fa-x-twitter" size="small"></v-btn>      -->
-          <!-- <v-btn><v-icon icon="fa-brands fa-square-github" /></v-btn> -->
-          <!-- <v-btn class="mr-4 ml-2 my-2"  icon="fa-brands fa-github-alt" size="small"></v-btn> -->
-        </div>
-      </v-col>
-    </v-row>
+          </div>
+        </v-col>
+        <v-col cols="2" class="d-flex flex-row-reverse">
+          <div class="vertical-center ">
+            <v-btn class="ma-2 pa-0" icon="fa-solid fa-magnifying-glass" size="small"></v-btn>
+            <!-- <v-btn class="ma-2 pa-0" icon="fa-brands fa-medium" size="small"></v-btn> -->
+            <!-- <v-btn><v-icon icon="fa-brands fa-linkedin" /></v-btn> -->
+            <!-- <v-btn class="ma-2 pa-0" icon="fa-brands fa-linkedin-in" size="small"></v-btn> -->
+            <!-- <v-btn><v-icon icon="fa-brands fa-square-x-twitter" /></v-btn>  -->
+            <!-- <v-btn class="ma-2"  icon="fa-brands fa-x-twitter" size="small"></v-btn>      -->
+            <!-- <v-btn><v-icon icon="fa-brands fa-square-github" /></v-btn> -->
+            <!-- <v-btn class="mr-4 ml-2 my-2"  icon="fa-brands fa-github-alt" size="small"></v-btn> -->
+          </div>
+        </v-col>
+      </v-row>
     </v-app-bar>
 
     <v-main>
-    <slot />
+      <slot />
     </v-main>
 
   </v-app>
-  
+
 </template>
 
 <script setup>
@@ -49,16 +44,16 @@ import { VApp } from 'vuetify/components';
 
 </script>
 
-<style >
+<style>
 /* .v-app-bar.v-toolbar {
   background-color: var(--v-theme-background);
   opacity: 1;
 } */
-.main-background{
+.main-background {
   background-color: var(--v-theme-background);
 }
 
-.appbar-border-bottom{
+.appbar-border-bottom {
   border-bottom: 1px solid rgb(var(--v-theme-surface));
 }
 
@@ -219,6 +214,7 @@ import { VApp } from 'vuetify/components';
   font-weight: 400;
   font-style: normal;
 }
+
 .neonderthaw-regular {
   font-family: "Neonderthaw", cursive;
   font-weight: 400;
@@ -297,9 +293,9 @@ import { VApp } from 'vuetify/components';
   /* border-color: rgb(var(--v-theme-secondary-darken-1)); */
   background-color: rgb(var(--v-theme-secondary));
   color: white;
-    display: block;
-    line-height: 0.95;
-    border-bottom: 2px solid rgba(var(--v-theme-secondary-darken-1), 1);
+  display: block;
+  line-height: 0.95;
+  border-bottom: 2px solid rgba(var(--v-theme-secondary-darken-1), 1);
 }
 
 body {
@@ -309,14 +305,19 @@ body {
 }
 
 .tag {
-    background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.3);
-    border-radius: 5;
-    transition: 0.05s ease-in-out;
+  background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.3);
+  border-radius: 5;
+  transition: 0.05s ease-in-out;
 }
+
 .tag:hover {
-    background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.6);
-    border-bottom: 2px solid rgba(var(--v-theme-secondaryContainer), 1);
-    display: inline-block;
-    line-height: 0.95;
+  background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.6);
+  border-bottom: 2px solid rgba(var(--v-theme-secondaryContainer), 1);
+  display: inline-block;
+  line-height: 0.95;
+}
+
+.v-card--link:before {
+  background: none;
 }
 </style>
