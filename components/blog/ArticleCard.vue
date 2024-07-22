@@ -16,7 +16,7 @@ const router = useRouter();
 const tagClicked = (tag) => {
 
   console.log('tag:::', tag)
-  router.push(`/post/tags/${tag}/`)
+  router.push(`/blog/tags/${tag}/`)
 }
 
 const postClickHandler = (path) => {
