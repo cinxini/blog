@@ -282,18 +282,18 @@ import { VApp } from 'vuetify/components';
 }
 
 /* blog colors */
-.v-chip.category {
+.category {
   border-color: rgb(var(--v-theme-secondary));
   color: rgb(var(--v-theme-secondary));
   border-radius: 5;
   transition: 0.05s ease-in-out;
 }
 
-.v-chip.category:hover {
+.category:hover {
   /* border-color: rgb(var(--v-theme-secondary-darken-1)); */
   background-color: rgb(var(--v-theme-secondary));
   color: white;
-  display: block;
+  display: inline-block;
   line-height: 0.95;
   border-bottom: 2px solid rgba(var(--v-theme-secondary-darken-1), 1);
 }
@@ -315,6 +315,23 @@ body {
   border-bottom: 2px solid rgba(var(--v-theme-secondaryContainer), 1);
   display: inline-block;
   line-height: 0.95;
+}
+
+.readmore {
+  background-color: rgba(var(--v-theme-tertiaryContainer-lighten-1), 0.3);
+  border-radius: 5px;
+  transition: 0.05s ease-in-out;
+}
+
+.readmore:hover {
+  background-color: rgba(var(--v-theme-tertiaryContainer-lighten-1), 0.6);
+  border-bottom: 2px solid rgba(var(--v-theme-tertiaryContainer), 1);
+  display: inline-block;
+  line-height: 0.95;
+}
+
+.is-btn {
+  cursor: pointer;
 }
 
 .v-card--link:before {
