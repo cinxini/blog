@@ -1,4 +1,4 @@
-<script  setup>
+<script setup>
 import ArticleCard from '@/components/blog/ArticleCard.vue';
 import FilterSidebar from '@/components/blog/BlogFilterSidebar.vue';
 import c from '@/constants/blog';
@@ -11,10 +11,10 @@ const router = useRouter();
 
 const page = ref(1);
 const { data: blogPosts } = useAsyncData('blogPostList', () => {
-    return queryContent('/post').sort({ 'dates.published' : -1 }).skip((page.value - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find();
-  })  
+  return queryContent('/blog').sort({ 'dates.published': -1 }).skip((page.value - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find();
+})
 
-const count = await queryContent('/post').count();
+const count = await queryContent('/blog').count();
 
 const numPages = computed(() => {
   return Math.ceil(count / c.POSTS_PER_PAGE);
@@ -23,7 +23,7 @@ const numPages = computed(() => {
 
 watch(page, async (newPage, prevPage) => {
   // const data = await queryContent('/post').sort({ 'dates.published' : -1 }).skip((page.value - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find();
-  const data = await queryContent('/post').sort({ 'dates.published' : -1 }).skip((newPage - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find()
+  const data = await queryContent('/blog').sort({ 'dates.published': -1 }).skip((newPage - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find()
   blogPosts.value = data;
   console.log('page', newPage, data)
 })
@@ -35,22 +35,16 @@ watch(page, async (newPage, prevPage) => {
   <v-container style=" max-width: 800px; min-width: 400px;">
     <div v-if="blogPosts">
       <p class="text-center text-h5 poppins-regular">Recent Posts</p>
-      <div  v-for="blogPost in blogPosts" :key="blogPost._path">
+      <div v-for="blogPost in blogPosts" :key="blogPost._path">
         <ArticleCard :article="blogPost" class="my-4"></ArticleCard>
       </div>
-      <v-pagination :length="numPages"
-        v-model="page"
-        next-icon="fa-solid fa-caret-right"
-        prev-icon="fa-solid fa-caret-left"
-        rounded="lg"
-      ></v-pagination>
-  </div>
+      <v-pagination :length="numPages" v-model="page" next-icon="fa-solid fa-caret-right"
+        prev-icon="fa-solid fa-caret-left" rounded="lg"></v-pagination>
+    </div>
   </v-container>
 
 </template>
 
 
 
-<style>
-
-</style>
+<style></style>
