@@ -30,43 +30,69 @@ const clickHandler = (e, arg) => {
 </script>
 <template>
   <v-card class="my-4 main-background" variant="plain" :ripple="false">
-    <div class="ma-0 px-4 py-2">
-      <v-row no-gutters class="text-caption poppins-regular pb-2">
-        <v-col class="d-flex flex-row  align-center">
-          <v-chip class="category is-btn" label variant="outlined" density="comfortable" size="small">
-            {{ article.category }}
-          </v-chip>
-        </v-col>
-      </v-row>
-      <v-row no-gutters class="text-wrap  text-h4 text-primary">
-        <v-col class="article-title is-btn" @click="postClickHandler(article._path)">{{ article.title }}</v-col>
-      </v-row>
-    </div>
-    <v-card-text class="ma-0 px-4 py-0 poppins-extralight text-body-2">{{ article.description }}</v-card-text>
-    <v-row no-gutters class="ma-0 px-4 py-2 text-wrap text-caption poppins-regular">
-      <v-col>
-        <FlexBox class="ga-2" style="justify-content: space-between;">
-          <FlexBox class="ga-2">
-            <div class="">{{ date.format(article.dates.published, 'fullDate') }}</div>
-            <span>|</span>
-            <v-icon icon="fa-solid fa-tag" size="small" color="secondary"></v-icon>
-            <FlexBox class="ga-1">
-              <div v-for="tag in article.tags" :key="tag" class="tag is-btn" @click.stop="tagClicked(tag)">
-                #{{ tag }}
-              </div>
-            </FlexBox>
-          </FlexBox>
-
-          <div class="readmore is-btn" style="padding-left: 10px; padding-right: 10px; border-radius: 5;"
-            @click="postClickHandler(article._path)">Read More
-          </div>
-        </FlexBox>
+    <v-row no-gutters class="text-caption poppins-regular pb-2">
+      <v-col cols="4">
+        <v-img src="~/assets/images/blog/BLOG101.png" cover height="100%"></v-img>
       </v-col>
+      <v-col cols="8">
+        <div>
+          <div class="ma-0 px-4 py-2">
+            <v-row no-gutters class="text-caption poppins-regular pb-2">
+              <v-col class="d-flex flex-row  align-center">
+                <v-chip class="category is-btn" label variant="outlined" density="comfortable" size="small">
+                  {{ article.category }}
+                </v-chip>
+              </v-col>
+            </v-row>
+            <v-row no-gutters class="text-wrap  text-h4 text-primary">
+              <v-col class="article-title is-btn" @click="postClickHandler(article._path)">{{ article.title }}</v-col>
+            </v-row>
+          </div>
+          <div class="ma-0 px-4 py-0 poppins-extralight text-body-2">
+            {{ article.description.substring(0, 150) }}{{ article.description.length > 150 ? '...' : '' }}
+          </div>
+          <v-row no-gutters class="ma-0 px-4 py-2 text-wrap text-caption poppins-regular">
+            <v-col>
+              <FlexBox class="ga-2" style="justify-content: space-between; ">
+                <FlexBox class="ga-2">
+                  <div class="">{{ date.format(article.dates.published, 'fullDate') }}</div>
+                  <span>|</span>
+                  <v-icon icon="fa-solid fa-tag" size="small" color="secondary"></v-icon>
+                  <FlexBox class="ga-1 tag-area" style="">
+                    <div v-for="tag in article.tags" :key="tag" class="tag is-btn" @click.stop="tagClicked(tag)">
+                      #{{ tag }}
+                    </div>
+                  </FlexBox>
+                </FlexBox>
+
+                <div class="readmore is-btn" style="padding-left: 10px; padding-right: 10px; border-radius: 5;"
+                  @click="postClickHandler(article._path)">Read More
+                </div>
+              </FlexBox>
+
+            </v-col>
+          </v-row>
+        </div>
+      </v-col>
+
     </v-row>
+
+
+
   </v-card>
 </template>
 
 <style>
+.tag-area {
+  width: 280px;
+  overflow-x: auto;
+}
+
+.tag-area::-webkit-scrollbar {
+  display: none;
+}
+
+
 .v-card--link:hover {
   background: none;
   background-color: white;

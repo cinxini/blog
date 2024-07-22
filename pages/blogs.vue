@@ -32,7 +32,7 @@ watch(page, async (newPage, prevPage) => {
 
 <template>
   <FilterSidebar></FilterSidebar>
-  <v-container style=" max-width: 800px; min-width: 400px;">
+  <v-container style=" max-width: 900px; min-width: 400px;">
     <div v-if="blogPosts">
       <p class="text-center text-h5 poppins-regular">Recent Posts</p>
       <div v-for="blogPost in blogPosts" :key="blogPost._path">
