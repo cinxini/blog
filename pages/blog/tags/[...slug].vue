@@ -39,8 +39,8 @@ const numPages = computed(() => {
 
 <template>
   <v-container style=" max-width: 900px; min-width: 400px;">
+    <p class="text-center text-h5 poppins-regular">{{ count }} Posts with #{{ tags[0] }}</p>
     <div v-if="blogPosts">
-      <p class="text-center text-h5 poppins-regular">{{ count }} Posts with #{{ tags[0] }}</p>
       <BlogPostList :blog-posts="blogPosts" />
       <v-pagination :length="numPages" v-model="page" next-icon="fa-solid fa-caret-right"
         prev-icon="fa-solid fa-caret-left" rounded="lg"></v-pagination>

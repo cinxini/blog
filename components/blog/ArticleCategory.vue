@@ -15,7 +15,7 @@ const props = defineProps({
 })
 
 const linkUrl = computed(() => {
-  return `/blog/category/${props.value}/`
+  return `/blog/category/${props.value}`
 })
 
 const emits = defineEmits(['select-category']);
