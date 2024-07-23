@@ -54,7 +54,7 @@ const clickHandler = (e, arg) => {
                   <span>|</span>
                   <v-icon icon="fa-solid fa-tag" size="small" color="secondary"></v-icon>
                   <FlexBox class="ga-1 tag-area" style="">
-                    <Tag v-for="tag in article.tags" :key="tag" :value="tag" />
+                    <Tag v-for="tag in article.tags" :key="tag" :value="tag" :enable-link="true" />
                   </FlexBox>
                 </FlexBox>
                 <Button01 value="Read More" :path="article._path" />

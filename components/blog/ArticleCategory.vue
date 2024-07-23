@@ -18,7 +18,7 @@ const linkUrl = computed(() => {
   return `/blog/category/${props.value}/`
 })
 
-const emits = defineEmits('select-category');
+const emits = defineEmits(['select-category']);
 </script>
 
 <template>
@@ -40,7 +40,7 @@ const emits = defineEmits('select-category');
     density="comfortable" 
     size="small" 
     class="category is-btn"
-    @click.stop="emits('select-category', value)"
+    @click="emits('select-category', value)"
   >
     {{ value }}
   </v-chip>

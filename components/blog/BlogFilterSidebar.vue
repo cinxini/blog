@@ -1,4 +1,6 @@
 <script setup>
+import Category from '@/components/blog/ArticleCategory.vue';
+import Tag from '@/components/blog/ArticleTag.vue';
 import FlexBox from '@/components/containers/FlexBox.vue';
 import c from '@/constants/blog';
 
@@ -20,6 +22,16 @@ const { data: tags } = useAsyncData(
     }).slice(0, c.TOP_NUM_TAGS)
   }
 );
+
+
+
+const categorySelectedHandler = (e) => {
+  console.log(e) 
+}
+
+const tagSelectedHandler = (e) => {
+  console.log(e) 
+}
 </script>
 
 <template>
@@ -29,10 +41,17 @@ const { data: tags } = useAsyncData(
       <v-list-item>
         <p>Category</p>
         <FlexBox style="flex-wrap: wrap;">
-          <v-chip label variant="outlined" density="comfortable" size="small" class="category">all</v-chip>
-          <v-chip label variant="outlined" density="comfortable" size="small" class="category">datasci</v-chip>
-          <v-chip label variant="outlined" density="comfortable" size="small" class="category">webdev</v-chip>
-          <v-chip label variant="outlined" density="comfortable" size="small" class="category">others</v-chip>
+          <Category  
+            value="all" 
+            :enable-link="false" 
+            @select-category="categorySelectedHandler" 
+          />
+          <Category
+            v-for="cat of c.CATEGORY_LIST" :key="cat"
+            :value="cat" 
+            :enable-link="false" 
+            @select-category="categorySelectedHandler" 
+          />
         </FlexBox>
       </v-list-item>
 
@@ -40,7 +59,7 @@ const { data: tags } = useAsyncData(
         <v-list-item-title>Tags</v-list-item-title>
         <v-list-item-subtitle>
           <FlexBox style="flex-wrap: wrap;">
-            <div v-for="tag in tags" :key="tag" class="tag">#{{ tag[0] }}</div>
+            <Tag v-for="tag in tags" :key="tag" :value="tag[0]" :enable-link="false" @select-tag="tagSelectedHandler" />
           </FlexBox>
         </v-list-item-subtitle>
       </v-list-item>
