@@ -17,7 +17,7 @@ const props = defineProps({
         <div>
             <Category :value="meta.category" :enable-link="true" />
         </div>
-        <div class="my-3 text-h3 text-primary">{{ meta.title }}</div>
+        <div class="my-5 text-h3 text-primary">{{ meta.title }}</div>
         <div class="poppins-light text-subtitle-2">{{ meta.description }}</div>
         <FlexBox class="my-1">
             <div class="poppins-regular text-caption">{{ meta.date }}</div> |
