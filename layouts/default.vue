@@ -195,25 +195,6 @@ body {
   font-style: normal;
 }
 
-
-
-/* .readmore {
-  background-color: rgba(var(--v-theme-tertiaryContainer-lighten-1), 0.3);
-  border-radius: 5px;
-  transition: 0.05s ease-in-out;
-  width: 100px;
-  height: 25px;
-  text-align: center;
-  line-height: 25px;
-}
-
-.readmore:hover {
-  background-color: rgba(var(--v-theme-tertiaryContainer-lighten-1), 0.6);
-  border-bottom: 2px solid rgba(var(--v-theme-tertiaryContainer), 1);
-  display: inline-block;
-  line-height: 0.95;
-} */
-
 .is-btn {
   cursor: pointer;
 }

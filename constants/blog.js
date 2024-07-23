@@ -6,5 +6,6 @@ export default {
         datasci: "/images/cover/defaults/datasci.png",
         webdev: "/images/cover/defaults/webdev.png",
         other: "/images/cover/defaults/other.png",
+        error: "/images/cover/defaults/error.png",
     },
 };
