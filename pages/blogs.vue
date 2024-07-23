@@ -36,9 +36,6 @@ watch(page, async (newPage, prevPage) => {
     <div v-if="blogPosts">
       <p class="text-center text-h5 poppins-regular">Recent Posts</p>
       <BlogPostList :blog-posts="blogPosts" />
-      <!-- <div v-for="blogPost in blogPosts" :key="blogPost._path">
-        <ArticleCard :article="blogPost" class="my-4"></ArticleCard>
-      </div> -->
       <v-pagination :length="numPages" v-model="page" next-icon="fa-solid fa-caret-right"
         prev-icon="fa-solid fa-caret-left" rounded="lg"></v-pagination>
     </div>
