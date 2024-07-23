@@ -1,6 +1,6 @@
 <script setup>
-import ArticleCard from '@/components/blog/ArticleCard.vue';
 import FilterSidebar from '@/components/blog/BlogFilterSidebar.vue';
+import BlogPostList from '@/components/blog/BlogPostList.vue';
 import c from '@/constants/blog';
 import { computed, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
@@ -35,9 +35,10 @@ watch(page, async (newPage, prevPage) => {
   <v-container style=" max-width: 900px; min-width: 400px;">
     <div v-if="blogPosts">
       <p class="text-center text-h5 poppins-regular">Recent Posts</p>
-      <div v-for="blogPost in blogPosts" :key="blogPost._path">
+      <BlogPostList :blog-posts="blogPosts" />
+      <!-- <div v-for="blogPost in blogPosts" :key="blogPost._path">
         <ArticleCard :article="blogPost" class="my-4"></ArticleCard>
-      </div>
+      </div> -->
       <v-pagination :length="numPages" v-model="page" next-icon="fa-solid fa-caret-right"
         prev-icon="fa-solid fa-caret-left" rounded="lg"></v-pagination>
     </div>

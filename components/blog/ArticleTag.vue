@@ -15,7 +15,7 @@ const props = defineProps({
 })
 
 const linkUrl = computed(() => {
-  return `/blog/tags/${props.value}/`
+  return `/blog/tags/${props.value}`
 })
 
 const emits = defineEmits(['select-tag']);
