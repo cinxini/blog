@@ -12,8 +12,6 @@ const { data: blogPost } = await useAsyncData(`content-${path}`, () => {
     return queryContent().where({ _path: path }).findOne();
 })
 
-console.log(blogPost.value.body.toc)
-
 const meta = computed(() => {
     if (blogPost) {
         return {
@@ -33,54 +31,52 @@ const intersectedTocId = ref(null);
 const observer = ref(null)
 const nuxtContent = ref(null)
 const observerOptions = ref({
-  root: 0,
-  threshold: "0",
+    root: 0,
+    threshold: "0",
 })
 onMounted(() => {
-    console.log('md', observerOptions)
     observer.value = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             const id = entry.target.getAttribute('id')
             if (entry.isIntersecting) {
                 intersectedTocId.value = id
-                console.log('intersecting::' , id)
             }
-            
+
         })
-    }, { threshold:1.0
+    }, {
+        threshold: 1.0
     })
-    console.log(observer)
+
     document.querySelectorAll('.content h2[id], .content h3[id]').forEach((section) => {
         observer.value?.observe(section)
     })
 })
 onUnmounted(() => {
-  observer.value?.disconnect()
+    observer.value?.disconnect()
 })
 </script>
 
 <template>
-    <v-container v-if="blogPost" style=" max-width: 800px; min-width: 400px;" class="main-background">
+    <v-container v-if="blogPost" style=" max-width: 900px; min-width: 400px;" class="main-background">
         <ArticleHeader :meta="meta"></ArticleHeader>
         <v-divider class="mt-4 mb-6" color="secondary"></v-divider>
         <ArticleBody class="poppins my-4 main-background">
             <!-- <ContentDoc ref="md" /> -->
             <ContentDoc />
-               
+
         </ArticleBody>
     </v-container>
     <ArticleToc :links="blogPost.body.toc.links" :current-id="intersectedTocId" />
 </template>
 
-<style >
-
+<style>
 /* @media screen and (max-width: 1200px) {
     .toc {
         display: none !important;
     }
 } */
 
- .poppins {
+.poppins {
     font-family: "Poppins", sans-serif;
- }
+}
 </style>

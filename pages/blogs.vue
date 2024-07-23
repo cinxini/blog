@@ -19,7 +19,6 @@ const numPages = computed(() => {
 watch(page, async (newPage, prevPage) => {
   const data = await queryContent('/blog').sort({ 'dates.published': -1 }).skip((newPage - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find()
   blogPosts.value = data;
-  console.log('page', newPage, data)
 })
 
 </script>

@@ -15,10 +15,8 @@ const props = defineProps({
 });
 
 const date = useDate()
-console.log(props.article)
 
 const coverImg = computed(() => {
-  console.log('cover img', props.article.coverImg)
   if (props.article.coverImage) {
     return props.article.coverImage;
   } else if (c.DEFAULT_COVER[props.article.category]) {
