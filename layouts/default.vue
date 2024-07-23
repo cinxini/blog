@@ -64,25 +64,6 @@ import { VApp } from 'vuetify/components';
 
 
 /* font */
-.josefin-slab-bold {
-  font-family: "Josefin Slab", serif;
-  font-optical-sizing: auto;
-  font-weight: bold;
-  font-style: normal;
-}
-
-.lobster-regular {
-  font-family: "Lobster", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.pacifico-regular {
-  font-family: "Pacifico", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
-
 .poppins-thin {
   font-family: "Poppins", sans-serif;
   font-weight: 100;
@@ -191,96 +172,6 @@ import { VApp } from 'vuetify/components';
   font-style: italic;
 }
 
-.sofia-regular {
-  font-family: "Sofia", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.nanum-gothic-coding-bold {
-  font-family: "Nanum Gothic Coding", monospace;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.nanum-gothic-coding-regular {
-  font-family: "Nanum Gothic Coding", monospace;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.borel-regular {
-  font-family: "Borel", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.neonderthaw-regular {
-  font-family: "Neonderthaw", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.noto-serif-display-regular {
-  font-family: "Noto Serif Display", serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-}
-
-.noto-serif-display-medium {
-  font-family: "Noto Serif Display", serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-}
-
-.noto-serif-display-semibold {
-  font-family: "Noto Serif Display", serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-}
-
-.noto-serif-display-bold {
-  font-family: "Noto Serif Display", serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-}
-
-.anonymous-pro-regular {
-  font-family: "Anonymous Pro", monospace;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.anonymous-pro-bold {
-  font-family: "Anonymous Pro", monospace;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.anonymous-pro-regular-italic {
-  font-family: "Anonymous Pro", monospace;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.anonymous-pro-bold-italic {
-  font-family: "Anonymous Pro", monospace;
-  font-weight: 700;
-  font-style: italic;
-}
-
 /* blog colors */
 .category {
   border-color: rgb(var(--v-theme-secondary));
@@ -304,20 +195,9 @@ body {
   font-style: normal;
 }
 
-.tag {
-  background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.3);
-  border-radius: 5;
-  transition: 0.05s ease-in-out;
-}
 
-.tag:hover {
-  background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.6);
-  border-bottom: 2px solid rgba(var(--v-theme-secondaryContainer), 1);
-  display: inline-block;
-  line-height: 0.95;
-}
 
-.readmore {
+/* .readmore {
   background-color: rgba(var(--v-theme-tertiaryContainer-lighten-1), 0.3);
   border-radius: 5px;
   transition: 0.05s ease-in-out;
@@ -332,7 +212,7 @@ body {
   border-bottom: 2px solid rgba(var(--v-theme-tertiaryContainer), 1);
   display: inline-block;
   line-height: 0.95;
-}
+} */
 
 .is-btn {
   cursor: pointer;
@@ -340,5 +220,19 @@ body {
 
 .v-card--link:before {
   background: none;
+}
+
+
+.tag {
+  background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.3);
+  border-radius: 5;
+  transition: 0.05s ease-in-out;
+}
+
+.tag:hover {
+  background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.6);
+  border-bottom: 2px solid rgba(var(--v-theme-secondaryContainer), 1);
+  display: inline-block;
+  line-height: 0.95;
 }
 </style>

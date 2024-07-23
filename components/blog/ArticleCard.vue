@@ -1,4 +1,7 @@
 <script setup>
+import Button01 from '@/components/buttons/Buttun01.vue';
+import Category from '@/components/blog/ArticleCategory.vue';
+import Tag from '@/components/blog/ArticleTag.vue';
 import FlexBox from '@/components/containers/FlexBox.vue';
 import { useRouter } from 'vue-router';
 import { useDate } from 'vuetify';
@@ -12,12 +15,6 @@ const props = defineProps({
 
 const date = useDate()
 const router = useRouter();
-
-const tagClicked = (tag) => {
-
-  console.log('tag:::', tag)
-  router.push(`/blog/tags/${tag}/`)
-}
 
 const postClickHandler = (path) => {
   console.log('path:::', path)
@@ -39,9 +36,7 @@ const clickHandler = (e, arg) => {
           <div class="ma-0 px-4 py-2">
             <v-row no-gutters class="text-caption poppins-regular pb-2">
               <v-col class="d-flex flex-row  align-center">
-                <v-chip class="category is-btn" label variant="outlined" density="comfortable" size="small">
-                  {{ article.category }}
-                </v-chip>
+                <Category :value="article.category" :enable-link="true" />
               </v-col>
             </v-row>
             <v-row no-gutters class="text-wrap  text-h4 text-primary">
@@ -55,19 +50,14 @@ const clickHandler = (e, arg) => {
             <v-col>
               <FlexBox class="ga-2" style="justify-content: space-between; ">
                 <FlexBox class="ga-2">
-                  <div class="">{{ date.format(article.dates.published, 'fullDate') }}</div>
+                  <div>{{ date.format(article.dates.published, 'fullDate') }}</div>
                   <span>|</span>
                   <v-icon icon="fa-solid fa-tag" size="small" color="secondary"></v-icon>
                   <FlexBox class="ga-1 tag-area" style="">
-                    <div v-for="tag in article.tags" :key="tag" class="tag is-btn" @click.stop="tagClicked(tag)">
-                      #{{ tag }}
-                    </div>
+                    <Tag v-for="tag in article.tags" :key="tag" :value="tag" />
                   </FlexBox>
                 </FlexBox>
-
-                <div class="readmore is-btn" style="padding-left: 10px; padding-right: 10px; border-radius: 5;"
-                  @click="postClickHandler(article._path)">Read More
-                </div>
+                <Button01 value="Read More" :path="article._path" />
               </FlexBox>
 
             </v-col>
