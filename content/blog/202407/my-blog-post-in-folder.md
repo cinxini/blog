@@ -1,9 +1,9 @@
 ---
-title: "My First Blog Post"
+title: "My First Blog Postttttttt"
 author: "@bruno"
 dates:
-    published: "2022-08-01"
-category: "webdev"
+    published: "2024-07-23"
+category: "datasci"
 tags: ["data", "test"]
 coverImage: "/images/cover/BLOG101.png"
 ---

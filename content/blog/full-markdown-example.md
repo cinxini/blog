@@ -4,8 +4,9 @@ author: "@gist"
 dates:
   published: "2024-06-08"
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tempus nibh libero. Cras porta quam vitae tortor sagittis pharetra. Phasellus ullamcorper orci ut lectus dapibus rhoncus. Ut facilisis tortor vitae commodo placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lacinia suscipit aliquam.
-category: Other
+category: other
 tags: ["tutorial", "test", "example"]
+coverImage:
 ---
 
 # Headers

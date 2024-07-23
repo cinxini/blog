@@ -4,8 +4,9 @@ author: "@markdownit"
 dates:
   published: "2024-06-09"
 description: Aenean libero massa, lacinia at gravida quis, porttitor a ante. Ut nec libero ultrices, ornare augue at, venenatis arcu. Ut libero tellus, sodales ac gravida tristique, suscipit a velit. Duis faucibus fermentum sem eleifend euismod. Curabitur sed enim quam. Maecenas vitae quam ut odio pellentesque rhoncus. Nullam a ullamcorper sapien.
-category: Other
+category: other
 tags: ["tutorial", "test", "example"]
+coverImage:
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tempus nibh libero. Cras porta quam vitae tortor sagittis pharetra. Phasellus ullamcorper orci ut lectus dapibus rhoncus. Ut facilisis tortor vitae commodo placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lacinia suscipit aliquam. Aenean fermentum dapibus facilisis. Mauris iaculis vehicula felis, ac lacinia tellus ullamcorper sed. Duis euismod lorem in pharetra euismod. In sodales, nibh at rutrum blandit, felis est congue sem, non venenatis orci orci ac tortor. Quisque tincidunt cursus metus vel egestas.

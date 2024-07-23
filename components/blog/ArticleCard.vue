@@ -1,9 +1,10 @@
 <script setup>
-import Button01 from '@/components/buttons/Buttun01.vue';
 import Category from '@/components/blog/ArticleCategory.vue';
 import Tag from '@/components/blog/ArticleTag.vue';
+import Button01 from '@/components/buttons/Buttun01.vue';
 import FlexBox from '@/components/containers/FlexBox.vue';
-import { useRouter } from 'vue-router';
+import c from '@/constants/blog';
+import { computed } from 'vue';
 import { useDate } from 'vuetify';
 
 const props = defineProps({
@@ -14,22 +15,28 @@ const props = defineProps({
 });
 
 const date = useDate()
-const router = useRouter();
+console.log(props.article)
 
-const postClickHandler = (path) => {
-  console.log('path:::', path)
-  router.push(path)
-}
-
-const clickHandler = (e, arg) => {
-  console.log(e)
-}
+const coverImg = computed(() => {
+  console.log('cover img', props.article.coverImg)
+  if (props.article.coverImage) {
+    return props.article.coverImage;
+  } else if (c.DEFAULT_COVER[props.article.category]) {
+    return `${c.DEFAULT_COVER[props.article.category]}`;
+  } else {
+    return `${c.DEFAULT_COVER.error}`;
+  }
+})
 </script>
 <template>
   <v-card class="my-4 main-background" variant="plain" :ripple="false">
     <v-row no-gutters class="text-caption poppins-regular pb-2">
       <v-col cols="4">
-        <v-img src="~/assets/images/blog/BLOG101.png" cover height="100%"></v-img>
+        <v-img :src="coverImg" cover height="100%">
+          <template v-slot:error>
+            <v-img class="mx-auto" height="300" max-width="500" :src="c.DEFAULT_COVER.error"></v-img>
+          </template>
+        </v-img>
       </v-col>
       <v-col cols="8">
         <div>
@@ -39,8 +46,10 @@ const clickHandler = (e, arg) => {
                 <Category :value="article.category" :enable-link="true" />
               </v-col>
             </v-row>
-            <v-row no-gutters class="text-wrap  text-h4 text-primary">
-              <v-col class="article-title is-btn" @click="postClickHandler(article._path)">{{ article.title }}</v-col>
+            <v-row no-gutters class="text-wrap">
+              <v-col>
+                <a class="title text-h4 text-primary" :href="article._path">{{ article.title }}</a>
+              </v-col>
             </v-row>
           </div>
           <div class="ma-0 px-4 py-0 poppins-extralight text-body-2">
@@ -100,5 +109,16 @@ const clickHandler = (e, arg) => {
 .v-card--variant-plain:hover {
   background-color: rgba(var(--v-theme-tertiaryContainer), 0.06);
   opacity: 1;
+}
+
+a.title {
+  /* color: rgb(var(--v-theme-primary)); */
+  text-decoration: underline solid rgba(var(--v-theme-primary-lighten-1), 0.0) 6px;
+  transition: all .3s ease-in-out;
+}
+
+a.title:hover {
+  /* color: rgb(var(--v-theme-primary)); */
+  text-decoration: underline solid rgba(var(--v-theme-primary-lighten-1), 0.3) 6px;
 }
 </style>

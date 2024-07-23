@@ -4,8 +4,9 @@ author: "@abcd"
 dates:
   published: "2022-06-05"
 description: This is an example of displaying images in markdown.
-category: Other
+category: webdev
 tags: ["tutorial", "test"]
+coverImage:
 ---
 
 ![Angry Law](https://wallpapers-clan.com/wp-content/uploads/2024/04/one-piece-angry-trafalgard-law-desktop-wallpaper-preview.jpg)

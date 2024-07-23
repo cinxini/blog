@@ -4,8 +4,9 @@ author: "@luisa"
 dates:
   published: "2022-06-01"
 description: This is a short description about my counter post.
-category: Other
+category: other
 tags: ["tutorial", "test"]
+coverImage:
 ---
 
 ## What is a counter?

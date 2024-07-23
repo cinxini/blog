@@ -18,6 +18,4 @@ const props = defineProps({
 
 
 
-<style>
-
-</style>
+<style></style>
