@@ -66,14 +66,16 @@ pre code .line {
   position: relative;
   font-family: monospace, monospace;
   background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.75);
-  padding: 5px 22px;
+  padding: 5px 12px;
   border-radius: 0px 0px 0px 0px;
+  height: 30px;
 }
 
 .code__header .code__header_filename {
   /* color: rgb(var(--v-theme-surface-variant)); */
   color: rgb(var(--v-theme-secondary-darken-1));
   font-weight: 300;
+height: 100%;
 }
 
 .code__header .code__header_lang{
