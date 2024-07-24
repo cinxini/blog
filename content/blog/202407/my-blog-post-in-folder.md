@@ -127,7 +127,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tempus nibh l
 
 And code highlighting:
 
-```js
+```js [sample.js]{4-6,7} meta-info=val
 var foo = 'bar';
 
 function baz(s) {

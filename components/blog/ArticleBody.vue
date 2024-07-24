@@ -31,5 +31,11 @@
   a {
     color: rgb(var(--v-theme-secondary))
   }
+
+  blockquote {
+    background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.4);
+    border-inline-start: 6px solid rgba(var(--v-theme-secondaryContainer), 0.6);
+    padding: var(--bulma-content-blockquote-padding);
+  }
 }
 </style>
