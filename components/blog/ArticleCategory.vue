@@ -11,6 +11,11 @@ const props = defineProps({
     type: Boolean,
     required: false, 
     default: false
+  },
+  active: {
+    type: Boolean,
+    required: false, 
+    default: false
   }
 })
 
@@ -29,6 +34,7 @@ const emits = defineEmits(['select-category']);
     density="comfortable" 
     size="small" 
     class="category is-btn"
+    :class="{ active: active }"
     @click.stop="router.push(linkUrl)"
   >
     {{ value }}
@@ -40,6 +46,7 @@ const emits = defineEmits(['select-category']);
     density="comfortable" 
     size="small" 
     class="category is-btn"
+    :class="{ active: active }"
     @click="emits('select-category', value)"
   >
     {{ value }}
@@ -56,7 +63,8 @@ const emits = defineEmits(['select-category']);
     transition: 0.05s ease-in-out;
   }
 
-  .category:hover {
+  .category:hover,
+  .category.active {
     background-color: rgb(var(--v-theme-secondary));
     color: white;
     display: inline-block;

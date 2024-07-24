@@ -66,7 +66,7 @@ pre code .line {
   position: relative;
   font-family: monospace, monospace;
   background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.75);
-  padding: 5px 12px;
+  padding: 5px .75rem;
   border-radius: 0px 0px 0px 0px;
   height: 30px;
 }

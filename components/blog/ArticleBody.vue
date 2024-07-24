@@ -40,8 +40,7 @@
 
 
   pre {
-    background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.4);
-
+    background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.3);
     code {
       font-size: 14px;
     }

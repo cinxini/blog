@@ -41,15 +41,16 @@ const tagSelectedHandler = (e) => {
       <v-list-item>
         <p>Category</p>
         <FlexBox style="flex-wrap: wrap;">
-          <Category  
+          <!-- <Category  
             value="all" 
             :enable-link="false" 
             @select-category="categorySelectedHandler" 
-          />
+          /> -->
           <Category
             v-for="cat of c.CATEGORY_LIST" :key="cat"
             :value="cat" 
             :enable-link="false" 
+            :active="true"
             @select-category="categorySelectedHandler" 
           />
         </FlexBox>

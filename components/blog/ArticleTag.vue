@@ -11,6 +11,11 @@ const props = defineProps({
     type: Boolean,
     required: false, 
     default: false
+  },
+  active: {
+    type: Boolean,
+    required: false, 
+    default: false
   }
 })
 
@@ -47,7 +52,8 @@ const emits = defineEmits(['select-tag']);
   transition: 0.05s ease-in-out;
 }
 
-.tag:hover {
+.tag:hover,
+.tag.active {
   background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.7);
   border-bottom: 2px solid rgba(var(--v-theme-secondaryContainer), 1);
   display: inline-block;
