@@ -12,11 +12,11 @@
 <style lang="scss">
 .content {
   h2 a {
-    color: rgb(var(--v-theme-tertiary-darken-1));
+    color: rgb(var(--v-theme-tertiary));
   }
 
   h3 a {
-    color: rgb(var(--v-theme-tertiary-darken-1))
+    color: rgb(var(--v-theme-tertiary-darken-2))
   }
 
   h4 a {
@@ -25,7 +25,7 @@
   }
 
   li::marker {
-    color: rgb(var(--v-theme-primary-darken-1));
+    color: rgb(var(--v-theme-primary-darken-2));
   }
 
   a {
@@ -34,8 +34,13 @@
 
   blockquote {
     background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.4);
-    border-inline-start: 6px solid rgba(var(--v-theme-secondaryContainer), 0.6);
+    border-inline-start: 8px solid rgba(var(--v-theme-secondary), 0.4);
     padding: var(--bulma-content-blockquote-padding);
+  }
+
+
+  pre {
+    background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.4);
   }
 }
 </style>
