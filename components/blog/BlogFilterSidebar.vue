@@ -4,7 +4,7 @@ import Tag from '@/components/blog/ArticleTag.vue';
 import Button02 from '@/components/buttons/Button02.vue';
 import FlexBox from '@/components/containers/FlexBox.vue';
 import c from '@/constants/blog';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 
 const fetchTags = async () => {
   const allTags = await queryContent('/blog').only(['tags']).find();
@@ -50,6 +50,34 @@ const filteredTags = computed(() => {
   return filtered;
 })
 
+const emits = defineEmits(['filter-posts']);
+
+watch(filteredCategories, (newCat) => {
+  console.log(newCat)
+  emits('filter-posts', filterConditions.value);
+
+})
+
+watch(filteredTags, (newTags) => {
+  console.log(newTags)
+  emits('filter-posts', filterConditions.value);
+})
+
+const filterConditions = computed(() => {
+  if ((filteredCategories.value.length == 0) && (filteredTags.value.length == 0)) {
+    return null;
+  }
+
+  const condition = {};
+  if (filteredCategories.value.length > 0) {
+    condition.category = filteredCategories.value[0];
+  }
+  if (filteredTags.value.length > 0) {
+    condition.tags = { $contains: filteredTags.value }
+  }
+  return condition;
+})
+
 const toggleFilter = computed(() => {
   if (openFilter.value) {
     return 'block';
@@ -69,6 +97,17 @@ const init = () => {
     })
   }
 
+}
+
+const selectCat = (category) => {
+  c.CATEGORY_LIST.forEach(cat => {
+    if (category == cat) {
+      categoryList.value[cat] = !categoryList.value[cat];
+    }
+    else {
+      categoryList.value[cat] = false;
+    }
+  })
 }
 
 onMounted(async () => {
@@ -96,7 +135,7 @@ onMounted(async () => {
           <p class="mb-1">Category</p>
           <FlexBox style="flex-wrap: wrap;">
             <Category v-for="cat of c.CATEGORY_LIST" :key="cat" :value="cat" :enable-link="false"
-              :active="categoryList[cat]" @select-category="categoryList[cat] = !categoryList[cat]" />
+              :active="categoryList[cat]" @select-category="selectCat(cat)" />
           </FlexBox>
         </v-list-item>
 
