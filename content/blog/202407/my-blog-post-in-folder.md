@@ -135,6 +135,8 @@ function baz(s) {
 }
 ```
 
+code
+
 ```js {3-4} meta-info=val
 var foo = 'bar';
 
@@ -142,7 +144,8 @@ function baz(s) {
     return foo + ':' + s;
 }
 ```
-kkkk
+
+code
 
 ```js 
 var foo = 'bar';
@@ -151,9 +154,10 @@ function baz(s) {
     return foo + ':' + s;
 }
 ```
-ll
 
-```{}
+code
+
+```
 var foo = 'bar';
 
 function baz(s) {
