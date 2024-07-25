@@ -35,15 +35,16 @@
   blockquote {
     background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.4);
     border-inline-start: 8px solid rgba(var(--v-theme-secondary), 0.4);
-    padding: var(--bulma-content-blockquote-padding);
+    // padding: var(--bulma-content-blockquote-padding);
   }
 
 
   pre {
     background-color: rgba(var(--v-theme-secondaryContainer-lighten-1), 0.3);
-    code {
-      font-size: 14px;
-    }
+
+    // code {
+    //   font-size: 14px;
+    // }
   }
 }
 </style>

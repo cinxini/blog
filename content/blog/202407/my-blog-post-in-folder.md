@@ -135,4 +135,30 @@ function baz(s) {
 }
 ```
 
+```js {3-4} meta-info=val
+var foo = 'bar';
+
+function baz(s) {
+    return foo + ':' + s;
+}
+```
+kkkk
+
+```js 
+var foo = 'bar';
+
+function baz(s) {
+    return foo + ':' + s;
+}
+```
+ll
+
+```{}
+var foo = 'bar';
+
+function baz(s) {
+    return foo + ':' + s;
+}
+```
+
 The end ...
