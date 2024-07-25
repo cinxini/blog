@@ -1,11 +1,6 @@
 <script setup>
 
-const router = useRouter();
 const props = defineProps({
-  path: {
-    type: String,
-    required: true
-  },
   value: {
     type: String,
     required: true
@@ -14,30 +9,30 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="readmore is-btn" @click.stop="router.push(path)">{{ value }}
+  <div class="button is-btn">{{ value }}
   </div>
 </template>
 
 
 
 <style scoped>
-.readmore {
+.button {
   background-color: rgba(var(--v-theme-tertiaryContainer-lighten-1), 0.3);
-  border-radius: 5px;
-  transition: 0.05s ease-in-out;
-  width: 100px;
-  height: 25px;
+  border-radius: 5;
+  transition: 0.1s ease-in-out;
+  width: 150px;
+  height: 30px;
   text-align: center;
-  line-height: 25px;
+  line-height: 30px;
   padding-left: 10px;
   padding-right: 10px;
-  /* border-radius: 5; */
+  border-color: transparent;
 }
 
-.readmore:hover {
+.button:hover {
   background-color: rgba(var(--v-theme-tertiaryContainer-lighten-1), 0.6);
   border-bottom: 2px solid rgba(var(--v-theme-tertiaryContainer), 1);
   display: inline-block;
-  line-height: 0.95;
+  line-height: 0.4;
 }
 </style>

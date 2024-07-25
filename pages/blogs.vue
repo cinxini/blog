@@ -30,10 +30,7 @@ watch(page, async (newPage, prevPage) => {
       <p class="text-center text-h5 poppins-regular">Recent Posts</p>
       <BlogPostList :blog-posts="blogPosts" />
       <v-pagination :length="numPages" v-model="page" next-icon="fa-solid fa-caret-right"
-        prev-icon="fa-solid fa-caret-left" rounded="lg"
-        color="grey"
-        active-color="primary"
-        ></v-pagination>
+        prev-icon="fa-solid fa-caret-left" rounded="lg" color="grey" active-color="primary"></v-pagination>
     </div>
   </v-container>
 

@@ -15,7 +15,6 @@ const props = defineProps({
 
 const openToc = ref(true);
 const toggleToc = computed(() => {
-    console.log(props.links)
     if (openToc.value) {
         return 'block';
     } else {
@@ -34,7 +33,7 @@ const toggleToc = computed(() => {
             <v-list-item>
                 <template v-slot:append>
                     <v-btn class="pa-0" icon="fa-solid fa-list" size="small" variant="plain"
-                        @click="openToc = !openToc"></v-btn>
+                        :color="openToc ? 'primary' : 'grey'" @click="openToc = !openToc"></v-btn>
                 </template>
             </v-list-item>
             <div :style="{ display: toggleToc }">
