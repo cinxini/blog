@@ -1,6 +1,9 @@
 <script setup>
 import FlexBox from '@/components/containers/FlexBox.vue';
 import { computed, ref } from 'vue';
+
+const router = useRouter();
+
 const props = defineProps({
     links: {
         type: Array,
@@ -40,7 +43,7 @@ const toggleToc = computed(() => {
                 <v-list-item class="ma-3">
                     <template v-slot:append>
                         <FlexBox class="align-center ga-3">
-                            <v-icon icon="fa-solid fa-caret-up"></v-icon>
+                            <v-icon icon="fa-solid fa-caret-up" @click="router.push('#top')" class="to-top"></v-icon>
                             <!-- <v-icon icon="fa-solid fa-caret-down"></v-icon> -->
                             <v-icon icon="fa-solid fa-comment-dots"></v-icon>
                         </FlexBox>
@@ -100,6 +103,15 @@ const toggleToc = computed(() => {
 </template>
 
 <style scoped>
+.to-top{
+    color: grey;
+    transition: 0.3s ease-in-out;
+}
+
+.to-top:hover {
+    color: rgb(var(--v-theme-primary));
+}
+
 .toc-h2 {
     /* font-family: "Menlo", "Meslo LG", monospace; */
     font-size: 13px;

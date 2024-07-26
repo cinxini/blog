@@ -58,6 +58,7 @@ onUnmounted(() => {
 
 <template>
     <v-container v-if="blogPost" style=" max-width: 900px; min-width: 400px;" class="main-background">
+        <a id="top"></a>
         <ArticleHeader :meta="meta"></ArticleHeader>
         <v-divider class="mt-4 mb-6" color="secondary"></v-divider>
         <ArticleBody class="poppins my-4 main-background">
