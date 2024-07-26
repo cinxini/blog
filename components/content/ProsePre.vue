@@ -1,16 +1,19 @@
 <template>
-  <div class="codeblock">
-    <div class="code__header">
-      <div class="code__header_filename">{{ filename }}</div>
-      <div class="code__header_lang">{{ language }}</div>
+
+    <div  class="codeblock">
+      <div v-if="filename || language" class="code__header">
+        <div class="code__header_filename">{{ filename }}</div>
+        <div class="code__header_lang">{{ language }}</div>
+      </div>
+      <div class="code__body">
+        <v-icon v-if="!isCopied" icon="fa-regular fa-paste" class="copy" @click="copyToClipboard"></v-icon>
+        <v-icon v-else icon="fa-solid fa-check" class="copied"></v-icon>
+        <pre v-if="filename || language" :class="$props.class"><slot /></pre>
+        <pre v-else :class="$props.class" style="padding: .75rem .75rem;"><slot /></pre>
+      </div>
     </div>
-    <div class="code__body">
-      <v-icon v-if="!isCopied" icon="fa-regular fa-paste" class="copy" @click="copyToClipboard"></v-icon>
-      <v-icon v-else icon="fa-solid fa-check" class="copied"></v-icon>
-      <pre :class="$props.class"><slot /></pre>
-    </div>
-    
-  </div>
+
+  
 </template>
 
 <script setup lang="ts">
@@ -46,7 +49,7 @@ const isCopied = ref(false);
 
 const copyToClipboard = () => {
   isCopied.value = true;
-  console.log(props.class)
+  copy(props.code);
   setTimeout(() => {
     isCopied.value = false;
   }, 1000);
@@ -69,6 +72,7 @@ pre code .line {
   padding: 5px .75rem;
   border-radius: 0px 0px 0px 0px;
   height: 30px;
+  border-bottom: 3px solid rgba(var(--v-theme-secondaryContainer), 0.4);
 }
 
 .code__header .code__header_filename {
@@ -92,7 +96,6 @@ height: 100%;
 
 .code__body{
   position: relative;
-  border-top: 3px solid rgba(var(--v-theme-secondaryContainer), 0.4);
 }
 
 .code__body .copy {
@@ -126,11 +129,12 @@ height: 100%;
     code {
       display: inline-block;
       width: 100%;
+      
     }
 
     .line{
       padding: 0 .75rem;
-      line-height: 1.6;
+      line-height: 1.5;
 
       &.highlight,
       &.highlighted {

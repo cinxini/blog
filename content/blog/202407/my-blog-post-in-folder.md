@@ -135,4 +135,12 @@ function baz(s) {
 }
 ```
 
+```
+var foo = 'bar';
+
+function baz(s) {
+    return foo + ':' + s;
+}
+```
+
 The end ...
