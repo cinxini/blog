@@ -29,14 +29,14 @@ const coverImg = computed(() => {
 <template>
   <v-card class="my-4 main-background" variant="plain" :ripple="false">
     <v-row no-gutters class="text-caption poppins-regular pb-2">
-      <v-col cols="4">
+      <v-col cols="3">
         <v-img :src="coverImg" cover height="100%">
           <template v-slot:error>
             <v-img class="mx-auto" height="300" max-width="500" :src="c.DEFAULT_COVER.error"></v-img>
           </template>
         </v-img>
       </v-col>
-      <v-col cols="8">
+      <v-col cols="9">
         <div>
           <div class="ma-0 px-4 py-2">
             <v-row no-gutters class="text-caption poppins-regular pb-2">
