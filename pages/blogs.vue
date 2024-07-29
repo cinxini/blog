@@ -13,9 +13,6 @@ const { data: blogPosts } = useAsyncData('blogPostList', () => {
 let count = await queryContent('/blog').count();
 numPages.value = Math.ceil(count / c.POSTS_PER_PAGE);
 const filterCondition = ref(null);
-// onBeforeMount(async () => {
-//   count.value = await queryContent('/blog').count();
-// })
 
 const fetchFilteredBlogPosts = async (cond) => {
   let data = null;
@@ -50,7 +47,7 @@ watch(filterCondition, async (newCond) => {
 
 <template>
   <FilterSidebar @filter-posts="filterPostsHandler"></FilterSidebar>
-  <v-container style=" max-width: 900px; min-width: 400px;">
+  <v-container style="max-width: 900px; min-width: 400px;">
     <div v-if="blogPosts.length > 0">
       <p class="text-center text-h5 poppins-regular">Recent Posts</p>
       <BlogPostList :blog-posts="blogPosts" />

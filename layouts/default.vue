@@ -4,7 +4,7 @@
       <v-row no-gutters>
         <v-col cols="2" class="d-flex flex-row">
           <div class="vertical-center ma-4">
-            <v-img :width="150" aspect-ratio="16/9" cover src="@/assets/images/logo4.png"></v-img>
+            <v-img :width="160" aspect-ratio="16/9" cover src="@/assets/images/logo-nutnar.png"></v-img>
           </div>
 
         </v-col>
@@ -53,6 +53,28 @@ import { VApp } from 'vuetify/components';
   background-color: var(--v-theme-background);
   opacity: 1;
 } */
+head {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.web-title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1.5em;
+  color: rgb(var(--v-base-color-darker));
+}
+
+.web-title .dot {
+  color: rgb(var(--v-theme-primary));
+  font-size: 1.8em;
+}
+
 .main-background {
   background-color: var(--v-theme-background);
 }
@@ -193,11 +215,7 @@ import { VApp } from 'vuetify/components';
   border-bottom: 2px solid rgba(var(--v-theme-secondary-darken-1), 1);
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
+
 
 .is-btn {
   cursor: pointer;
@@ -219,5 +237,10 @@ body {
   border-bottom: 2px solid rgba(var(--v-theme-secondaryContainer), 1);
   display: inline-block;
   line-height: 0.95;
+}
+
+.main-container {
+  max-width: calc(var(--v-main-container-max-width)*1px);
+  min-width: calc(var(--v-main-container-min-width)*1px);
 }
 </style>

@@ -1,4 +1,4 @@
-import orangeTheme from "@/assets/themes/candy.json";
+import customTheme from "@/assets/themes/candy.json";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@mdi/font/css/materialdesignicons.css";
 import { createVuetify } from "vuetify";
@@ -7,12 +7,22 @@ import "vuetify/styles";
 
 const lightTheme = {
     dark: false,
-    colors: orangeTheme.schemes.light,
+    colors: customTheme.schemes.light,
+    variables: {
+        "main-container-max-width": 900,
+        "main-container-min-width": 400,
+        "base-color": "#b1b1b1",
+        "base-color-darker": "#414849",
+        "base-button-opacity": 0.05,
+        "base-button-color": "#b1b1b1",
+        "base-button-hover-color": customTheme.schemes.light.primary,
+        "light-emphasis-opacity": 0.1,
+    },
 };
 
 const darkTheme = {
     dark: true,
-    colors: orangeTheme.schemes.dark,
+    colors: customTheme.schemes.dark,
 };
 
 export default defineNuxtPlugin((app) => {
