@@ -7,6 +7,8 @@ description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus 
 category: other
 tags: ["tutorial", "test", "example"]
 coverImage:
+status: 'published'
+isFeatured: true
 ---
 
 # h1 Heading 8-)

@@ -6,6 +6,8 @@ dates:
 category: "webdev"
 tags: ["data", "test"]
 coverImage: "/images/cover/BLOG101.png"
+status: 'published'
+isFeatured: false
 ---
 
 This is some basic, sample markdown.

@@ -9,12 +9,6 @@
 
         </v-col>
         <v-col class="d-flex justify-center ">
-          <!-- <div class="vertical-center">
-            <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/">home</v-btn>
-            <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/about">about</v-btn>
-            <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/projects">projects</v-btn>
-            <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/blogs">blog</v-btn>
-          </div> -->
         </v-col>
         <v-col cols="2" class="d-flex flex-row-reverse">
           <div class="vertical-center ">
@@ -23,13 +17,6 @@
             <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/projects">projects</v-btn>
             <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/blogs">blog</v-btn>
             <v-btn class="ma-2 pa-0" icon="fa-solid fa-magnifying-glass" size="small"></v-btn>
-            <!-- <v-btn class="ma-2 pa-0" icon="fa-brands fa-medium" size="small"></v-btn> -->
-            <!-- <v-btn><v-icon icon="fa-brands fa-linkedin" /></v-btn> -->
-            <!-- <v-btn class="ma-2 pa-0" icon="fa-brands fa-linkedin-in" size="small"></v-btn> -->
-            <!-- <v-btn><v-icon icon="fa-brands fa-square-x-twitter" /></v-btn>  -->
-            <!-- <v-btn class="ma-2"  icon="fa-brands fa-x-twitter" size="small"></v-btn>      -->
-            <!-- <v-btn><v-icon icon="fa-brands fa-square-github" /></v-btn> -->
-            <!-- <v-btn class="mr-4 ml-2 my-2"  icon="fa-brands fa-github-alt" size="small"></v-btn> -->
           </div>
         </v-col>
       </v-row>
@@ -240,7 +227,9 @@ body {
 }
 
 .main-container {
-  max-width: calc(var(--v-main-container-max-width)*1px);
-  min-width: calc(var(--v-main-container-min-width)*1px);
+  max-width: 66%; min-width: 40%;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 </style>

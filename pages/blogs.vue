@@ -47,7 +47,7 @@ watch(filterCondition, async (newCond) => {
 
 <template>
   <FilterSidebar @filter-posts="filterPostsHandler"></FilterSidebar>
-  <v-container style="max-width: 900px; min-width: 400px;">
+  <v-container class="main-container">
     <div v-if="blogPosts.length > 0">
       <p class="text-center text-h5 poppins-regular">Recent Posts</p>
       <BlogPostList :blog-posts="blogPosts" />

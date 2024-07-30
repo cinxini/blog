@@ -7,6 +7,8 @@ description: This is an example of displaying images in markdown.
 category: webdev
 tags: ["tutorial", "test"]
 coverImage:
+status: 'published'
+isFeatured: true
 ---
 
 ![Angry Law](https://wallpapers-clan.com/wp-content/uploads/2024/04/one-piece-angry-trafalgard-law-desktop-wallpaper-preview.jpg)

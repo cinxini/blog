@@ -7,6 +7,8 @@ description: This is a short description about my counter post.
 category: other
 tags: ["tutorial", "test"]
 coverImage:
+status: 'published'
+isFeatured: true
 ---
 
 ## What is a counter?

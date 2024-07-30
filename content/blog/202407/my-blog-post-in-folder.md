@@ -6,6 +6,8 @@ dates:
 category: "datasci"
 tags: ["data", "test"]
 coverImage: "/images/cover/BLOG101.png"
+status: 'published'
+isFeatured: true
 ---
 
 This is some basic, sample markdown.

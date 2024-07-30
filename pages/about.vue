@@ -7,7 +7,7 @@ const isOpenned = ref(false);
 
 <template>
   <v-container class="main-container">
-    <p class="text-center text-h5 poppins-regular">About Me</p>
+    <p class="text-center text-h5">About Me</p>
 
     <div class="d-flex flex-column align-center ga-1 my-4">
       <v-hover v-slot="{ isHovering, props }">

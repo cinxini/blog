@@ -1,6 +1,6 @@
 <script setup>
 import ProjectList from '@/components/project/ProjectList.vue';
-import { ref, onMounted, computed } from 'vue';
+import { computed, onMounted } from 'vue';
 
 const fetchProjects = async () => {
   let data = null;
@@ -31,7 +31,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-container class="main-container">
+  <v-container class="w-66">
     <p class="text-center text-h5 poppins-regular">Projects</p>
     <div v-if="showList">
       <ProjectList :projects="projectItems"></ProjectList>

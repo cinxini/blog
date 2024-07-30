@@ -7,6 +7,8 @@ description: Aenean libero massa, lacinia at gravida quis, porttitor a ante. Ut 
 category: other
 tags: ["tutorial", "test", "example"]
 coverImage:
+status: 'published'
+isFeatured: false
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tempus nibh libero. Cras porta quam vitae tortor sagittis pharetra. Phasellus ullamcorper orci ut lectus dapibus rhoncus. Ut facilisis tortor vitae commodo placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lacinia suscipit aliquam. Aenean fermentum dapibus facilisis. Mauris iaculis vehicula felis, ac lacinia tellus ullamcorper sed. Duis euismod lorem in pharetra euismod. In sodales, nibh at rutrum blandit, felis est congue sem, non venenatis orci orci ac tortor. Quisque tincidunt cursus metus vel egestas.

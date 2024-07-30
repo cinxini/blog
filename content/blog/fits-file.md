@@ -6,6 +6,8 @@ dates:
 category: "datasci"
 tags: ["data", "test"]
 coverImage:
+status: 'published'
+isFeatured: false
 ---
 
 # kjkljlkj
