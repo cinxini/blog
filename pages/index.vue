@@ -37,10 +37,15 @@ const totalFeaturePosts = computed(() => {
     return null
 })
 const featuredPostIdx = (iPage, iCard) =>{
-  return (((iPage-1) * numFeaturedPerPages.value) + iCard -1);
+  return (((iPage-1) * numFeaturedPerPages.value) + iCard);
 }
 const showFeatured = (iPage, iCard) => {
   return featuredPostIdx(iPage, iCard) < totalFeaturePosts.value? true : false
+}
+
+const iPagePosts = (iPage) => {
+  const startIdx = featuredPostIdx(iPage, 0)
+  return featuredPosts.value?.slice(startIdx, startIdx + numFeaturedPerPages.value)
 }
 onMounted(async () => {
   if(!featuredPosts.value){
@@ -49,33 +54,38 @@ onMounted(async () => {
   console.log(featuredPosts.value)
   numFeaturedPages.value = Math.ceil(featuredPosts.value.length / c.FEATURED_PER_PAGE);
   console.log(featuredPosts.value.length, c.FEATURED_PER_PAGE, numFeaturedPages.value)
+
 })
 </script>
 
 <template>
   <v-container class="main-container" >
-    <p class="text-center text-h5 poppins-regular">Featured</p>
-    <v-carousel
-      v-if="featuredPosts"
-      class="my-4"
-      height="250"
-      width="100%"
-      show-arrows="hover"
-      cycle
-      hide-delimiter-background
-    >
-      <v-carousel-item
-        v-for="iPage in numFeaturedPages"
-        :key="iPage"
+    <div class="mb-10"> 
+      <p class="text-center text-h5 poppins-regular">Featured</p>
+      <v-carousel
+        v-if="featuredPosts"
+        class="my-4"
+        height="250"
+        width="100%"
+        show-arrows="hover"
+        cycle
+        hide-delimiter-background
       >
-      <div class="d-flex flex-row justify-center ga-5">
-        <div v-for="iCard in numFeaturedPerPages" :key="iCard">
-          <FeaturedCard v-if="showFeatured(iPage, iCard)" :content="featuredPosts[featuredPostIdx(iPage, iCard)]" />
+        <v-carousel-item
+          v-for="iPage in numFeaturedPages"
+          :key="iPage"
+        >
+        <div class="d-flex flex-row justify-center ga-5">
+          <FeaturedCard v-for="post in iPagePosts(iPage)" :key="post._path" :content="post"/>
         </div>
-        
-      </div>
-      </v-carousel-item>
-    </v-carousel>
+        </v-carousel-item>
+      </v-carousel>
+    </div>
+    <div class="mb-10">
+      <p class="text-center text-h5 poppins-regular">Latest</p>
+
+    </div>
+    
 
   </v-container>
   
