@@ -1,4 +1,6 @@
 export default {
     FEATURED_PER_PAGE: 3,
     MAX_FEATURED: 9,
+    NUM_LATEST: 10,
+    DESCRIPTION_MAX_CHAR: 60,
 };

@@ -7,6 +7,8 @@ description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus 
 category: other
 tags: ["nuxt3", "nuxt-content", "project"]
 coverImage:
+status: 'published'
+isFeatured: true
 ---
 
 # h1 Heading 8-)
