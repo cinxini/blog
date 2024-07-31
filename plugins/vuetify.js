@@ -17,6 +17,9 @@ const lightTheme = {
         "base-button-color": "#b1b1b1",
         "base-button-hover-color": customTheme.schemes.light.primary,
         "light-emphasis-opacity": 0.1,
+
+        // tag
+        "tag-hover-color": customTheme.schemes.light.secondary,
     },
 };
 

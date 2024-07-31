@@ -67,6 +67,7 @@ const isOpenned = ref(false);
   color: rgb(var(--v-base-button-hover-color));
 }
 
+/* 
 .more__button {
   background-color: rgba(var(--v-base-color), var(--v-base-button-opacity));
   border-radius: 5px;
@@ -88,5 +89,5 @@ const isOpenned = ref(false);
   line-height: 22px;
   height: 30px;
   color: rgb(var(--v-base-button-hover-color));
-}
+} */
 </style>

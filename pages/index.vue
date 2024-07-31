@@ -1,5 +1,6 @@
 <script setup>
 import FeaturedCard from '@/components/containers/FeaturedCard.vue';
+import LatestCard from '@/components/containers/LatestCard.vue';
 import c from '@/constants/index';
 import { onMounted, ref } from 'vue';
 
@@ -55,6 +56,7 @@ onMounted(async () => {
   console.log(latestPosts.value)
 
 })
+
 </script>
 
 <template>
@@ -72,28 +74,9 @@ onMounted(async () => {
     </div>
     <div class="mb-10">
       <p class="text-center text-h5 poppins-regular ">Latest Posts</p>
-      <div class="my-4 d-flex justify-space-between flex-wrap ga-5">
-        <v-card v-for="content in latestPosts" :key="content._path" width="48%" height="120" riant="flat"
-          color="transparent">
-          <v-row no-gutters style="height: 100%;">
-            <v-col cols="3" class="position-relative">
-              <v-img src="public/images/project/default.png" cover height="100%" />
-            </v-col>
-            <v-col class="d-flex flex-column pa-3">
-              <div class="text-subtitle-1">{{ content.title }}</div>
-              <div class="text-caption">
-                {{ content.description.substring(0, c.DESCRIPTION_MAX_CHAR) }}{{ content.description.length > c.DESCRIPTION_MAX_CHAR ? '...' : '' }}
-              </div>
+      <div class="my-4 d-flex justify-space-between flex-wrap ga-2">
+        <LatestCard v-for="content in latestPosts" :content="content" />
 
-              <div class="d-flex flex-row ga-1 align-center">
-                <v-icon icon="fa-solid fa-tag" size="small" color="secondary" />
-                <v-chip v-for="tag in content.tags" :key="tag" :ripple="false" link size="small" density="compact"
-                  rounded="sm"> {{ tag }}</v-chip>
-              </div>
-
-            </v-col>
-          </v-row>
-        </v-card>
       </div>
     </div>
 
@@ -105,7 +88,23 @@ onMounted(async () => {
 
 
 <style scoped>
-v-chip {
-  background-color: red;
+.latest-title a {
+  color: rgb(var(--v-theme-primary));
+  font-weight: 500;
+  font-size: 1.2em;
+}
+
+
+.latest-title a:hover {
+  text-decoration: underline solid rgba(var(--v-theme-primary-lighten-1), 0.3) 4px;
+  color: rgb(var(--v-theme-primary))
+}
+
+.mytag {
+  color: rgb(var(--v-base-color));
+}
+
+.categoryChip {
+  color: rgb(var(--v-base-color));
 }
 </style>

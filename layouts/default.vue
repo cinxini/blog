@@ -77,6 +77,10 @@ body {
 
 
 /* font */
+.poppins {
+  font-family: "Poppins", sans-serif;
+}
+
 .poppins-thin {
   font-family: "Poppins", sans-serif;
   font-weight: 100;
@@ -227,7 +231,8 @@ body {
 }
 
 .main-container {
-  max-width: 66%; min-width: 40%;
+  max-width: 66%;
+  min-width: 40%;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
