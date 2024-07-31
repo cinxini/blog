@@ -32,8 +32,14 @@ const isOpenned = ref(false);
           target="_blank" />
       </p>
       <div style="height: 30px;">
-        <div v-if="!isOpenned" class="more__button" @click="isOpenned = true">More About Me</div>
-        <div v-else class="more__button" @click="isOpenned = false">Hide</div>
+        <v-hover>
+          <template v-slot:default="{ isHovering, props }">
+            <v-btn v-bind="props" :variant="isHovering ? 'tonal' : 'flat'" :color="isHovering ? 'primary' : 'baseColor'"
+              class="mybutton" density="comfortable" @click="isOpenned = !isOpenned" width="150">
+              <span>{{ isOpenned ? 'Hide' : 'More About Me' }}</span>
+            </v-btn>
+          </template>
+        </v-hover>
       </div>
     </div>
     <div v-if="isOpenned">
@@ -46,6 +52,13 @@ const isOpenned = ref(false);
 
 
 <style scoped>
+.mybutton {
+  text-transform: capitalize;
+  color: rgb(var(--v-base-color));
+}
+
+
+
 .social__bttn {
   color: rgb(var(--v-base-button-color));
 }
