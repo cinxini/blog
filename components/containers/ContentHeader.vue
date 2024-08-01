@@ -19,12 +19,17 @@ const props = defineProps({
     required: false,
     nullable: true,
     default: null
+  },
+  isCenter: {
+    type: Boolean,
+    default: false
   }
+
 });
 </script>
 
 <template>
-  <div class="d-flex flex-row h-auto justify-start">
+  <div class="d-flex flex-row h-auto justify-start" :class="{ 'justify-center': isCenter }">
 
     <!-- page: project or blog -->
     <v-hover v-if="page">
@@ -71,10 +76,6 @@ const props = defineProps({
 .latest-title a:hover {
   text-decoration: underline solid rgba(var(--v-theme-primary-lighten-1), 0.3) 4px;
   color: rgb(var(--v-theme-primary))
-}
-
-.mytag {
-  color: rgb(var(--v-base-color));
 }
 
 .categoryChip {

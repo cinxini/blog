@@ -1,4 +1,6 @@
 <script setup>
+import ContentFooter from '@/components/containers/ContentFooter.vue';
+import ContentHeader from '@/components/containers/ContentHeader.vue';
 import c from '@/constants/index';
 
 const props = defineProps({
@@ -19,54 +21,16 @@ const extractPageFromPath = (path) => { return path.split('/')[1] }
       </v-col>
 
       <v-col class="d-flex flex-column pa-3">
-
-        <div class="d-flex flex-row h-auto justify-start">
-
-          <v-hover>
-            <template v-slot:default="{ isHovering, props }">
-              <v-chip v-bind="props" size="x-small" density="comfortable" label class="pageChip ma-0 rounded-s-sm"
-                variant="flat" color="tertiary" rounded="0">
-                <v-icon v-if="extractPageFromPath(content._path) === 'project'" icon="fa-solid fa-code" size="x-small"
-                  start />
-                <v-icon v-else icon="fa-solid fa-quote-right" size="x-small" start />
-                {{ extractPageFromPath(content._path) }}</v-chip>
-            </template>
-          </v-hover>
-
-          <v-hover>
-            <template v-slot:default="{ isHovering, props }">
-              <v-chip v-bind:="props" size="x-small" density="comfortable" class="categoryChip ma-0 rounded-e-sm"
-                variant="outlined" rounded="0" :color="isHovering ? 'tertiary' : 'baseColor'" label link>
-                <v-icon icon="fa-solid fa-folder" start size="x-small"></v-icon>
-                {{ content.category }}
-              </v-chip>
-            </template>
-          </v-hover>
-
-          <v-chip variant="text" size="x-small" density="comfortable">
-            <v-icon icon="fa-regular fa-calendar" size="x-small" color="baseVariant" start />
-            {{ content.dates.published }}
-          </v-chip>
-
-        </div>
+        <content-header :category="content.category" :page="extractPageFromPath(content._path)" size="x-small"
+          :date="content.dates.published" />
 
         <div class="latest-title mb-2"><a>{{ content.title }}</a></div>
         <div class="text-caption">
           {{ content.description.substring(0, c.DESCRIPTION_MAX_CHAR) }}{{ content.description.length > c.DESCRIPTION_MAX_CHAR ? '...' : '' }}
         </div>
 
-        <div class="d-flex flex-row ga-1 align-center">
-          <v-icon icon="fa-solid fa-tags" size="x-small" color="secondary" />
-          <div v-for="tag in content.tags" :key="tag">
-            <v-hover>
-              <template v-slot:default="{ isHovering, props }">
-                <v-chip class="mytag" v-bind="props" :ripple="false" link size="small" density="compact" pill
-                  :color="isHovering ? 'secondary' : 'baseColor'" variant="tonal">
-                  {{ tag }}</v-chip>
-              </template>
-            </v-hover>
-          </div>
-        </div>
+        <ContentFooter :tags="content.tags" />
+
       </v-col>
     </v-row>
   </v-card>
