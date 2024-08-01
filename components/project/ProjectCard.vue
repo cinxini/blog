@@ -1,7 +1,7 @@
 <script setup>
-import { computed } from 'vue';
+import ContentHeader from '@/components/containers/ContentHeader.vue';
 import c from '@/constants/project';
-
+import { computed } from 'vue';
 const props = defineProps({
   project: {
     type: Object,
@@ -32,7 +32,7 @@ const coverImg = computed(() => {
         <div class="ma-0 px-4 py-2">
           <v-row no-gutters class="text-caption poppins-regular pb-2">
             <v-col class="d-flex flex-row  align-center">
-              <Category :value="project.category" :enable-link="true" />
+              <ContentHeader :category="project.category" page="project" />
             </v-col>
           </v-row>
           <v-row no-gutters class="text-wrap">
