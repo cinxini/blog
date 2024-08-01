@@ -1,5 +1,5 @@
 <script setup>
-import ProjectList from '@/components/project/ProjectList.vue';
+import ProjectList from '@/components/ContentList.vue';
 import { computed, onMounted } from 'vue';
 
 const fetchProjects = async () => {
@@ -34,7 +34,7 @@ onMounted(async () => {
   <v-container class="w-66">
     <p class="text-center text-h5 poppins-regular">Projects</p>
     <div v-if="showList">
-      <ProjectList :projects="projectItems"></ProjectList>
+      <ProjectList :articles="projectItems"></ProjectList>
     </div>
   </v-container>
 </template>

@@ -3,20 +3,26 @@ import ContentFooter from '@/components/containers/ContentFooter.vue';
 import ContentHeader from '@/components/containers/ContentHeader.vue';
 import c from '@/constants/project';
 import { computed } from 'vue';
+
+const router = useRouter();
 const props = defineProps({
-  project: {
+  content: {
     type: Object,
     required: true
   }
 })
 
 const coverImg = computed(() => {
-  if (props.project.coverImage) {
-    return props.project.coverImage;
+  console.log(props.content)
+  if (props.content.coverImage) {
+    return props.content.coverImage;
   } else {
-    return `${c.cover}`;
+    return `${c.COVER}`;
   }
 })
+
+const extractPageFromPath = (path) => { return path.split('/')[1] }
+
 </script>
 
 <template>
@@ -25,22 +31,24 @@ const coverImg = computed(() => {
       <v-col cols="3">
         <v-img :src="coverImg" cover height="100%">
           <template v-slot:error>
-            <v-img class="mx-auto" height="300" max-width="500" :src="c.cover"></v-img>
+            <v-img class="mx-auto" height="300" max-width="500" :src="c.COVER"></v-img>
           </template>
         </v-img>
       </v-col>
       <v-col cols="9" class="d-flex flex-column pa-3">
-        <ContentHeader :category="project.category" page="project" :date="project.dates.published" class="mb-1" />
-        <div class="project-title mb-2"><a>{{ project.title }}</a></div>
-        <div class="project-description mb-1">
-          {{ project.description.substring(0, 150) }}{{ project.description.length > c.DESCRIPTION_MAX_CHAR ? '...' : '' }}
+        <ContentHeader :category="content.category" :page="extractPageFromPath(content._path)"
+          :date="content.dates.published" class="mb-1" />
+        <div class="content-title mb-2"><a :href="content._path">{{ content.title }}</a></div>
+        <div class="content-description mb-1">
+          {{ content.description.substring(0, c.DESCRIPTION_MAX_CHAR) }}{{ content.description.length > c.DESCRIPTION_MAX_CHAR ? '...' : '' }}
         </div>
         <div class="d-flex flex-row justify-space-between justify-end">
-          <ContentFooter :tags="project.tags" />
+          <ContentFooter :tags="content.tags" />
           <v-hover>
             <template v-slot:default="{ isHovering, props }">
               <v-btn v-bind="props" :variant="isHovering ? 'tonal' : 'flat'"
-                :color="isHovering ? 'primary' : 'baseColor'" class="mybutton" density="comfortable" width="150">
+                :color="isHovering ? 'primary' : 'baseColor'" class="mybutton" density="comfortable" width="150"
+                @click="router.push(content._path)">
                 Read More
               </v-btn>
             </template>
@@ -53,7 +61,7 @@ const coverImg = computed(() => {
 </template>
 
 <style scoped>
-.project-title a {
+.content-title a {
   /* color: rgb(var(--v-theme-primary)); */
   color: rgb(var(--v-theme-primary));
   font-weight: 500;
@@ -63,7 +71,7 @@ const coverImg = computed(() => {
   transition: all .3s ease-in-out;
 }
 
-.project-title a:hover {
+.content-title a:hover {
   /* color: rgb(var(--v-theme-primary)); */
   text-decoration: underline solid rgba(var(--v-theme-primary-lighten-1), 0.3) 6px;
 }

@@ -24,7 +24,7 @@ const extractPageFromPath = (path) => { return path.split('/')[1] }
         <v-icon icon="fa-regular fa-calendar" size="x-small" color="baseVariant" start />
         {{ content.dates.published }}
       </v-chip>
-      <div class="feature-title mb-2">{{ content.title }}{{ content.title }}</div>
+      <div class="feature-title mb-2"><a :href="content._path">{{ content.title }}</a></div>
       <ContentFooter :tags="content.tags" />
     </v-sheet>
   </v-card>
@@ -32,11 +32,16 @@ const extractPageFromPath = (path) => { return path.split('/')[1] }
 
 
 <style scoped>
-.feature-title {
+.feature-title a {
   color: rgb(var(--v-theme-primary));
   font-weight: 500;
   font-size: 1.2rem;
   line-height: 1.2;
+}
+
+.feature-title a:hover {
+  text-decoration: underline solid rgba(var(--v-theme-primary-lighten-1), 0.3) 4px;
+  color: rgb(var(--v-theme-primary))
 }
 
 .mytag {

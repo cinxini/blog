@@ -1,6 +1,7 @@
 <script setup>
+import BlogPostList from '@/components/ContentList.vue';
 import FilterSidebar from '@/components/blog/BlogFilterSidebar.vue';
-import BlogPostList from '@/components/blog/BlogPostList.vue';
+// import BlogPostList from '@/components/blog/BlogPostList.vue';
 import c from '@/constants/blog';
 import { ref, watch } from 'vue';
 
@@ -50,7 +51,7 @@ watch(filterCondition, async (newCond) => {
   <v-container class="main-container">
     <div v-if="blogPosts.length > 0">
       <p class="text-center text-h5 poppins-regular">Recent Posts</p>
-      <BlogPostList :blog-posts="blogPosts" />
+      <BlogPostList :articles="blogPosts" />
       <v-pagination :length="numPages" v-model="page" next-icon="fa-solid fa-caret-right"
         prev-icon="fa-solid fa-caret-left" rounded="lg" color="grey" active-color="primary"></v-pagination>
     </div>

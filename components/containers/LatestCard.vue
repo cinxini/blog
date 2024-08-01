@@ -24,7 +24,7 @@ const extractPageFromPath = (path) => { return path.split('/')[1] }
         <content-header :category="content.category" :page="extractPageFromPath(content._path)" size="x-small"
           :date="content.dates.published" />
 
-        <div class="latest-title mb-2"><a>{{ content.title }}</a></div>
+        <div class="latest-title mb-2"><a :href="content._path">{{ content.title }}</a></div>
         <div class="text-caption">
           {{ content.description.substring(0, c.DESCRIPTION_MAX_CHAR) }}{{ content.description.length > c.DESCRIPTION_MAX_CHAR ? '...' : '' }}
         </div>
