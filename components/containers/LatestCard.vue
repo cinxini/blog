@@ -36,14 +36,17 @@ const extractPageFromPath = (path) => { return path.split('/')[1] }
           <v-hover>
             <template v-slot:default="{ isHovering, props }">
               <v-chip v-bind:="props" size="x-small" density="comfortable" class="categoryChip ma-0 rounded-e-sm"
-                variant="tonal" rounded="0" :color="isHovering ? 'tertiary' : 'baseColor'" label>
+                variant="outlined" rounded="0" :color="isHovering ? 'tertiary' : 'baseColor'" label link>
                 <v-icon icon="fa-solid fa-folder" start size="x-small"></v-icon>
                 {{ content.category }}
               </v-chip>
             </template>
           </v-hover>
 
-          <v-chip variant="text" size="x-small" density="comfortable">{{ content.dates.published }}</v-chip>
+          <v-chip variant="text" size="x-small" density="comfortable">
+            <v-icon icon="fa-regular fa-calendar" size="x-small" color="baseVariant" start />
+            {{ content.dates.published }}
+          </v-chip>
 
         </div>
 
@@ -75,7 +78,7 @@ const extractPageFromPath = (path) => { return path.split('/')[1] }
 .latest-title a {
   color: rgb(var(--v-theme-primary));
   font-weight: 500;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   line-height: 1.5;
 }
 

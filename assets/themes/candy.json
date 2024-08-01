@@ -14,6 +14,8 @@
     ],
     "schemes": {
         "light": {
+            "base": "#b1b1b1",
+            "baseVariant": "#464646",
             "primary": "#82C0D9",
             "surfaceTint": "#3B656B",
             "onPrimary": "#FFFFFF",

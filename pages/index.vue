@@ -9,8 +9,9 @@ const numFeaturedPages = ref(1);
 const numFeaturedPerPages = ref(c.FEATURED_PER_PAGE);
 
 const fetchFeatured = async () => {
-  const data = await queryContent('/blog')
+  const data = await queryContent('/')
     .where({ isFeatured: true })
+    .limit(c.MAX_FEATURED)
     .sort({ 'dates.published': -1 })
     .find()
   return data;
@@ -40,7 +41,7 @@ const fetchLatest = async () => {
   return data;
 }
 
-const { data: latestPosts } = useAsyncData('featuredList', () => {
+const { data: latestPosts } = useAsyncData('latestList', () => {
   return fetchLatest();
 })
 
@@ -48,6 +49,7 @@ onMounted(async () => {
   if (!featuredPosts.value) {
     featuredPosts.value = await fetchFeatured();
   }
+  console.log('feat', featuredPosts.value)
   numFeaturedPages.value = Math.ceil(featuredPosts.value.length / c.FEATURED_PER_PAGE);
 
   if (!latestPosts.value) {
@@ -63,8 +65,7 @@ onMounted(async () => {
   <v-container class="main-container">
     <div class="mb-10">
       <p class="text-center text-h5 poppins-regular">Featured</p>
-      <v-carousel v-if="featuredPosts" class="my-4" height="250" width="100%" show-arrows="hover" cycle
-        hide-delimiter-background>
+      <v-carousel v-if="featuredPosts" class="my-4" height="290" width="100%" show-arrows="hover" cycle hide-delimiters>
         <v-carousel-item v-for="iPage in numFeaturedPages" :key="iPage">
           <div class="d-flex flex-row justify-space-between ga-5">
             <FeaturedCard v-for="post in iPagePosts(iPage)" :key="post._path" :content="post" />
