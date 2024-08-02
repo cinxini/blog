@@ -76,7 +76,7 @@ onMounted(async () => {
     <div class="mb-10">
       <p class="text-center text-h5 poppins-regular ">Latest Posts</p>
       <div class="my-4 d-flex justify-space-between flex-wrap ga-2">
-        <LatestCard v-for="content in latestPosts" :content="content" />
+        <LatestCard v-for="content in latestPosts" :key="content._path" :content="content" />
 
       </div>
     </div>
