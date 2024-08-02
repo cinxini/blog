@@ -1,4 +1,5 @@
 <script setup>
+const router = useRouter();
 const props = defineProps({
   category: {
     type: String,
@@ -46,7 +47,8 @@ const props = defineProps({
     <v-hover>
       <template v-slot:default="{ isHovering, props }">
         <v-chip v-bind:="props" :size="size" density="comfortable" class="categoryChip ma-0 rounded-e-sm"
-          variant="outlined" rounded="0" :color="isHovering ? 'tertiary' : 'baseColor'" label link>
+          variant="outlined" rounded="0" :color="isHovering ? 'tertiary' : 'baseColor'" label link
+          :href="`/category/${category}`">
           <v-icon icon="fa-solid fa-folder" start size="x-small"></v-icon>
           {{ category }}
         </v-chip>
