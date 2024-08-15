@@ -1,12 +1,12 @@
 <script setup>
+import DotLoader from '@/components/items/DotLoader.vue';
 import c from '@/constants/posts';
 import { computed, onMounted } from 'vue';
 const { path, query, params } = useRoute();
 
-const router = useRouter();
 const isFetching = ref(false);
-const numPages = ref(1);
 const currPage = ref(1);
+
 const category = computed(() => {
   if (params.slug.length > 0)
     return params.slug[0]
@@ -25,15 +25,15 @@ const findPostsWithCategory = async (category, currPage) => {
   isFetching.value = true;
   let data = null;
   try {
-
-    let count = 0;
     if (pageType.value === 'all') {
       data = await queryContent(`/`)
+        .where({
+          category: category
+        })
         .sort({ 'dates.published': -1 })
         .skip((currPage - 1) * c.POSTS_PER_PAGE)
         .limit(c.POSTS_PER_PAGE)
         .find();
-      count = await queryContent('/').count();
     } else {
       data = await queryContent(`/${pageType.value}`)
         .where({
@@ -43,10 +43,7 @@ const findPostsWithCategory = async (category, currPage) => {
         .skip((currPage - 1) * c.POSTS_PER_PAGE)
         .limit(c.POSTS_PER_PAGE)
         .find();
-      count = await queryContent(`/${pageType.value}`).count();
     }
-    numPages.value = Math.ceil(count / c.POSTS_PER_PAGE);
-
   } catch (error) {
     console.log('error', error)
   } finally {
@@ -58,19 +55,23 @@ const { data: posts } = await useAsyncData(`category-${path}`, () => {
   return findPostsWithCategory(category.value, currPage.value);
 })
 
+const count = await queryContent(`/${pageType.value === 'all' ? '' : pageType.value}`).where({ category: category.value }).count();
+const numPages = computed(() => {
+  return Math.ceil(count / c.POSTS_PER_PAGE);
+})
 onMounted(async () => {
   if (!posts.value) {
     posts.value = await findPostsWithCategory(category.value, currPage.value);
   }
+  console.log('posts', posts.value.length)
 })
-
-
-
 </script>
 
 <template>
   <v-container class="main-container w-66">
-    <p class="text-center text-h5 poppins-regular">Posts in <span class="text-primary">{{ category }}</span>
+    <p class="text-center text-h5"> {{ count }} {{ pageType === 'all' ? '' : pageType }} article{{ count > 1 ? 's' : ''
+      }}
+      founded in <span class="text-primary">{{ category }}</span>
       Category</p>
     <div class="d-flex flex-row justify-center">
       <v-hover>
@@ -105,10 +106,11 @@ onMounted(async () => {
         </template>
       </v-hover>
     </div>
+
     <div v-if="isFetching" class="d-flex flex-row justify-center ma-16">
-      <div class="loader">
-      </div>
+      <DotLoader />
     </div>
+
     <div v-if="posts">
       <ContentList :articles="posts" />
       <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
@@ -118,41 +120,4 @@ onMounted(async () => {
   </v-container>
 </template>
 
-
-
-<style scoped>
-/* HTML: <div class="loader"></div> 
-https://css-loaders.com/dots/
-*/
-.loader {
-  width: 150px;
-  height: 50px;
-  aspect-ratio: 2;
-  --_g: no-repeat radial-gradient(circle closest-side, rgb(var(--v-theme-primary)) 90%, #0000);
-  background:
-    var(--_g) 0% 50%,
-    var(--_g) 50% 50%,
-    var(--_g) 100% 50%;
-  background-size: calc(100%/3) 50%;
-  animation: l3 1s infinite linear;
-  border-width: 0px;
-}
-
-@keyframes l3 {
-  20% {
-    background-position: 0% 0%, 50% 50%, 100% 50%
-  }
-
-  40% {
-    background-position: 0% 100%, 50% 0%, 100% 50%
-  }
-
-  60% {
-    background-position: 0% 50%, 50% 100%, 100% 0%
-  }
-
-  80% {
-    background-position: 0% 50%, 50% 50%, 100% 100%
-  }
-}
-</style>
+<style scoped></style>
