@@ -33,7 +33,7 @@ const props = defineProps({
       <v-hover>
         <template v-slot:default="{ isHovering, props }">
           <v-chip class="mytag" v-bind="props" :ripple="false" link :size="size" density="compact" pill
-            :color="isHovering ? 'secondary' : 'base'" variant="tonal">
+            :color="isHovering ? 'secondary' : 'base'" variant="tonal" :href="`/tag/${tag}`">
             {{ tag }}</v-chip>
         </template>
       </v-hover>

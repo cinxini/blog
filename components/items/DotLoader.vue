@@ -18,9 +18,9 @@ https://css-loaders.com/dots/
   aspect-ratio: 2;
   --_g: no-repeat radial-gradient(circle closest-side, rgb(var(--v-theme-primary)) 90%, #0000);
   background:
-    var(--_g) 0% 50%,
-    var(--_g) 50% 50%,
-    var(--_g) 100% 50%;
+    no-repeat radial-gradient(circle closest-side, rgb(var(--v-theme-primary)) 90%, #0000) 0% 50%,
+    no-repeat radial-gradient(circle closest-side, rgb(var(--v-theme-primary)) 90%, #0000) 50% 50%,
+    no-repeat radial-gradient(circle closest-side, rgb(var(--v-theme-primary)) 90%, #0000) 100% 50%;
   background-size: calc(100%/3) 50%;
   animation: l3 1s infinite linear;
   border-width: 0px;

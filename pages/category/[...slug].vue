@@ -69,9 +69,7 @@ onMounted(async () => {
 
 <template>
   <v-container class="main-container w-66">
-    <p class="text-center text-h5"> {{ count }} {{ pageType === 'all' ? '' : pageType }} article{{ count > 1 ? 's' : ''
-      }}
-      founded in <span class="text-primary">{{ category }}</span>
+    <p class="text-center text-h5"> Posted in <span class="text-primary">{{ category }}</span>
       Category</p>
     <div class="d-flex flex-row justify-center">
       <v-hover>
