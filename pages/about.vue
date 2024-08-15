@@ -6,7 +6,7 @@ const isOpenned = ref(false);
 
 
 <template>
-  <v-container class="main-container">
+  <v-container class="main-container w-66">
     <p class="text-center text-h5">About Me</p>
 
     <div class="d-flex flex-column align-center ga-1 my-4">
@@ -24,11 +24,13 @@ const isOpenned = ref(false);
       <p class="d-flex flex-row ga-3 my-3">
         <v-btn class="social__bttn" icon="fa-brands fa-medium" size="small" href="https://medium.com/@nutnar.ee"
           target="_blank" />
-        <v-btn class="social__bttn" icon="fa-brands fa-linkedin-in" size="small" href="https://medium.com/@nutnar.ee"
+        <v-btn class="social__bttn" icon="fa-brands fa-linkedin-in" size="small" href="https://medium.com/@cinxini"
           target="_blank" />
         <v-btn class="social__bttn" icon="fa-brands fa-x-twitter" size="small" href="https://x.com/cinxini"
           target="_blank" />
-        <v-btn class="social__bttn" icon="fa-brands fa-github-alt" size="small" href="https://github.com/nutnareek"
+        <v-btn class="social__bttn" icon="fa-brands fa-github-alt" size="small" href="https://github.com/cinxini"
+          target="_blank" />
+        <v-btn class="social__bttn" icon="fa-brands fa-kaggle" size="small" href="https://www.kaggle.com/cinxini"
           target="_blank" />
       </p>
       <div style="height: 30px;">

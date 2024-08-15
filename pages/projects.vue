@@ -8,7 +8,7 @@ const fetchProjects = async () => {
   console.log
   return data;
 }
-// const projectItems = ref(null);
+
 const { data: projectItems } = useAsyncData('projectList', () => {
   return fetchProjects();
 })
@@ -31,7 +31,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-container class="w-66">
+  <v-container class="w-66 main-container">
     <p class="text-center text-h5 poppins-regular">Projects</p>
     <div v-if="showList">
       <ProjectList :articles="projectItems"></ProjectList>

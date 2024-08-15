@@ -62,7 +62,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-container class="main-container">
+  <v-container class="main-container w-66">
     <div class="mb-10">
       <p class="text-center text-h5 poppins-regular">Featured</p>
       <v-carousel v-if="featuredPosts" class="my-4" height="290" width="100%" show-arrows="hover" cycle hide-delimiters>

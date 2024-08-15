@@ -48,7 +48,7 @@ const props = defineProps({
       <template v-slot:default="{ isHovering, props }">
         <v-chip v-bind:="props" :size="size" density="comfortable" class="categoryChip ma-0 rounded-e-sm"
           variant="outlined" rounded="0" :color="isHovering ? 'tertiary' : 'baseColor'" label link
-          :href="`/category/${category}`">
+          :href="`/category/${category}?type=${page}`">
           <v-icon icon="fa-solid fa-folder" start size="x-small"></v-icon>
           {{ category }}
         </v-chip>

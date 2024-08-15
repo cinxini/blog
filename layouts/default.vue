@@ -4,7 +4,7 @@
       <v-row no-gutters>
         <v-col cols="2" class="d-flex flex-row">
           <div class="vertical-center ma-4">
-            <v-img :width="160" aspect-ratio="16/9" cover src="@/assets/images/logo-nutnar.png"></v-img>
+            <v-img :width="120" aspect-ratio="16/9" cover src="@/assets/images/logo.png"></v-img>
           </div>
 
         </v-col>
@@ -12,10 +12,10 @@
         </v-col>
         <v-col cols="2" class="d-flex flex-row-reverse">
           <div class="vertical-center ">
-            <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/">home</v-btn>
-            <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/about">about</v-btn>
-            <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/projects">projects</v-btn>
-            <v-btn class="ma-2 poppins-semibold text-subtitle-1" color="primary" to="/blogs">blog</v-btn>
+            <v-btn class="ma-2" color="primary" to="/">home</v-btn>
+            <v-btn class="ma-2" color="primary" to="/about">about</v-btn>
+            <v-btn class="ma-2" color="primary" to="/projects">projects</v-btn>
+            <v-btn class="ma-2" color="primary" to="/blogs">blog</v-btn>
             <v-btn class="ma-2 pa-0" icon="fa-solid fa-magnifying-glass" size="small"></v-btn>
           </div>
         </v-col>
@@ -231,10 +231,43 @@ body {
 }
 
 .main-container {
-  max-width: 66%;
-  min-width: 40%;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-style: normal;
+}
+
+/* HTML: <div class="loader"></div> 
+https://css-loaders.com/dots/
+*/
+.loader {
+  width: 150px;
+  height: 50px;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side, rgb(var(--v-theme-primary)) 90%, #0000);
+  background:
+    var(--_g) 0% 50%,
+    var(--_g) 50% 50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 50%;
+  animation: l3 1s infinite linear;
+  border-width: 0px;
+}
+
+@keyframes l3 {
+  20% {
+    background-position: 0% 0%, 50% 50%, 100% 50%
+  }
+
+  40% {
+    background-position: 0% 100%, 50% 0%, 100% 50%
+  }
+
+  60% {
+    background-position: 0% 50%, 50% 100%, 100% 0%
+  }
+
+  80% {
+    background-position: 0% 50%, 50% 50%, 100% 100%
+  }
 }
 </style>

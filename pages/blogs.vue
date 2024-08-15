@@ -48,9 +48,9 @@ watch(filterCondition, async (newCond) => {
 
 <template>
   <FilterSidebar @filter-posts="filterPostsHandler"></FilterSidebar>
-  <v-container class="main-container">
+  <v-container class="main-container w-66">
     <div v-if="blogPosts.length > 0">
-      <p class="text-center text-h5 poppins-regular">Recent Posts</p>
+      <p class="text-center text-h5 poppins-regular">Recent Blog Posts</p>
       <BlogPostList :articles="blogPosts" />
       <v-pagination :length="numPages" v-model="page" next-icon="fa-solid fa-caret-right"
         prev-icon="fa-solid fa-caret-left" rounded="lg" color="grey" active-color="primary"></v-pagination>
