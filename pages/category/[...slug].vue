@@ -1,12 +1,13 @@
 <script setup>
 import DotLoader from '@/components/items/DotLoader.vue';
+import PageSelector from '@/components/selectors/PageTypeSelector.vue';
 import c from '@/constants/posts';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 const { path, query, params } = useRoute();
 
 const isFetching = ref(false);
 const currPage = ref(1);
-
+const count = ref(0);
 const category = computed(() => {
   if (params.slug.length > 0)
     return params.slug[0]
@@ -14,36 +15,20 @@ const category = computed(() => {
     return null
 })
 
-const pageType = computed(() => {
-  if (query.type)
-    return query.type;
-  else
-    return 'all';
-})
+const pageType = ref(query.type ? query.type : 'all');
 
-const findPostsWithCategory = async (category, currPage) => {
+const findPostsWithCategory = async (category, currPage, type) => {
   isFetching.value = true;
   let data = null;
   try {
-    if (pageType.value === 'all') {
-      data = await queryContent(`/`)
-        .where({
-          category: category
-        })
-        .sort({ 'dates.published': -1 })
-        .skip((currPage - 1) * c.POSTS_PER_PAGE)
-        .limit(c.POSTS_PER_PAGE)
-        .find();
-    } else {
-      data = await queryContent(`/${pageType.value}`)
-        .where({
-          category: category
-        })
-        .sort({ 'dates.published': -1 })
-        .skip((currPage - 1) * c.POSTS_PER_PAGE)
-        .limit(c.POSTS_PER_PAGE)
-        .find();
-    }
+    data = await queryContent(`/${type === 'all' ? '' : type}`)
+      .where({
+        category: category
+      })
+      .sort({ 'dates.published': -1 })
+      .skip((currPage - 1) * c.POSTS_PER_PAGE)
+      .limit(c.POSTS_PER_PAGE)
+      .find();
   } catch (error) {
     console.log('error', error)
   } finally {
@@ -52,18 +37,29 @@ const findPostsWithCategory = async (category, currPage) => {
   return data;
 }
 const { data: posts } = await useAsyncData(`category-${path}`, () => {
-  return findPostsWithCategory(category.value, currPage.value);
+  return findPostsWithCategory(category.value, currPage.value, pageType.value);
 })
 
-const count = await queryContent(`/${pageType.value === 'all' ? '' : pageType.value}`).where({ category: category.value }).count();
+// const count = await queryContent(`/${pageType.value === 'all' ? '' : pageType.value}`).where({ category: category.value }).count();
 const numPages = computed(() => {
-  return Math.ceil(count / c.POSTS_PER_PAGE);
+  if (count.value === 0) return 1;
+  return Math.ceil(count.value / c.POSTS_PER_PAGE);
 })
 onMounted(async () => {
   if (!posts.value) {
-    posts.value = await findPostsWithCategory(category.value, currPage.value);
+    posts.value = await findPostsWithCategory(category.value, currPage.value, pageType.value);
   }
-  console.log('posts', posts.value.length)
+  count.value = await queryContent(`/${pageType.value === 'all' ? '' : pageType.value}`).where({ category: category.value }).count();
+})
+
+watch(pageType, async (newPage) => {
+  currPage.value = 1;
+  posts.value = await findPostsWithCategory(category.value, currPage.value, newPage);
+  count.value = await queryContent(`/${newPage === 'all' ? '' : newPage}`).where({ category: category.value }).count();
+})
+
+watch(currPage, async (newPageNo) => {
+  posts.value = await findPostsWithCategory(category.value, newPageNo, newPage);
 })
 </script>
 
@@ -71,45 +67,17 @@ onMounted(async () => {
   <v-container class="main-container w-66">
     <p class="text-center text-h5"> Posted in <span class="text-primary">{{ category }}</span>
       Category</p>
-    <div class="d-flex flex-row justify-center">
-      <v-hover>
-        <template v-slot:default="{ isHovering, props }">
-          <v-chip v-bind="props" class="rounded-s-lg" rounded="0"
-            :color="isHovering || pageType === 'all' ? 'tertiary' : 'base'"
-            :variant="pageType === 'all' ? 'flat' : 'tonal'" size="small" label link :href="path">
-            <v-icon icon="fa-solid fa-box-archive" size="small" start />
-            all</v-chip>
-        </template>
-      </v-hover>
-
-      <v-hover>
-        <template v-slot:default="{ isHovering, props }">
-          <v-chip v-bind="props" class="rounded-0" :color="isHovering || pageType === 'project' ? 'tertiary' : 'base'"
-            :variant="pageType === 'project' ? 'flat' : 'tonal'" size="small" label link
-            :href="`/category/${category}?type=project`">
-            <v-icon icon="fa-solid fa-code" size="small" start />
-            project</v-chip>
-        </template>
-      </v-hover>
-
-      <v-hover>
-        <template v-slot:default="{ isHovering, props }">
-          <v-chip v-bind="props" class="rounded-e-lg redborder" rounded="0"
-            :color="isHovering || pageType === 'blog' ? 'tertiary' : 'base'"
-            :variant="pageType === 'blog' ? 'flat' : 'tonal'" label link :href="`/category/${category}?type=blog`"
-            size="small">
-            <v-icon icon="fa-solid fa-quote-right" size="small" start />
-            blog
-          </v-chip>
-        </template>
-      </v-hover>
-    </div>
+    <PageSelector v-model="pageType" />
 
     <div v-if="isFetching" class="d-flex flex-row justify-center ma-16">
       <DotLoader />
     </div>
+    <div v-else>
+      <p v-if="count > 0" class="text-center">Found {{ count }} posts.</p>
+      <p v-else class="text-center">No posts with category <span class="text-primary">{{ category }}</span>.</p>
+    </div>
 
-    <div v-if="posts">
+    <div v-if="posts.length > 0">
       <ContentList :articles="posts" />
       <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
         prev-icon="fa-solid fa-caret-left" rounded="lg" color="grey" active-color="primary"></v-pagination>

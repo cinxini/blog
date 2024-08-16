@@ -4,10 +4,9 @@ import PageSelector from '@/components/selectors/PageTypeSelector.vue';
 import c from '@/constants/posts';
 import { onMounted, ref, watch } from 'vue';
 
-const { path, query, params } = useRoute();
+const { path, params } = useRoute();
 const pageType = ref('all');
 const tags = ref(params.slug);
-console.log(params.slug[0])
 
 const isFetching = ref(false);
 const currPage = ref(1);
@@ -48,7 +47,6 @@ onMounted(async () => {
     posts.value = await findPostsWithTags(tags.value, currPage.value);
   }
   count.value = await queryContent(`/${pageType.value === 'all' ? '' : pageType.value}`).where({ tags: { $contains: tags.value } }).count();
-  console.log('count', count.value)
 })
 
 watch(pageType, async (newPage) => {
@@ -65,20 +63,19 @@ watch(currPage, async (newPageNo) => {
 <template>
   <v-container class="main-container w-66">
     <p class="text-center text-h5"> Posted in tag <span class="text-primary">{{ tags[0] }}</span></p>
-
     <PageSelector v-model="pageType" />
     <div v-if="isFetching" class="d-flex flex-row justify-center ma-16">
       <DotLoader />
     </div>
-    <p v-if="count > 0" class="text-center">Found {{ count }} posts.</p>
-    <p v-else class="text-center">No posts with tag <span class="text-primary">{{ tags[0] }}</span>.</p>
+    <div v-else>
+      <p v-if="count > 0" class="text-center">Found {{ count }} posts.</p>
+      <p v-else class="text-center">No posts with tag <span class="text-primary">{{ tags[0] }}</span>.</p>
+    </div>
     <div v-if="posts.length > 0">
-
       <ContentList :articles="posts" />
       <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
         prev-icon="fa-solid fa-caret-left" rounded="lg" color="grey" active-color="primary"></v-pagination>
     </div>
-
   </v-container>
 </template>
 
