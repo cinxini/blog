@@ -87,7 +87,7 @@ const extractPageFromPath = (path) => { return path.split('/')[1] }
   text-decoration: underline solid rgba(var(--v-theme-primary-lighten-1), 0.3) 6px;
 }
 
-.mybutton {
+/* .mybutton {
   color: rgb(var(--v-theme-base))
-}
+} */
 </style>

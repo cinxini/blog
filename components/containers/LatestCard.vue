@@ -21,8 +21,18 @@ const extractPageFromPath = (path) => { return path.split('/')[1] }
       </v-col>
 
       <v-col class="d-flex flex-column pa-3">
-        <content-header :category="content.category" :page="extractPageFromPath(content._path)" size="x-small"
-          :date="content.dates.published" />
+        <div class="d-flex flex-row justify-space-between">
+          <content-header :category="content.category" :page="extractPageFromPath(content._path)" size="x-small"
+            :date="content.dates.published" />
+          <v-hover>
+            <template v-slot:default="{ isHovering, props }">
+              <v-btn v-bind="props" v-if="content.github" class="mybutton" icon="fa-brands fa-github-alt"
+                :variant="isHovering ? 'tonal' : 'flat'" :color="isHovering ? 'primary' : 'baseColor'" size="x-small"
+                density="comfortable" :href="content.github" target="_blank" />
+            </template>
+          </v-hover>
+        </div>
+
 
         <div class="latest-title mb-2"><a :href="content._path">{{ content.title }}</a></div>
         <div class="text-caption">

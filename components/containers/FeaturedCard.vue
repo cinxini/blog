@@ -20,10 +20,20 @@ const extractPageFromPath = (path) => { return path.split('/')[1] }
       </div>
     </div>
     <v-sheet height="45%" class="d-flex flex-column pa-3" color="transparent">
-      <v-chip variant="text" size="x-small" density="comfortable">
-        <v-icon icon="fa-regular fa-calendar" size="x-small" color="baseVariant" start />
-        {{ content.dates.published }}
-      </v-chip>
+      <div class="d-flex flex-row justify-space-between">
+        <v-chip variant="text" size="x-small" density="comfortable">
+          <v-icon icon="fa-regular fa-calendar" size="x-small" color="baseVariant" start />
+          {{ content.dates.published }}
+        </v-chip>
+        <v-hover>
+          <template v-slot:default="{ isHovering, props }">
+            <v-btn v-bind="props" v-if="content.github" class="mybutton" icon="fa-brands fa-github-alt"
+              :variant="isHovering ? 'tonal' : 'flat'" :color="isHovering ? 'primary' : 'baseColor'" size="x-small"
+              density="comfortable" :href="content.github" target="_blank" />
+          </template>
+        </v-hover>
+      </div>
+
       <div class="feature-title mb-2"><a :href="content._path">{{ content.title }}</a></div>
       <ContentFooter :tags="content.tags" />
     </v-sheet>

@@ -270,4 +270,8 @@ https://css-loaders.com/dots/
     background-position: 0% 50%, 50% 50%, 100% 100%
   }
 }
+
+.mybutton {
+  color: rgb(var(--v-theme-base))
+}
 </style>
