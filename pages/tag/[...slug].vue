@@ -7,6 +7,7 @@ import { onMounted, ref, watch } from 'vue';
 const { path, params } = useRoute();
 const pageType = ref('all');
 const tags = ref(params.slug);
+const count = ref(null);
 
 const isFetching = ref(false);
 const currPage = ref(1);
@@ -32,21 +33,23 @@ const findPostsWithTags = async (tagList, currPage) => {
   return data
 }
 
+count.value = await queryContent(`/${pageType.value === 'all' ? '' : pageType.value}`).where({ tags: { $contains: tags.value } }).count();
 const { data: posts } = await useAsyncData(`tag-${path}`, () => {
   return findPostsWithTags(tags.value, currPage.value);
 })
 
-const count = ref(0);
+
 const numPages = computed(() => {
   if (count.value === 0) return 1;
   return Math.ceil(count.value / c.POSTS_PER_PAGE);
 })
 
 onMounted(async () => {
+  if (!count.value) count.value = await queryContent(`/${pageType.value === 'all' ? '' : pageType.value}`).where({ tags: { $contains: tags.value } }).count();
+
   if (!posts.value) {
     posts.value = await findPostsWithTags(tags.value, currPage.value);
   }
-  count.value = await queryContent(`/${pageType.value === 'all' ? '' : pageType.value}`).where({ tags: { $contains: tags.value } }).count();
 })
 
 watch(pageType, async (newPage) => {
@@ -57,6 +60,13 @@ watch(pageType, async (newPage) => {
 
 watch(currPage, async (newPageNo) => {
   posts.value = await findPostsWithTags(tags.value, newPageNo);
+})
+
+const showList = computed(() => {
+  if (posts.value && posts.value.length > 0)
+    return true;
+  else
+    return false;
 })
 </script>
 
@@ -70,12 +80,14 @@ watch(currPage, async (newPageNo) => {
     <div v-else>
       <p v-if="count > 0" class="text-center">Found {{ count }} posts.</p>
       <p v-else class="text-center">No posts with tag <span class="text-primary">{{ tags[0] }}</span>.</p>
+      <div v-if="showList">
+        <ContentList :articles="posts" />
+        <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
+          prev-icon="fa-solid fa-caret-left" rounded="lg" color="grey" active-color="primary"></v-pagination>
+      </div>
+
     </div>
-    <div v-if="posts.length > 0">
-      <ContentList :articles="posts" />
-      <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
-        prev-icon="fa-solid fa-caret-left" rounded="lg" color="grey" active-color="primary"></v-pagination>
-    </div>
+
   </v-container>
 </template>
 

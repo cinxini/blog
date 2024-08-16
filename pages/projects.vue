@@ -34,7 +34,7 @@ const fetchProjects = async (pageNo) => {
 }
 
 const { data: projectItems } = useAsyncData('projectList', () => {
-  return fetchProjects();
+  return fetchProjects(currPage.value);
 })
 
 const showList = computed(() => {
@@ -68,6 +68,8 @@ watch(currPage, async (newPageNo) => {
       <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
         prev-icon="fa-solid fa-caret-left" rounded="lg" color="grey" active-color="primary"></v-pagination>
     </div>
+    <p v-else class="text-center">No projects.</p>
+
   </v-container>
 </template>
 

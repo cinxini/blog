@@ -1,63 +1,67 @@
 <script setup>
 import BlogPostList from '@/components/ContentList.vue';
-import FilterSidebar from '@/components/blog/BlogFilterSidebar.vue';
-// import BlogPostList from '@/components/blog/BlogPostList.vue';
-import c from '@/constants/blog';
-import { ref, watch } from 'vue';
+import DotLoader from '@/components/items/DotLoader.vue';
+import c from '@/constants/posts';
+import { computed, onMounted, ref, watch } from 'vue';
 
-const page = ref(1);
-const numPages = ref(1);
-const { data: blogPosts } = useAsyncData('blogPostList', () => {
-  return queryContent('/blog').sort({ 'dates.published': -1 }).skip((page.value - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find();
+const isFetching = ref(false);
+const currPage = ref(1);
+const count = ref(0);
+const numPages = computed(() => {
+  if (count.value === 0) return 1;
+  return Math.ceil(count.value / c.POSTS_PER_PAGE);
 })
 
-let count = await queryContent('/blog').count();
-numPages.value = Math.ceil(count / c.POSTS_PER_PAGE);
-const filterCondition = ref(null);
-
-const fetchFilteredBlogPosts = async (cond) => {
+const fetchBlogPosts = async (pageNo) => {
+  isFetching.value = true;
   let data = null;
-  page.value = 1;
-  if (cond) {
-    data = await queryContent('/blog').where(cond).sort({ 'dates.published': -1 }).skip((page.value - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find()
-    count = await queryContent('/blog').where(cond).count();
-  } else {
-    data = await queryContent('/blog').sort({ 'dates.published': -1 }).skip((page.vale - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find()
-    count = await queryContent('/blog').count();
+  try {
+    data = await queryContent('/blog').where({ status: 'published' }).sort({ 'dates.published': -1 }).skip((pageNo - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find()
+  } catch (error) {
+    console.log('Error:', error);
+  } finally {
+    isFetching.value = false;
   }
-  numPages.value = Math.ceil(count / c.POSTS_PER_PAGE);
-  blogPosts.value = data;
+  return data;
 }
 
-watch(page, async (newPage, prevPage) => {
-  const data = await queryContent('/blog').sort({ 'dates.published': -1 }).skip((newPage - 1) * c.POSTS_PER_PAGE).limit(c.POSTS_PER_PAGE).find()
-  blogPosts.value = data;
+const { data: blogPosts } = useAsyncData('blogPostList', () => {
+  return fetchBlogPosts(currPage.value);
 })
 
-const filterPostsHandler = async (payload) => {
-  console.log(payload)
-  filterCondition.value = payload;
-}
+const showList = computed(() => {
+  if (blogPosts.value && blogPosts.value.length > 0)
+    return true;
+  else
+    return false;
+})
 
-watch(filterCondition, async (newCond) => {
-  console.log('new cond:', newCond)
-  fetchFilteredBlogPosts(newCond);
+onMounted(async () => {
+  if (!blogPosts.value) {
+    blogPosts.value = await fetchBlogPosts(currPage.value);
+  }
+  count.value = await queryContent('/blog').where({ status: 'published' }).count();
+})
+
+watch(currPage, async (newPageNo) => {
+  blogPosts.value = await fetchBlogPosts(newPageNo);
 })
 
 </script>
 
 <template>
-  <FilterSidebar @filter-posts="filterPostsHandler"></FilterSidebar>
+  <!-- <FilterSidebar @filter-posts="filterPostsHandler"></FilterSidebar> -->
   <v-container class="main-container w-66">
-    <div v-if="blogPosts.length > 0">
-      <p class="text-center text-h5 poppins-regular">Recent Blog Posts</p>
+    <p class="text-center text-h5">Recent Blog Posts</p>
+    <div v-if="isFetching" class="d-flex flex-row justify-center ma-16">
+      <DotLoader />
+    </div>
+    <div v-if="showList">
       <BlogPostList :articles="blogPosts" />
-      <v-pagination :length="numPages" v-model="page" next-icon="fa-solid fa-caret-right"
+      <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
         prev-icon="fa-solid fa-caret-left" rounded="lg" color="grey" active-color="primary"></v-pagination>
     </div>
-    <div v-else>
-      <p class="text-center text-h5 poppins-regular">No Posts</p>
-    </div>
+    <p v-else class="text-center">No blog posts.</p>
   </v-container>
 
 </template>
