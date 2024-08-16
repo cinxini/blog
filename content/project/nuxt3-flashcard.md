@@ -7,6 +7,7 @@ description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus 
 category: webdev
 tags: ["nuxt3", "nuxt-content", "project"]
 coverImage:
+github: https://github.com/cinxini/dev-orange-cat
 status: 'published'
 isFeatured: true
 ---

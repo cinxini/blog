@@ -44,15 +44,26 @@ const extractPageFromPath = (path) => { return path.split('/')[1] }
         </div>
         <div class="d-flex flex-row justify-space-between justify-end">
           <ContentFooter :tags="content.tags" />
-          <v-hover>
-            <template v-slot:default="{ isHovering, props }">
-              <v-btn v-bind="props" :variant="isHovering ? 'tonal' : 'flat'"
-                :color="isHovering ? 'primary' : 'baseColor'" class="mybutton" density="comfortable" width="150"
-                @click="router.push(content._path)">
-                Read More
-              </v-btn>
-            </template>
-          </v-hover>
+          <div class="d-flex flex-row ga-2 justify-end">
+            <v-hover>
+              <template v-slot:default="{ isHovering, props }">
+                <v-btn v-bind="props" v-if="content.github" class="mybutton" icon="fa-brands fa-github-alt"
+                  :variant="isHovering ? 'tonal' : 'flat'" :color="isHovering ? 'primary' : 'baseColor'" size="small"
+                  density="comfortable" :href="content.github" target="_blank" />
+              </template>
+            </v-hover>
+
+            <v-hover>
+              <template v-slot:default="{ isHovering, props }">
+                <v-btn v-bind="props" :variant="isHovering ? 'tonal' : 'flat'"
+                  :color="isHovering ? 'primary' : 'baseColor'" class="mybutton" density="comfortable" width="150"
+                  @click="router.push(content._path)">
+                  Read More
+                </v-btn>
+              </template>
+            </v-hover>
+          </div>
+
         </div>
 
       </v-col>
