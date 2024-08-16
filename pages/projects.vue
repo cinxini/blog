@@ -44,6 +44,8 @@ const showList = computed(() => {
     return false;
 })
 
+
+
 onMounted(async () => {
   if (!projectItems.value) {
     projectItems.value = await fetchProjects(currPage.value);
@@ -58,6 +60,7 @@ watch(currPage, async (newPageNo) => {
 </script>
 
 <template>
+
   <v-container class="w-66 main-container">
     <p class="text-center text-h5">Recent Projects</p>
     <div v-if="isFetching" class="d-flex flex-row justify-center ma-16">
@@ -71,6 +74,8 @@ watch(currPage, async (newPageNo) => {
     <p v-else class="text-center">No projects.</p>
 
   </v-container>
+
+
 </template>
 
 

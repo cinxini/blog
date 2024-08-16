@@ -16,7 +16,7 @@ const { data: blogPost } = await useAsyncData(`content-${path}`, () => {
 const extractPageFromPath = (path) => { return path.split('/')[1] }
 
 const meta = computed(() => {
-    if (blogPost) {
+    if (blogPost.value) {
         return {
             pageType: extractPageFromPath(blogPost.value._path),
             title: blogPost.value.title,
@@ -39,6 +39,7 @@ const observerOptions = ref({
     root: 0,
     threshold: "0",
 })
+
 onMounted(() => {
     observer.value = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
