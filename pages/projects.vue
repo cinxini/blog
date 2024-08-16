@@ -46,7 +46,7 @@ const showList = computed(() => {
 
 onMounted(async () => {
   if (!projectItems.value) {
-    projectItems.value = fetchProjects(currPage.value);
+    projectItems.value = await fetchProjects(currPage.value);
   }
   count.value = await queryContent('/project').where({ status: 'published' }).count()
 })

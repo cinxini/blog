@@ -1,6 +1,7 @@
 <script setup>
+
+import ArticleHeader from '@/components/articles/ArticleHeader.vue';
 import ArticleBody from '@/components/blog/ArticleBody.vue';
-import ArticleHeader from '@/components/blog/ArticleHeader.vue';
 import ArticleToc from '@/components/blog/ArticleToc.vue';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useDate } from 'vuetify';
@@ -12,15 +13,19 @@ const { data: blogPost } = await useAsyncData(`content-${path}`, () => {
     return queryContent().where({ _path: path }).findOne();
 })
 
+const extractPageFromPath = (path) => { return path.split('/')[1] }
+
 const meta = computed(() => {
     if (blogPost) {
         return {
+            pageType: extractPageFromPath(blogPost.value._path),
             title: blogPost.value.title,
             author: blogPost.value.author,
             category: blogPost.value.category,
             date: date.format(blogPost.value.dates.published, 'fullDate'),
             description: blogPost.value.description,
-            tags: blogPost.value.tags
+            tags: blogPost.value.tags,
+            github: blogPost.value.github ? blogPost.value.github : null
         }
     } else {
         return null;
@@ -57,9 +62,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <v-container v-if="blogPost" style=" max-width: 900px; min-width: 400px;" class="main-background">
+    <v-container v-if="blogPost" class="main-background w-66">
         <a id="top"></a>
-        <ArticleHeader :meta="meta"></ArticleHeader>
+        <ArticleHeader :meta="meta" />
         <v-divider class="mt-4 mb-6" color="secondary"></v-divider>
         <ArticleBody class="poppins my-4 main-background">
             <!-- <ContentDoc ref="md" /> -->
