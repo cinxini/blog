@@ -21,6 +21,7 @@ const props = defineProps({
 
 <template>
   <div class="d-flex flex-row ga-1 align-center">
+
     <!-- optional date -->
     <v-chip v-if="date" variant="text" :size="size" density="comfortable">
       <v-icon icon="fa-regular fa-calendar" :size="size" color="baseVariant" start />

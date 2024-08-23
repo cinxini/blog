@@ -16,16 +16,18 @@ const props = defineProps({
     <ContentHeader :category="meta.category" :page="meta.pageType" :date="meta.date" class="mb-1" />
     <p class="my-2 article-header-title">{{ meta.title }}</p>
     <p class="article-header-description">{{ meta.description }}</p>
-    <div v-if="meta.github">
-      <v-hover>
-        <template v-slot:default="{ isHovering, props }">
-          <v-btn v-bind="props" class="mybutton" icon="fa-brands fa-github-alt" :variant="isHovering ? 'tonal' : 'flat'"
-            :color="isHovering ? 'primary' : 'baseColor'" size="small" density="comfortable" :href="meta.github"
-            target="_blank" />
-        </template>
-      </v-hover>
-    </div>
-    <div class="d-flex flex-row justify-space-between justify-end">
+
+    <div class="d-flex flex-row ga-2  justify-start">
+      <div v-if="meta.github" class="d-flex flex-row ga-1 align-center justify-end">
+        <v-icon icon="fa-brands fa-github" size="x-small" color="secondary" />
+        <v-hover>
+          <template v-slot:default="{ isHovering, props }">
+            <v-chip class="mytag" v-bind="props" :ripple="false" link size="small" density="compact" pill
+              :color="isHovering ? 'secondary' : 'base'" variant="tonal" :href="meta.github">
+              {{ meta.github.split('/').at(-1) }}</v-chip>
+          </template>
+        </v-hover>
+      </div>
       <ContentFooter :tags="meta.tags" />
     </div>
   </v-sheet>
@@ -50,4 +52,13 @@ const props = defineProps({
   font-family: "Poppins", sans-serif;
   text-transform: none !important;
 }
+
+/* a.github {
+  color: rgb(var(--v-theme-base));
+  transition: 0.3s;
+}
+
+a.github:hover {
+  color: rgb(var(--v-theme-base));
+} */
 </style>
