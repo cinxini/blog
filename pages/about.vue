@@ -1,7 +1,11 @@
 <script setup>
+import ArticleBody from '@/components/blog/ArticleBody.vue';
 import { ref } from 'vue';
 
+
 const isOpenned = ref(false);
+const { data: myContent } = await useAsyncData('aboutme', () => queryContent('/info').find())
+console.log(myContent.value[0]._path)
 </script>
 
 
@@ -45,8 +49,15 @@ const isOpenned = ref(false);
       </div>
     </div>
     <div v-if="isOpenned">
-      <p>I am a data scientist and web developer currently based in Japan. In my free time, I am all-kind-of-handmade
-        hobbyist.</p>
+      <!-- <p>I am a data scientist and web developer currently based in Japan. In my free time, I am all-kind-of-handmade
+        hobbyist.</p> -->
+      <ArticleBody class="poppins my-4 main-background">
+        <ContentDoc path="/about" />
+      </ArticleBody>
+      <!-- <div class="md-style">
+        <ContentDoc path="/about" />
+      </div> -->
+
     </div>
 
   </v-container>
