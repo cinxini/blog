@@ -40,6 +40,26 @@ export default defineNuxtConfig({
     },
     markdown: {
       toc: { depth: 3, searchDepth: 3 }
+    },
+    experimental: {
+      search: {
+        indexed: true,
+        options: {
+          fields: ['title', 'content', 'titles', 'tags', 'description'],
+          storeFields: ['title', 'content', 'titles', 'tags', 'description'],
+          searchOptions: {
+            prefix: true,
+            fuzzy: 0.2,
+            boost: {
+              title: 4,
+              content: 2,
+              titles: 1,
+              tag: 4,
+              description: 3
+            }
+          }
+        }
+      }
     }
   },
   vite: {

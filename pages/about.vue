@@ -4,14 +4,18 @@ import { ref } from 'vue';
 
 
 const isOpenned = ref(false);
-const { data: myContent } = await useAsyncData('aboutme', () => queryContent('/info').find())
-console.log(myContent.value[0]._path)
+const { path } = useRoute();
+const { data: aboutPost } = await useAsyncData(`aboutme`, () => {
+  return queryContent().where({ _path: path }).findOne();
+})
+// const { data: myContent } = await useAsyncData('aboutme', () => queryContent('/info').find())
+console.log(aboutPost.value)
 </script>
 
 
 <template>
   <v-container class="main-container w-66">
-    <p class="text-center text-h5">About Me</p>
+    <p class="text-center text-h5">{{ aboutPost.title }}</p>
 
     <div class="d-flex flex-column align-center ga-1 my-4">
       <v-hover v-slot="{ isHovering, props }">
@@ -21,21 +25,20 @@ console.log(myContent.value[0]._path)
         </v-avatar>
       </v-hover>
       <div>
-        <div class="text-h6 text-primary font-weight-bold text-center">Nutnaree Kleawsirikul</div>
-        <div class="text-caption text-grey font-weight-medium my-1 text-center mt-0">Data Scientist & Web Developer &
-          Handmade Hobbyist</div>
+        <div class="text-h6 text-primary font-weight-bold text-center">{{ aboutPost.name }}</div>
+        <div class="text-caption text-grey font-weight-medium my-1 text-center mt-0">{{ aboutPost.shortBio }}</div>
       </div>
       <p class="d-flex flex-row ga-3 my-3">
-        <v-btn class="social__bttn" icon="fa-brands fa-medium" size="small" href="https://medium.com/@nutnar.ee"
-          target="_blank" />
-        <v-btn class="social__bttn" icon="fa-brands fa-linkedin-in" size="small" href="https://medium.com/@cinxini"
-          target="_blank" />
-        <v-btn class="social__bttn" icon="fa-brands fa-x-twitter" size="small" href="https://x.com/cinxini"
-          target="_blank" />
-        <v-btn class="social__bttn" icon="fa-brands fa-github-alt" size="small" href="https://github.com/cinxini"
-          target="_blank" />
-        <v-btn class="social__bttn" icon="fa-brands fa-kaggle" size="small" href="https://www.kaggle.com/cinxini"
-          target="_blank" />
+        <v-btn v-if="aboutPost.social.medium" class="social__bttn" icon="fa-brands fa-medium" size="small"
+          :href="aboutPost.social.medium" target="_blank" />
+        <v-btn v-if="aboutPost.social.linkedin" class="social__bttn" icon="fa-brands fa-linkedin-in" size="small"
+          :href="aboutPost.social.linkedin" target="_blank" />
+        <v-btn v-if="aboutPost.social.x" class="social__bttn" icon="fa-brands fa-x-twitter" size="small"
+          :href="aboutPost.social.x" target="_blank" />
+        <v-btn v-if="aboutPost.social.github" class="social__bttn" icon="fa-brands fa-github-alt" size="small"
+          :href="aboutPost.social.github" target="_blank" />
+        <v-btn v-if="aboutPost.social.kaggle" class="social__bttn" icon="fa-brands fa-kaggle" size="small"
+          :href="aboutPost.social.kaggle" target="_blank" />
       </p>
       <div style="height: 30px;">
         <v-hover>
@@ -49,15 +52,9 @@ console.log(myContent.value[0]._path)
       </div>
     </div>
     <div v-if="isOpenned">
-      <!-- <p>I am a data scientist and web developer currently based in Japan. In my free time, I am all-kind-of-handmade
-        hobbyist.</p> -->
       <ArticleBody class="poppins my-4 main-background">
         <ContentDoc path="/about" />
       </ArticleBody>
-      <!-- <div class="md-style">
-        <ContentDoc path="/about" />
-      </div> -->
-
     </div>
 
   </v-container>

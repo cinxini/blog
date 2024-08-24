@@ -1,3 +1,19 @@
+<script setup>
+import SearchDialog from '@/components/SearchDialog.vue';
+import { ref, watch } from 'vue';
+import { VApp } from 'vuetify/components';
+
+const openSearchDiaglog = ref(false);
+watch(openSearchDiaglog, (newval) => { console.log(newval) })
+// const search = ref('')
+// const searchResults = ref(null);
+// async function searchApp() {
+//   const results = await searchContent(search);
+//   searchResults.value = results;
+// }
+
+</script>
+
 <template>
   <v-app>
     <v-app-bar :elevation="0" height="50" class="appbar-border-bottom" color="background">
@@ -16,24 +32,48 @@
             <v-btn class="ma-2" color="primary" to="/about">about</v-btn>
             <v-btn class="ma-2" color="primary" to="/projects">projects</v-btn>
             <v-btn class="ma-2" color="primary" to="/blogs">blog</v-btn>
-            <v-btn class="ma-2 pa-0" icon="fa-solid fa-magnifying-glass" size="small"></v-btn>
+            <SearchDialog />
+            <!-- <v-dialog max-width="500">
+              <template v-slot:activator="{ props: activatorProps }">
+                <v-hover>
+                  <template v-slot:default="{ isHovering, props }">
+                    <v-btn v-bind="{ ...activatorProps, ...props }" class="ma-2 pa-0"
+                      icon="fa-solid fa-magnifying-glass" size="small"
+                      :color="isHovering ? 'primary' : 'baseColor'"></v-btn>
+                  </template>
+</v-hover>
+</template>
+
+<template v-slot:default="{ isActive }">
+                <SearchDialog />
+              </template>
+</v-dialog>
+
+
+<v-hover>
+  <template v-slot:default="{ isHovering, props }">
+                <v-btn v-bind="props" class="ma-2 pa-0" icon="fa-solid fa-magnifying-glass" size="small"
+                  @click.stop="openSearchDiaglog = !openSearchDiaglog"
+                  :color="isHovering ? 'primary' : 'baseColor'"></v-btn>
+              </template>
+</v-hover> -->
           </div>
         </v-col>
       </v-row>
     </v-app-bar>
 
     <v-main>
+
       <slot />
+
     </v-main>
+    <SearchDialog :open="openSearchDiaglog" />
 
   </v-app>
 
 </template>
 
-<script setup>
-import { VApp } from 'vuetify/components';
 
-</script>
 
 <style>
 /* .v-app-bar.v-toolbar {
