@@ -1,11 +1,37 @@
 <script setup>
 import { ref } from 'vue';
 
-const search = ref('')
+const searchTerm = ref('')
+const isProcessing = ref(false);
 const searchResults = ref(null);
+
 async function searchApp() {
-  const results = await searchContent(search);
-  searchResults.value = results;
+  isProcessing.value = true;
+  const terms = searchTerm.value.split(' ')
+  try {
+    const data = await queryContent('/blog')
+      .only(['title', 'description'])
+      .where({
+        $or: [
+          { title: { $icontains: searchTerm.value } },
+          {
+            description: { $icontains: searchTerm.value }
+          }
+        ]
+      })
+      .find()
+    if (data) {
+      searchResults.value = data;
+    } else {
+      searchResults.value = null;
+    }
+  } catch (error) {
+    console.log('error:::', error)
+  } finally {
+    isProcessing.value = false
+  }
+  // const results = await searchContent(search);
+  // searchResults.value = results;
 }
 
 // watch(() => props.showDialog, (newval) => {
@@ -28,7 +54,7 @@ async function searchApp() {
     <template v-slot:default="{ isActive }">
       <v-card>
         <v-list-item class="px-4">
-          <v-text-field v-model="search" label="Search" base-color="baseColor" color="primary" variant="plain"
+          <v-text-field v-model="searchTerm" label="Search" base-color="baseColor" color="primary" variant="plain"
             @update:modelValue="searchApp">
             <template v-slot:prepend>
               <v-icon color="primary" icon="fa-solid fa-magnifying-glass"></v-icon>
