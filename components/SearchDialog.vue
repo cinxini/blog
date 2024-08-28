@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const searchTerm = ref('')
 const isProcessing = ref(false);
@@ -22,6 +22,13 @@ async function createQueryConds(terms) {
   console.log(query)
   return query
 }
+
+const showResults = computed(() => {
+  if (searchResults.value || searchResults.length > 0)
+    return true;
+  else
+    return false;
+})
 
 async function searchApp() {
   isProcessing.value = true;
@@ -48,13 +55,15 @@ async function searchApp() {
   // searchResults.value = results;
 }
 
+
+
 // watch(() => props.showDialog, (newval) => {
 //   console.log('search', newval)
 //   open.value = newval;
 // })
 </script>
 <template>
-  <v-dialog max-width="500">
+  <v-dialog max-width="50vw">
     <template v-slot:activator="{ props: activatorProps }">
       <!-- <v-btn v-bind="activatorProps" color="surface-variant" text="Open Dialog" variant="flat"></v-btn> -->
       <v-hover>
@@ -66,19 +75,25 @@ async function searchApp() {
     </template>
 
     <template v-slot:default="{ isActive }">
-      <v-card>
-        <v-list-item class="px-4">
-          <v-text-field v-model="searchTerm" label="Search" base-color="baseColor" color="primary" variant="plain"
-            @update:modelValue="searchApp">
+      <v-card height="70vh">
+        <v-list-item class="px-4 pt-3 pb-4">
+          <v-text-field v-model="searchTerm" base-color="baseColor" color="primary" variant="plain" placeholder="search"
+            @update:modelValue="searchApp" clearable density="compact" hide-details="true" class="pt-0">
             <template v-slot:prepend>
               <v-icon color="primary" icon="fa-solid fa-magnifying-glass"></v-icon>
             </template>
           </v-text-field>
         </v-list-item>
         <v-divider class="my-0" color="baseColor"></v-divider>
-        <v-card-text>
-          <pre>{{ terms }}</pre>
-          <pre v-if="searchResults">{{ searchResults }}</pre>
+        <v-card-text class="overflow-y-auto fill-height">
+          <pre v-if="showResults">{{ searchResults }}</pre>
+          <div class="d-flex flex-column fill-height justify-center align-center">
+            <p>search something you like</p>
+            <p><v-icon color="primary" icon="fa-regular fa-face-smile-wink" size="x-large"></v-icon></p>
+
+          </div>
+
+
         </v-card-text>
       </v-card>
     </template>
