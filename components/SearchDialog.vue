@@ -1,66 +1,28 @@
 <script setup>
 import { computed, ref } from 'vue';
 
+
+
 const searchTerm = ref('')
 const isProcessing = ref(false);
-const searchResults = ref(null);
+// const searchResults = ref(null);
 
-const fields = ['body']
-const terms = ref(null)
-async function createQueryConds(terms) {
-
-  const query = { $or: [] }
-  terms.forEach((term) => {
-    const subQuery = { $or: [] };
-    fields.forEach((field) => {
-      const cond = {}
-      cond[field] = { $icontains: term }
-      subQuery.$or.push(cond)
-    })
-    query.$or.push(subQuery)
-  })
-  console.log(query)
-  return query
-}
+const { data: searchResults, status, error, refresh } = await useAsyncData(
+  'index-search',
+  () => {
+    if (searchTerm.value === '') return null;
+    return searchContent(searchTerm.value)
+  }
+);
 
 const showResults = computed(() => {
-  if (searchResults.value || searchResults.length > 0)
+  console.log('res', searchResults.value)
+  if (searchResults.value)
     return true;
   else
     return false;
 })
 
-async function searchApp() {
-  isProcessing.value = true;
-  terms.value = searchTerm.value.split(' ');
-  console.log(terms.value)
-  try {
-    const queryConds = await createQueryConds(terms.value)
-    // const data = await queryContent('/blog')
-    //   // .only(['title', 'description'])
-    //   .where(queryConds)
-    //   .find()
-    const data = await searchContent(searchTerm.value)
-    if (data) {
-      searchResults.value = data;
-    } else {
-      searchResults.value = null;
-    }
-  } catch (error) {
-    console.log('error:::', error)
-  } finally {
-    isProcessing.value = false
-  }
-  // const results = await searchContent(search);
-  // searchResults.value = results;
-}
-
-
-
-// watch(() => props.showDialog, (newval) => {
-//   console.log('search', newval)
-//   open.value = newval;
-// })
 </script>
 <template>
   <v-dialog max-width="50vw">
@@ -78,7 +40,7 @@ async function searchApp() {
       <v-card height="70vh">
         <v-list-item class="px-4 pt-3 pb-4">
           <v-text-field v-model="searchTerm" base-color="baseColor" color="primary" variant="plain" placeholder="search"
-            @update:modelValue="searchApp" clearable density="compact" hide-details="true" class="pt-0">
+            @update:modelValue="refresh" clearable density="compact" hide-details="true" class="pt-0">
             <template v-slot:prepend>
               <v-icon color="primary" icon="fa-solid fa-magnifying-glass"></v-icon>
             </template>
@@ -87,10 +49,9 @@ async function searchApp() {
         <v-divider class="my-0" color="baseColor"></v-divider>
         <v-card-text class="overflow-y-auto fill-height">
           <pre v-if="showResults">{{ searchResults }}</pre>
-          <div class="d-flex flex-column fill-height justify-center align-center">
+          <div v-else class="d-flex flex-column fill-height justify-center align-center">
             <p>search something you like</p>
             <p><v-icon color="primary" icon="fa-regular fa-face-smile-wink" size="x-large"></v-icon></p>
-
           </div>
 
 
