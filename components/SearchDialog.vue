@@ -1,6 +1,7 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
+import Fuse from 'fuse.js';
 
 
 const searchTerm = ref('')
@@ -14,6 +15,46 @@ const { data: searchResults, status, error, refresh } = await useAsyncData(
     return searchContent(searchTerm.value)
   }
 );
+
+const { data: fetchPosts } = await useAsyncData('fetch-content', () => {
+  return queryContent('/')
+    .where({ status: 'published' })
+    .only(['title', 'author', 'category', 'description', 'tags', 'plainContent', '_id', '_path', '_dir']).find()
+})
+
+console.log('fetched posts:::', fetchPosts.value)
+
+async function fuseSearch(keyword) {
+  if (keyword === '') return null;
+  const options = {
+    isCaseSensitive: false,
+    includeMatches: true,
+    minMatchCharLength: 2,
+    includeScore: true,
+    // Search in `author` and in `tags` array
+    keys: ['title', 'description', 'plainContent'],
+
+    // fuzzy
+    threshold: 0.6, // default
+  }
+
+  const fuse = new Fuse(fetchPosts.value, options)
+
+  const result = await fuse.search(keyword)
+  return result
+}
+
+watch(searchTerm, async (newTerm) => {
+  const results = await fuseSearch(newTerm);
+  console.log('fuse results', results)
+})
+// const options = {
+//   includeScore: true,
+//   // Search in `author` and in `tags` array
+//   keys: ['author', 'tags']
+// }
+// const fuse = new Fuse(list, options)
+// const result = fuse.search('tion')
 
 const showResults = computed(() => {
   console.log('res', searchResults.value)
