@@ -69,4 +69,7 @@ export default defineNuxtConfig({
       },
     },
   },
+  // nitro: {
+  //   plugins: ['plugins/content.ts']
+  // }
 })

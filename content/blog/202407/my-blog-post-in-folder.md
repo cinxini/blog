@@ -9,6 +9,7 @@ coverImage: "/images/cover/BLOG101.png"
 status: 'published'
 isFeatured: true
 ---
+my first blog post
 
 This is some basic, sample markdown.
 
