@@ -5,21 +5,35 @@ const searchTerm = ref('')
 const isProcessing = ref(false);
 const searchResults = ref(null);
 
+const fields = ['body']
+const terms = ref(null)
+async function createQueryConds(terms) {
+
+  const query = { $or: [] }
+  terms.forEach((term) => {
+    const subQuery = { $or: [] };
+    fields.forEach((field) => {
+      const cond = {}
+      cond[field] = { $icontains: term }
+      subQuery.$or.push(cond)
+    })
+    query.$or.push(subQuery)
+  })
+  console.log(query)
+  return query
+}
+
 async function searchApp() {
   isProcessing.value = true;
-  const terms = searchTerm.value.split(' ')
+  terms.value = searchTerm.value.split(' ');
+  console.log(terms.value)
   try {
-    const data = await queryContent('/blog')
-      .only(['title', 'description'])
-      .where({
-        $or: [
-          { title: { $icontains: searchTerm.value } },
-          {
-            description: { $icontains: searchTerm.value }
-          }
-        ]
-      })
-      .find()
+    const queryConds = await createQueryConds(terms.value)
+    // const data = await queryContent('/blog')
+    //   // .only(['title', 'description'])
+    //   .where(queryConds)
+    //   .find()
+    const data = await searchContent(searchTerm.value)
     if (data) {
       searchResults.value = data;
     } else {
@@ -63,6 +77,7 @@ async function searchApp() {
         </v-list-item>
         <v-divider class="my-0" color="baseColor"></v-divider>
         <v-card-text>
+          <pre>{{ terms }}</pre>
           <pre v-if="searchResults">{{ searchResults }}</pre>
         </v-card-text>
       </v-card>

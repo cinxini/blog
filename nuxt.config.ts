@@ -35,6 +35,7 @@ export default defineNuxtConfig({
     //...
   ],
   content: {
+    documentDriven: true,
     highlight: {
       theme: 'github-light'
     },
@@ -45,8 +46,8 @@ export default defineNuxtConfig({
       search: {
         indexed: true,
         options: {
-          fields: ['title', 'content', 'titles', 'tags', 'description'],
-          storeFields: ['title', 'content', 'titles', 'tags', 'description'],
+          fields: ['title', 'content', 'titles', 'id'],
+          storeFields: ['title', 'content', 'titles'],
           searchOptions: {
             prefix: true,
             fuzzy: 0.2,
@@ -54,8 +55,7 @@ export default defineNuxtConfig({
               title: 4,
               content: 2,
               titles: 1,
-              tag: 4,
-              description: 3
+              id: 2,
             }
           }
         }
