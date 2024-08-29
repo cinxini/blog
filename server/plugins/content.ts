@@ -1,5 +1,5 @@
+import c from '@/constants/posts';
 import RemoveMarkdown from "remove-markdown";
-
 function getPosition(str, subStr, nPos) {
     return str.split(subStr, nPos).join(subStr).length;
 }
@@ -15,11 +15,15 @@ export default defineNitroPlugin((nitroApp) => {
   
     nitroApp.hooks.hook('content:file:afterParse', (file) => {
       if (file._id.endsWith('.md')) {
-        // file.raw = files[file._id].split('---');
+        // plaintext content part
         const contentPos = getPosition(files[file._id], '---', 2) + 3;
         const mdContent = files[file._id].slice(contentPos)
+        file.mdContent = mdContent;
         file.plainContent = RemoveMarkdown(mdContent).replace(/(\r\n|\n|\r)/gm, " ")
-        // console.log('afterParse', { file });
+
+        // page type
+        const pageType = file._id.split(':')[1];
+        file.pageType = c.PAGE_TYPE.includes(pageType)? pageType: 'info';
       }
     });
   

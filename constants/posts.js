@@ -1,4 +1,5 @@
 export default {
+    PAGE_TYPE: ["blog", "project"],
     POSTS_PER_PAGE: 5,
     TOP_NUM_TAGS: 30,
     CATEGORY_LIST: ["datasci", "webdev", "other"],

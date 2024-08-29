@@ -8,22 +8,43 @@ const searchTerm = ref('')
 const isProcessing = ref(false);
 // const searchResults = ref(null);
 
-const { data: searchResults, status, error, refresh } = await useAsyncData(
-  'index-search',
-  () => {
-    if (searchTerm.value === '') return null;
-    return searchContent(searchTerm.value)
-  }
-);
-
 const { data: fetchPosts } = await useAsyncData('fetch-content', () => {
   return queryContent('/')
-    .where({ status: 'published' })
-    .only(['title', 'author', 'category', 'description', 'tags', 'plainContent', '_id', '_path', '_dir']).find()
+    .where({ status: 'published', pageType: { $ne: 'info' } })
+    .only(['_id', 'mdContent', 'pageType', 'title', 'author', 'category', 'description', 'tags', 'plainContent', '_id', '_path', '_dir']).find()
 })
 
 console.log('fetched posts:::', fetchPosts.value)
+// const fetchChildLinks = async (links) => {
+//   let newChildLinks = []
+//   await links.forEach(async (link) => {
+//     // console.log(link)
+//     const newItem = { id: link.id, text: link.text }
+//     console.log(newItem)
+//     newChildLinks.push(newItem)
+//     if (link.children) {
+//       console.log('has child')
+//       const childLinks = await fetchChildLinks(link.children)
+//       newChildLinks.push(...childLinks)
+//     }
+//   })
+//   console.log('final links before return ', newChildLinks)
+//   return newChildLinks;
+// }
+// const linksObjToArray = async (post) => {
+//   return await fetchChildLinks(post.body.toc.links)
+// }
 
+// const childrenLinks = await linksObjToArray(fetchPosts.value[0])
+// console.log('links', childrenLinks)
+
+// childrenLinks.forEach(link => {
+//   console.log(link)
+//   const post = fetchPosts.value[0];
+//   console.log(link.text, post.plainContent.split(link.text))
+// })
+
+// linksObjToArray(fetchPosts.value[0])
 async function fuseSearch(keyword) {
   if (keyword === '') return null;
   const options = {
@@ -32,7 +53,7 @@ async function fuseSearch(keyword) {
     minMatchCharLength: 2,
     includeScore: true,
     // Search in `author` and in `tags` array
-    keys: ['title', 'description', 'plainContent'],
+    keys: ['title', 'description', 'mdContent'],
 
     // fuzzy
     threshold: 0.6, // default
@@ -44,17 +65,18 @@ async function fuseSearch(keyword) {
   return result
 }
 
+const { data: searchResults, status, error, refresh } = await useAsyncData(
+  'index-search',
+  () => {
+    if (searchTerm.value === '') return null;
+    return fuseSearch(searchTerm.value)
+  }
+);
+
 watch(searchTerm, async (newTerm) => {
-  const results = await fuseSearch(newTerm);
-  console.log('fuse results', results)
+  refresh();
+  console.log('fuse results', searchResults.value)
 })
-// const options = {
-//   includeScore: true,
-//   // Search in `author` and in `tags` array
-//   keys: ['author', 'tags']
-// }
-// const fuse = new Fuse(list, options)
-// const result = fuse.search('tion')
 
 const showResults = computed(() => {
   console.log('res', searchResults.value)
@@ -89,8 +111,28 @@ const showResults = computed(() => {
         </v-list-item>
         <v-divider class="my-0" color="baseColor"></v-divider>
         <v-card-text class="overflow-y-auto fill-height">
-          <pre v-if="showResults">{{ searchResults }}</pre>
-          <div v-else class="d-flex flex-column fill-height justify-center align-center">
+
+          <div v-if="showResults" class="fill-height">
+            <div v-if="searchResults.length > 0" class="fill-height">
+              <v-card v-for="post in searchResults" class="mb-4">
+                <v-card-title>
+                  <p>{{ post.item.pageType }}: {{ post.item.title }}</p>
+                  <!-- <pre>{{ post.item.body.toc.links }}</pre> -->
+                </v-card-title>
+                <div class="d-flex flex-column">
+                  <v-list-item v-for="match in post.matches">
+                    <pre>{{ match }}</pre>
+                  </v-list-item>
+                </div>
+                <!-- <pre>{{ post }}</pre> -->
+              </v-card>
+            </div>
+            <div v-else class="d-flex flex-column fill-height justify-center align-center ga-3">
+              <p>cannot find any posts</p>
+              <p><v-icon color="primary" icon="fa-regular fa-face-sad-cry" size="x-large"></v-icon></p>
+            </div>
+          </div>
+          <div v-else class="d-flex flex-column fill-height justify-center align-center ga-3">
             <p>search something you like</p>
             <p><v-icon color="primary" icon="fa-regular fa-face-smile-wink" size="x-large"></v-icon></p>
           </div>
