@@ -1,8 +1,7 @@
 <script setup>
-import { computed, ref, watch } from 'vue';
-
+import SearchPostItem from '@/components/items/SearchPostItem.vue';
 import Fuse from 'fuse.js';
-
+import { computed, ref, watch } from 'vue';
 
 const searchTerm = ref('')
 const isProcessing = ref(false);
@@ -11,40 +10,10 @@ const isProcessing = ref(false);
 const { data: fetchPosts } = await useAsyncData('fetch-content', () => {
   return queryContent('/')
     .where({ status: 'published', pageType: { $ne: 'info' } })
-    .only(['_id', 'mdContent', 'pageType', 'title', 'author', 'category', 'description', 'tags', 'plainContent', '_id', '_path', '_dir']).find()
+    .only(['sections', 'pageType', 'title', 'author', 'category', 'description', 'tags', '_id', '_path', '_dir']).find()
 })
 
-console.log('fetched posts:::', fetchPosts.value)
-// const fetchChildLinks = async (links) => {
-//   let newChildLinks = []
-//   await links.forEach(async (link) => {
-//     // console.log(link)
-//     const newItem = { id: link.id, text: link.text }
-//     console.log(newItem)
-//     newChildLinks.push(newItem)
-//     if (link.children) {
-//       console.log('has child')
-//       const childLinks = await fetchChildLinks(link.children)
-//       newChildLinks.push(...childLinks)
-//     }
-//   })
-//   console.log('final links before return ', newChildLinks)
-//   return newChildLinks;
-// }
-// const linksObjToArray = async (post) => {
-//   return await fetchChildLinks(post.body.toc.links)
-// }
 
-// const childrenLinks = await linksObjToArray(fetchPosts.value[0])
-// console.log('links', childrenLinks)
-
-// childrenLinks.forEach(link => {
-//   console.log(link)
-//   const post = fetchPosts.value[0];
-//   console.log(link.text, post.plainContent.split(link.text))
-// })
-
-// linksObjToArray(fetchPosts.value[0])
 async function fuseSearch(keyword) {
   if (keyword === '') return null;
   const options = {
@@ -53,16 +22,16 @@ async function fuseSearch(keyword) {
     minMatchCharLength: 2,
     includeScore: true,
     // Search in `author` and in `tags` array
-    keys: ['title', 'description', 'mdContent'],
-
+    keys: ['title', 'description', 'sections.content', 'author'],
     // fuzzy
-    threshold: 0.6, // default
+    threshold: 0.5, // default
   }
 
   const fuse = new Fuse(fetchPosts.value, options)
 
   const result = await fuse.search(keyword)
-  return result
+  const filteredResult = result.filter((item) => item.score < 0.7);
+  return filteredResult;
 }
 
 const { data: searchResults, status, error, refresh } = await useAsyncData(
@@ -75,16 +44,15 @@ const { data: searchResults, status, error, refresh } = await useAsyncData(
 
 watch(searchTerm, async (newTerm) => {
   refresh();
-  console.log('fuse results', searchResults.value)
 })
 
 const showResults = computed(() => {
-  console.log('res', searchResults.value)
   if (searchResults.value)
     return true;
   else
     return false;
 })
+
 
 </script>
 <template>
@@ -114,18 +82,7 @@ const showResults = computed(() => {
 
           <div v-if="showResults" class="fill-height">
             <div v-if="searchResults.length > 0" class="fill-height">
-              <v-card v-for="post in searchResults" class="mb-4">
-                <v-card-title>
-                  <p>{{ post.item.pageType }}: {{ post.item.title }}</p>
-                  <!-- <pre>{{ post.item.body.toc.links }}</pre> -->
-                </v-card-title>
-                <div class="d-flex flex-column">
-                  <v-list-item v-for="match in post.matches">
-                    <pre>{{ match }}</pre>
-                  </v-list-item>
-                </div>
-                <!-- <pre>{{ post }}</pre> -->
-              </v-card>
+              <SearchPostItem v-for="post in searchResults" :key="post.item._path" :post="post" />
             </div>
             <div v-else class="d-flex flex-column fill-height justify-center align-center ga-3">
               <p>cannot find any posts</p>
@@ -136,28 +93,17 @@ const showResults = computed(() => {
             <p>search something you like</p>
             <p><v-icon color="primary" icon="fa-regular fa-face-smile-wink" size="x-large"></v-icon></p>
           </div>
-
-
         </v-card-text>
       </v-card>
     </template>
   </v-dialog>
-  <!-- <v-card>
-    <v-list-item class="px-4">
-      <v-text-field v-model="search" label="Search" base-color="baseColor" color="primary" variant="plain"
-        @update:modelValue="searchApp">
-        <template v-slot:prepend>
-          <v-icon color="primary" icon="fa-solid fa-magnifying-glass"></v-icon>
-        </template>
-      </v-text-field>
-    </v-list-item>
-    <v-divider class="my-0" color="baseColor"></v-divider>
-    <v-card-text>
-      <pre v-if="searchResults">{{ searchResults }}</pre>
-    </v-card-text>
-  </v-card> -->
 </template>
 
 
 
-<style></style>
+<style scoped>
+.bold {
+  font-weight: bold;
+  color: red;
+}
+</style>

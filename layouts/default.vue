@@ -33,30 +33,7 @@ watch(openSearchDiaglog, (newval) => { console.log(newval) })
             <v-btn class="ma-2" color="primary" to="/projects">projects</v-btn>
             <v-btn class="ma-2" color="primary" to="/blogs">blog</v-btn>
             <SearchDialog />
-            <!-- <v-dialog max-width="500">
-              <template v-slot:activator="{ props: activatorProps }">
-                <v-hover>
-                  <template v-slot:default="{ isHovering, props }">
-                    <v-btn v-bind="{ ...activatorProps, ...props }" class="ma-2 pa-0"
-                      icon="fa-solid fa-magnifying-glass" size="small"
-                      :color="isHovering ? 'primary' : 'baseColor'"></v-btn>
-                  </template>
-</v-hover>
-</template>
 
-<template v-slot:default="{ isActive }">
-                <SearchDialog />
-              </template>
-</v-dialog>
-
-
-<v-hover>
-  <template v-slot:default="{ isHovering, props }">
-                <v-btn v-bind="props" class="ma-2 pa-0" icon="fa-solid fa-magnifying-glass" size="small"
-                  @click.stop="openSearchDiaglog = !openSearchDiaglog"
-                  :color="isHovering ? 'primary' : 'baseColor'"></v-btn>
-              </template>
-</v-hover> -->
           </div>
         </v-col>
       </v-row>
@@ -67,7 +44,7 @@ watch(openSearchDiaglog, (newval) => { console.log(newval) })
       <slot />
 
     </v-main>
-    <SearchDialog :open="openSearchDiaglog" />
+    <!-- <SearchDialog :open="openSearchDiaglog" /> -->
 
   </v-app>
 
