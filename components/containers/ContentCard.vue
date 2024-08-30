@@ -13,7 +13,6 @@ const props = defineProps({
 })
 
 const coverImg = computed(() => {
-  console.log(props.content)
   if (props.content.coverImage) {
     return props.content.coverImage;
   } else {

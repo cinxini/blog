@@ -4,8 +4,7 @@ import Fuse from 'fuse.js';
 import { computed, ref, watch } from 'vue';
 
 const searchTerm = ref('')
-const isProcessing = ref(false);
-// const searchResults = ref(null);
+
 
 const { data: fetchPosts } = await useAsyncData('fetch-content', () => {
   return queryContent('/')
@@ -15,7 +14,6 @@ const { data: fetchPosts } = await useAsyncData('fetch-content', () => {
 
 
 async function fuseSearch(keyword) {
-  if (keyword === '') return null;
   const options = {
     isCaseSensitive: false,
     includeMatches: true,
@@ -37,13 +35,14 @@ async function fuseSearch(keyword) {
 const { data: searchResults, status, error, refresh } = await useAsyncData(
   'index-search',
   () => {
-    if (searchTerm.value === '') return null;
+    if (!searchTerm.value) return [];
+    if (searchTerm.value === '') return [];
     return fuseSearch(searchTerm.value)
   }
 );
 
 watch(searchTerm, async (newTerm) => {
-  refresh();
+  updateSearch()
 })
 
 const showResults = computed(() => {
@@ -53,12 +52,18 @@ const showResults = computed(() => {
     return false;
 })
 
+const onClear = () => {
+
+}
+
+const updateSearch = () => {
+  refresh();
+}
 
 </script>
 <template>
   <v-dialog max-width="50vw">
     <template v-slot:activator="{ props: activatorProps }">
-      <!-- <v-btn v-bind="activatorProps" color="surface-variant" text="Open Dialog" variant="flat"></v-btn> -->
       <v-hover>
         <template v-slot:default="{ isHovering, props }">
           <v-btn v-bind="{ ...activatorProps, ...props }" class="ma-2 pa-0" icon="fa-solid fa-magnifying-glass"
@@ -71,7 +76,7 @@ const showResults = computed(() => {
       <v-card height="70vh">
         <v-list-item class="px-4 pt-3 pb-4">
           <v-text-field v-model="searchTerm" base-color="baseColor" color="primary" variant="plain" placeholder="search"
-            @update:modelValue="refresh" clearable density="compact" hide-details="true" class="pt-0">
+            clearable density="compact" hide-details="true" class="pt-0" @click:clear="onClear">
             <template v-slot:prepend>
               <v-icon color="primary" icon="fa-solid fa-magnifying-glass"></v-icon>
             </template>

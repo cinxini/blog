@@ -46,10 +46,9 @@ const toggleToc = computed(() => {
               <v-icon icon="fa-solid fa-angle-up" @click="router.push('#top')" class="to-top" size="small"></v-icon>
               <v-icon icon="fa-solid fa-angle-down" @click="router.push('#bottom')" class="to-top"
                 size="small"></v-icon>
-              <!-- <v-icon icon="fa-solid fa-caret-down"></v-icon> -->
               <v-icon icon="fa-regular fa-comment" @click="router.push('#comment-section')" class="to-top"
                 size="small"></v-icon>
-              <v-icon icon="fa-solid fa-share-nodes" class="to-top" size="small"></v-icon>
+              <!-- <v-icon icon="fa-solid fa-share-nodes" class="to-top" size="small"></v-icon> -->
             </FlexBox>
           </template>
         </v-list-item>

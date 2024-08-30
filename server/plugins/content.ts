@@ -17,7 +17,6 @@ function mdToPlain(md){
 
 function mdToSections(md) {
   const headings = findHeadings(md)
-  console.log(headings)
   const sections = []
 
   headings.forEach((heading, i) => {
@@ -51,7 +50,6 @@ export default defineNitroPlugin((nitroApp) => {
     nitroApp.hooks.hook('content:file:beforeParse', (file) => {
       if (file._id.endsWith('.md')) {
         files[file._id] = file.body;
-        console.log('raw', file.body)
       }
     });
   
@@ -69,6 +67,5 @@ export default defineNitroPlugin((nitroApp) => {
       }
     });
   
-    // console.log('files', files);
   });
   
