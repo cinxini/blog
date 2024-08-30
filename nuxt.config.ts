@@ -7,7 +7,7 @@ export default defineNuxtConfig({
       baseURL: '/blog',
     },
   },
-  ssr: false,
+  ssr: true,
   app: {
     head: {
       link: [
