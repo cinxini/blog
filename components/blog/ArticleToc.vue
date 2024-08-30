@@ -45,7 +45,8 @@ const toggleToc = computed(() => {
                         <FlexBox class="align-center ga-3">
                             <v-icon icon="fa-solid fa-caret-up" @click="router.push('#top')" class="to-top"></v-icon>
                             <!-- <v-icon icon="fa-solid fa-caret-down"></v-icon> -->
-                            <v-icon icon="fa-solid fa-comment-dots"></v-icon>
+                            <v-icon icon="fa-solid fa-comment-dots" @click="router.push('#giscus')"
+                                class="to-comment"></v-icon>
                         </FlexBox>
                     </template>
                 </v-list-item>
@@ -103,12 +104,14 @@ const toggleToc = computed(() => {
 </template>
 
 <style scoped>
-.to-top{
-    color: grey;
-    transition: 0.3s ease-in-out;
+.to-top,
+.to-comment {
+    color: rgb(var(--v-theme-base));
+    transition: 0.2s ease-in-out;
 }
 
-.to-top:hover {
+.to-top:hover,
+.to-comment:hover {
     color: rgb(var(--v-theme-primary));
 }
 

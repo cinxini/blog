@@ -69,6 +69,11 @@ export default defineNuxtConfig({
       },
     },
   },
+  routeRules: {
+    '/css/**': {
+        proxy: { to: "http://localhost:3020/css/**", },
+    }
+  }
   // nitro: {
   //   plugins: ['plugins/content.ts']
   // }

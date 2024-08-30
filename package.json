@@ -10,6 +10,7 @@
         "postinstall": "nuxt prepare"
     },
     "dependencies": {
+        "@giscus/vue": "^3.0.0",
         "@mdi/font": "^7.4.47",
         "@types/remove-markdown": "^0.3.4",
         "fuse.js": "^7.0.0",

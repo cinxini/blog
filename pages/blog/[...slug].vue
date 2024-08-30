@@ -3,6 +3,7 @@
 import ArticleHeader from '@/components/articles/ArticleHeader.vue';
 import ArticleBody from '@/components/blog/ArticleBody.vue';
 import ArticleToc from '@/components/blog/ArticleToc.vue';
+import GiscusComment from '@/components/containers/GiscusComment.vue';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useDate } from 'vuetify';
 
@@ -66,12 +67,14 @@ onUnmounted(() => {
     <v-container v-if="blogPost" class="main-background w-66">
         <a id="top"></a>
         <ArticleHeader :meta="meta" />
-        <v-divider class="mt-4 mb-6" color="secondary"></v-divider>
+        <v-divider class="mt-4 mb-6" color="base"></v-divider>
         <ArticleBody class="poppins my-4 main-background">
             <!-- <ContentDoc ref="md" /> -->
             <ContentDoc />
-
         </ArticleBody>
+        <v-divider class="my-0" color="base"></v-divider>
+        <a id="comments"></a>
+        <GiscusComment class="my-4" />
     </v-container>
     <ArticleToc :links="blogPost.body.toc.links" :current-id="intersectedTocId" />
 </template>

@@ -16,6 +16,8 @@ watch(openSearchDiaglog, (newval) => { console.log(newval) })
 
 <template>
   <v-app>
+
+
     <v-app-bar :elevation="0" height="50" class="appbar-border-bottom" color="background">
       <v-row no-gutters>
         <v-col cols="2" class="d-flex flex-row">
