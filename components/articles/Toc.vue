@@ -42,10 +42,14 @@ const toggleToc = computed(() => {
       <div :style="{ display: toggleToc }">
         <v-list-item class="ma-3">
           <template v-slot:append>
-            <FlexBox class="align-center ga-3">
-              <v-icon icon="fa-solid fa-caret-up" @click="router.push('#top')" class="to-top"></v-icon>
+            <FlexBox class="align-center ga-4">
+              <v-icon icon="fa-solid fa-angle-up" @click="router.push('#top')" class="to-top" size="small"></v-icon>
+              <v-icon icon="fa-solid fa-angle-down" @click="router.push('#bottom')" class="to-top"
+                size="small"></v-icon>
               <!-- <v-icon icon="fa-solid fa-caret-down"></v-icon> -->
-              <v-icon icon="fa-solid fa-comment-dots"></v-icon>
+              <v-icon icon="fa-regular fa-comment" @click="router.push('#comment-section')" class="to-top"
+                size="small"></v-icon>
+              <v-icon icon="fa-solid fa-share-nodes" class="to-top" size="small"></v-icon>
             </FlexBox>
           </template>
         </v-list-item>
@@ -55,7 +59,7 @@ const toggleToc = computed(() => {
               <v-list-item-title class="toc-h2 poppins-medium">
                 <span class="h2-sharp text-primary-lighten-1"># </span>
                 <span :class="{ current: h2.id == currentId ? true : false }" class="toc-label">
-                  <a class="" :href="`#${h2.id}`">
+                  <a class="toc-link" :href="`#${h2.id}`">
                     {{ h2.text }}
                   </a>
                 </span>
@@ -67,7 +71,7 @@ const toggleToc = computed(() => {
                 <v-list-item density="compact" min-height="20" class="py-0">
                   <v-list-item-title class="toc-h3 poppins-regular">
                     <span :class="{ current: h3.id == currentId ? true : false }" class="toc-label">
-                      <a class="" :href="`#${h3.id}`">
+                      <a class="toc-link" :href="`#${h3.id}`">
                         {{ h3.text }}
                       </a>
                     </span>
@@ -79,7 +83,7 @@ const toggleToc = computed(() => {
                     <v-list-item density="compact" min-height="20" class="py-0">
                       <v-list-item-title class="toc-h4 poppins-light">
                         <span :class="{ current: h4.id == currentId ? true : false }" class="toc-label">
-                          <a class="" :href="`#${h4.id}`">
+                          <a class="toc-link" :href="`#${h4.id}`">
                             {{ h4.text }}
                           </a>
                         </span>
@@ -103,13 +107,15 @@ const toggleToc = computed(() => {
 
 <style scoped>
 .to-top {
-  color: grey;
-  transition: 0.3s ease-in-out;
+  color: rgb(var(--v-theme-base));
+  transition: 0.1s ease-in-out;
 }
 
 .to-top:hover {
   color: rgb(var(--v-theme-primary));
 }
+
+
 
 .toc-h2 {
   /* font-family: "Menlo", "Meslo LG", monospace; */
@@ -142,5 +148,10 @@ const toggleToc = computed(() => {
 .toc-h4 .toc-label.current a {
   color: rgb(var(--v-theme-tertiary));
   font-weight: bold;
+}
+
+a.toc-link:hover {
+  text-decoration: underline solid rgba(var(--v-theme-primary-lighten-1), 0.3) 4px;
+  /* color: rgb(var(--v-theme-primary)) */
 }
 </style>

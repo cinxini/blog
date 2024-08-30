@@ -1,7 +1,8 @@
 <script setup>
-import ArticleHeader from '@/components/articles/ArticleHeader.vue';
 import ArticleBody from '@/components/articles/ArticleBody.vue';
+import ArticleHeader from '@/components/articles/ArticleHeader.vue';
 import Toc from '@/components/articles/Toc.vue';
+import GiscusComment from '@/components/containers/GiscusComment.vue';
 import { onMounted } from 'vue';
 import { useDate } from 'vuetify';
 
@@ -65,6 +66,10 @@ onMounted(() => {
     <ArticleBody>
       <ContentDoc />
     </ArticleBody>
+    <v-divider class="my-0" color="base"></v-divider>
+    <a id="comment-section"></a>
+    <GiscusComment class="my-4" />
+    <a id="bottom"></a>
   </v-container>
   <Toc :links="projectPost.body.toc.links" :current-id="intersectedTocId" />
 

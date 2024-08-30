@@ -73,7 +73,7 @@ onUnmounted(() => {
             <ContentDoc />
         </ArticleBody>
         <v-divider class="my-0" color="base"></v-divider>
-        <a id="comments"></a>
+        <a id="comment-section"></a>
         <GiscusComment class="my-4" />
     </v-container>
     <ArticleToc :links="blogPost.body.toc.links" :current-id="intersectedTocId" />

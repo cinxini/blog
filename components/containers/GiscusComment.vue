@@ -19,8 +19,7 @@
   <div class="comments-container">
     <Giscus id="comments" repo="cinxini/giscus-comment-test" repoId="R_kgDOMqAHFg" category="General"
       categoryId="DIC_kwDOMqAHFs4CiCH7" mapping="title" term="Welcome to @giscus/vue component!" reactionsEnabled="1"
-      emitMetadata="0" inputPosition="top" theme="https://cinxini.github.io/stylesheets/giscus/noborder_light.css"
-      lang="en" />
+      emitMetadata="0" inputPosition="top" theme="https://cinxini.github.io/stylesheets/giscus/candy.css" lang="en" />
   </div>
 
 </template>
