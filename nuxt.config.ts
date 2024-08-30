@@ -61,7 +61,10 @@ export default defineNuxtConfig({
   //     failOnError: false, 
   //   },
   // },
-  // nitro: {
-  //   plugins: ['plugins/content.ts']
-  // }
+  nitro: {
+    prerender: {
+      concurrency: 250,
+      interval: 100,
+    }
+  }
 })
