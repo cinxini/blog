@@ -1,4 +1,6 @@
 export default {
+    INTERSECT_OBS_THRESHOLD: 1.0,
+    INTERSECT_OBS_IDS: ".md-style h2[id], .md-style h3[id], .md-style h4[id]",
     PAGE_TYPE: ["blog", "project"],
     POSTS_PER_PAGE: 5,
     TOP_NUM_TAGS: 30,

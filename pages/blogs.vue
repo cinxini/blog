@@ -1,12 +1,14 @@
 <script setup>
 import BlogPostList from '@/components/ContentList.vue';
 import DotLoader from '@/components/items/DotLoader.vue';
+import SectionTitle from '@/components/items/SectionTitle.vue';
 import c from '@/constants/posts';
 import { computed, onMounted, ref, watch } from 'vue';
 
 const isFetching = ref(false);
 const currPage = ref(1);
 const count = ref(0);
+
 const numPages = computed(() => {
   if (count.value === 0) return 1;
   return Math.ceil(count.value / c.POSTS_PER_PAGE);
@@ -25,7 +27,7 @@ const fetchBlogPosts = async (pageNo) => {
   return data;
 }
 
-const { data: blogPosts } = useAsyncData('blogPostList', () => {
+const { data: blogPosts, refresh } = await useAsyncData('blogPostList', () => {
   return fetchBlogPosts(currPage.value);
 })
 
@@ -38,32 +40,33 @@ const showList = computed(() => {
 
 onMounted(async () => {
   if (!blogPosts.value) {
-    blogPosts.value = await fetchBlogPosts(currPage.value);
+    refresh();
   }
   count.value = await queryContent('/blog').where({ status: 'published' }).count();
 })
 
 watch(currPage, async (newPageNo) => {
-  blogPosts.value = await fetchBlogPosts(newPageNo);
+  refresh();
 })
 
 </script>
 
 <template>
-  <!-- <FilterSidebar @filter-posts="filterPostsHandler"></FilterSidebar> -->
   <v-container class="main-container w-66">
-    <p class="text-center text-h5">Recent Blog Posts</p>
+    <SectionTitle title="Recent Blog Posts" icon="fa-solid fa-quote-left" class="mb-5" />
+
     <div v-if="isFetching" class="d-flex flex-row justify-center ma-16">
       <DotLoader />
     </div>
-    <div v-if="showList">
-      <BlogPostList :articles="blogPosts" />
-      <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
-        prev-icon="fa-solid fa-caret-left" rounded="lg" color="grey" active-color="primary"></v-pagination>
+    <div v-else>
+      <div v-if="showList">
+        <BlogPostList :articles="blogPosts" />
+        <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
+          prev-icon="fa-solid fa-caret-left" rounded="lg" color="grey" active-color="primary"></v-pagination>
+      </div>
+      <p v-else class="text-center">No blog posts.</p>
     </div>
-    <p v-else class="text-center">No blog posts.</p>
   </v-container>
-
 </template>
 
 <style></style>

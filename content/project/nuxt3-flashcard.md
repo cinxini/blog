@@ -18,3 +18,7 @@ isFeatured: true
 #### h4 Heading
 ##### h5 Heading
 ###### h6 Heading
+
+```js
+function hello( ) {}
+```

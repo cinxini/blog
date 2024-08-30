@@ -3,22 +3,24 @@ import ArticleBody from '@/components/articles/ArticleBody.vue';
 import ArticleHeader from '@/components/articles/ArticleHeader.vue';
 import Toc from '@/components/articles/Toc.vue';
 import GiscusComment from '@/components/containers/GiscusComment.vue';
-import { onMounted } from 'vue';
+import c from '@/constants/posts';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useDate } from 'vuetify';
 
 const date = useDate()
 const { path } = useRoute();
 
+const intersectedTocId = ref(null);
+const observer = ref(null)
+
 const { data: projectPost } = await useAsyncData(`content-${path}`, () => {
   return queryContent().where({ _path: path }).findOne();
 })
 
-const extractPageFromPath = (path) => { return path.split('/')[1] }
-
 const meta = computed(() => {
   if (projectPost.value) {
     return {
-      pageType: extractPageFromPath(projectPost.value._path),
+      pageType: projectPost.value.pageType,
       title: projectPost.value.title,
       author: projectPost.value.author,
       category: projectPost.value.category,
@@ -32,14 +34,7 @@ const meta = computed(() => {
   }
 })
 
-const intersectedTocId = ref(null);
-const observer = ref(null)
-const nuxtContent = ref(null)
-const observerOptions = ref({
-  root: 0,
-  threshold: "0",
-})
-
+// hooks
 onMounted(() => {
   observer.value = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -49,12 +44,16 @@ onMounted(() => {
       }
     })
   }, {
-    threshold: 1.0
+    threshold: c.INTERSECT_OBS_THRESHOLD
   })
 
-  document.querySelectorAll('.md-style h2[id], .md-style h3[id], .md-style h4[id]').forEach((section) => {
+  document.querySelectorAll(c.INTERSECT_OBS_IDS).forEach((section) => {
     observer.value?.observe(section)
   })
+})
+
+onUnmounted(() => {
+  observer.value?.disconnect()
 })
 </script>
 
@@ -68,7 +67,7 @@ onMounted(() => {
     </ArticleBody>
     <v-divider class="my-0" color="base"></v-divider>
     <a id="comment-section"></a>
-    <GiscusComment class="my-4" />
+    <GiscusComment class="my-5" />
     <a id="bottom"></a>
   </v-container>
   <Toc :links="projectPost.body.toc.links" :current-id="intersectedTocId" />
