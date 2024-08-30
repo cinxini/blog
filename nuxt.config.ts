@@ -2,12 +2,12 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
-  runtimeConfig: {
-    app: {
-      baseURL: '/blog',
-    },
-  },
-  ssr: true,
+  // runtimeConfig: {
+  //   app: {
+  //     baseURL: '/blog',
+  //   },
+  // },
+  // ssr: true,
   app: {
     head: {
       link: [
