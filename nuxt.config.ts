@@ -75,7 +75,7 @@ export default defineNuxtConfig({
   //   }
   // },
   nitro: {
-    baseURL: "http://localhost:3020",
+    baseURL: "https://github.com/cinxini",
     prerender: {
       crawlLinks: true,
       failOnError: false, 
