@@ -1,9 +1,7 @@
 <script setup>
 import ProjectList from '@/components/ContentList.vue';
 import DotLoader from '@/components/items/DotLoader.vue';
-
 import c from '@/constants/posts';
-
 import { computed, onMounted, ref, watch } from 'vue';
 
 const isFetching = ref(false);
@@ -33,7 +31,7 @@ const fetchProjects = async (pageNo) => {
   return data;
 }
 
-const { data: projectItems } = useAsyncData('projectList', () => {
+const { data: projectItems, refresh } = useAsyncData('projectList', () => {
   return fetchProjects(currPage.value);
 })
 
@@ -44,38 +42,34 @@ const showList = computed(() => {
     return false;
 })
 
-
-
 onMounted(async () => {
   if (!projectItems.value) {
-    projectItems.value = await fetchProjects(currPage.value);
+    refresh();
   }
   count.value = await queryContent('/project').where({ status: 'published' }).count()
 })
 
 watch(currPage, async (newPageNo) => {
-  projectItems.value = await fetchProjects(newPageNo);
+  refresh();
 })
 
 </script>
 
 <template>
-
   <v-container class="w-66 main-container">
     <p class="text-center text-h5">Recent Projects</p>
     <div v-if="isFetching" class="d-flex flex-row justify-center ma-16">
       <DotLoader />
     </div>
-    <div v-if="showList">
-      <ProjectList :articles="projectItems"></ProjectList>
-      <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
-        prev-icon="fa-solid fa-caret-left" rounded="lg" color="grey" active-color="primary"></v-pagination>
+    <div v-else>
+      <div v-if="showList">
+        <ProjectList :articles="projectItems"></ProjectList>
+        <v-pagination :length="numPages" v-model="currPage" next-icon="fa-solid fa-caret-right"
+          prev-icon="fa-solid fa-caret-left" rounded="lg" color="grey" active-color="primary"></v-pagination>
+      </div>
+      <p v-else class="text-center">No projects.</p>
     </div>
-    <p v-else class="text-center">No projects.</p>
-
   </v-container>
-
-
 </template>
 
 

@@ -1,16 +1,6 @@
 <script setup>
 import SearchDialog from '@/components/SearchDialog.vue';
-import { ref, watch } from 'vue';
 import { VApp } from 'vuetify/components';
-
-const openSearchDiaglog = ref(false);
-watch(openSearchDiaglog, (newval) => { console.log(newval) })
-// const search = ref('')
-// const searchResults = ref(null);
-// async function searchApp() {
-//   const results = await searchContent(search);
-//   searchResults.value = results;
-// }
 
 </script>
 
@@ -46,7 +36,6 @@ watch(openSearchDiaglog, (newval) => { console.log(newval) })
       <slot />
 
     </v-main>
-    <!-- <SearchDialog :open="openSearchDiaglog" /> -->
 
   </v-app>
 
