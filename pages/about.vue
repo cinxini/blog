@@ -1,5 +1,6 @@
 <script setup>
-import ArticleBody from '@/components/blog/ArticleBody.vue';
+import ArticleBody from '@/components/articles/ArticleBody.vue';
+import SectionTitle from '@/components/items/SectionTitle.vue';
 import { ref } from 'vue';
 
 
@@ -15,9 +16,8 @@ console.log(aboutPost.value)
 
 <template>
   <v-container class="main-container w-66">
-    <p class="text-center text-h5">{{ aboutPost.title }}</p>
-
-    <div class="d-flex flex-column align-center ga-1 my-4">
+    <SectionTitle :title="aboutPost.title" icon="fa-regular fa-face-grin-wink" />
+    <div class="d-flex flex-column align-center ga-1 my-8">
       <v-hover v-slot="{ isHovering, props }">
         <v-avatar size="110" class="mb-3 avatar" v-bind="props" :class="`elevation-${isHovering ? 5 : 2}`"
           variant="elevated">

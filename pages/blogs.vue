@@ -1,6 +1,7 @@
 <script setup>
 import BlogPostList from '@/components/ContentList.vue';
 import DotLoader from '@/components/items/DotLoader.vue';
+import SectionTitle from '@/components/items/SectionTitle.vue';
 import c from '@/constants/posts';
 import { computed, onMounted, ref, watch } from 'vue';
 
@@ -52,7 +53,8 @@ watch(currPage, async (newPageNo) => {
 
 <template>
   <v-container class="main-container w-66">
-    <p class="text-center text-h5">Recent Blog Posts</p>
+    <SectionTitle title="Recent Blog Posts" icon="fa-solid fa-quote-left" class="mb-5" />
+
     <div v-if="isFetching" class="d-flex flex-row justify-center ma-16">
       <DotLoader />
     </div>
