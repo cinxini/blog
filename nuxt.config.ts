@@ -35,32 +35,12 @@ export default defineNuxtConfig({
     //...
   ],
   content: {
-    documentDriven: true,
     highlight: {
       theme: 'github-light'
     },
     markdown: {
       toc: { depth: 3, searchDepth: 3 }
     },
-    experimental: {
-      search: {
-        indexed: true,
-        options: {
-          fields: ['title', 'content', 'titles', 'id'],
-          storeFields: ['title', 'content', 'titles'],
-          searchOptions: {
-            prefix: true,
-            fuzzy: 0.2,
-            boost: {
-              title: 4,
-              content: 2,
-              titles: 1,
-              id: 2,
-            }
-          }
-        }
-      }
-    }
   },
   vite: {
     vue: {
@@ -74,13 +54,13 @@ export default defineNuxtConfig({
   //       proxy: { to: "http://localhost:3020/css/**", },
   //   }
   // },
-  nitro: {
-    baseURL: "https://github.com/cinxini",
-    prerender: {
-      crawlLinks: true,
-      failOnError: false, 
-    },
-  },
+  // nitro: {
+  //   baseURL: "https://github.com/cinxini",
+  //   prerender: {
+  //     crawlLinks: true,
+  //     failOnError: false, 
+  //   },
+  // },
   // nitro: {
   //   plugins: ['plugins/content.ts']
   // }
