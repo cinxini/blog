@@ -4,7 +4,7 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
   runtimeConfig: {
     app: {
-      baseURL: '/test',
+      baseURL: '/blog',
     },
   },
   ssr: false,
