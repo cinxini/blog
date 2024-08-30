@@ -69,11 +69,18 @@ export default defineNuxtConfig({
       },
     },
   },
-  routeRules: {
-    '/css/**': {
-        proxy: { to: "http://localhost:3020/css/**", },
-    }
-  }
+  // routeRules: {
+  //   '/css/**': {
+  //       proxy: { to: "http://localhost:3020/css/**", },
+  //   }
+  // },
+  nitro: {
+    baseURL: "http://localhost:3020",
+    prerender: {
+      crawlLinks: true,
+      failOnError: false, 
+    },
+  },
   // nitro: {
   //   plugins: ['plugins/content.ts']
   // }
