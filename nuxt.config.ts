@@ -8,7 +8,9 @@ export default defineNuxtConfig({
   //   },
   // },
   // ssr: true,
+  // ssr:false,
   app: {
+    baseURL: '/blog',
     head: {
       link: [
         {
