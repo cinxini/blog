@@ -1,0 +1,1 @@
+import{_ as s,o as t,g as o,w as a,a as r,R as c}from"./C_V3QOGJ.js";import{V as n}from"./S6mNapcC.js";const l={},_={class:"md-style is-normal myh2"};function d(e,i){return t(),o(n,null,{default:a(()=>[r("div",_,[c(e.$slots,"default")])]),_:3})}const h=s(l,[["render",d]]);export{h as A};
