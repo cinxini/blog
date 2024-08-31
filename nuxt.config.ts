@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   //     baseURL: '/blog',
   //   },
   // },
-  // ssr: true,
+  ssr: true,
   // ssr:false,
   app: {
     baseURL: '/blog',
